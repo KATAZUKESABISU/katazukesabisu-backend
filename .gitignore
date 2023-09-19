@@ -46,4 +46,4 @@ node_modules/
 # Environment setup #
 #####################
 # .gitignore
-.env
+#.env

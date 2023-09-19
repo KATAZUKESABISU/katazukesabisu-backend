@@ -1,3 +1,6 @@
+if (process.env.NODE_ENV !== "production") {
+    require('dotenv').config();
+}
 const mongoose = require("mongoose");
 
 const MstInquiryModel = require("../models/mst_inquiry_model");
