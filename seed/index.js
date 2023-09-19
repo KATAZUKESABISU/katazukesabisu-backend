@@ -8,6 +8,7 @@ const mstInquirySeed = require("./mst_inquiry_seed");
 const mstContactSeed = require("./mst_contact_seed");
 const mstPostCommonSeed = require("./mst_post_common_seed");
 
+mongoose.set("strictQuery", false);
 mongoose.connect("mongodb://localhost:27017/yelp-camp", {
     useNewUrlParser: true,
     useUnifiedTopology: true,

@@ -62,6 +62,5 @@ module.exports.uploadImage = async (imagePath) => {
         return result.secure_url;
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Something went wrong!" });
     }
 };

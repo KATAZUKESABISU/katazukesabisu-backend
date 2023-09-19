@@ -1,5 +1,5 @@
 const { uploadImage } = require("../utils/commonUtil");
-import ImgContact from "../uploads/images/167418631395102.png";
+const ImgContact = "../uploads/images/167418631395102.png";
 
 module.exports = {
     title: "お問い合わせはこちら",

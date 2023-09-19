@@ -1,10 +1,10 @@
 const { uploadImage } = require("../utils/commonUtil");
-import ImgQRCode from "../uploads/images/167375512749501.png";
-import image1 from "../uploads/images/161037146399401.jpg";
-import image2 from "../uploads/images/161037164366101.jpg";
-import image3 from "../uploads/images/161060655013303.png";
-import image4 from "../uploads/images/161060655013301.png";
-import image5 from "../uploads/images/161060655013302.png";
+const ImgQRCode = "../uploads/images/167375512749501.png";
+const image1 = "../uploads/images/161037146399401.jpg";
+const image2 = "../uploads/images/161037164366101.jpg";
+const image3 = "../uploads/images/161060655013303.png";
+const image4 = "../uploads/images/161060655013301.png";
+const image5 = "../uploads/images/161060655013302.png";
 
 const imgQRCodeUrl = uploadImage(ImgQRCode);
 const image1Url = uploadImage(image1);
