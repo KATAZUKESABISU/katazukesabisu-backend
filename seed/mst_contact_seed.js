@@ -1,5 +1,6 @@
+const { getPathImg } = require("../uploads/images");
 const { uploadImage } = require("../utils/commonUtil");
-const ImgContact = "../uploads/images/167418631395102.png";
+const ImgContact = getPathImg("167418631395102.png");
 
 module.exports = {
     title: "お問い合わせはこちら",

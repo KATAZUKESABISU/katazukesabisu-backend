@@ -1,10 +1,11 @@
+const { getPathImg } = require("../uploads/images");
 const { uploadImage } = require("../utils/commonUtil");
-const ImgQRCode = "../uploads/images/167375512749501.png";
-const image1 = "../uploads/images/161037146399401.jpg";
-const image2 = "../uploads/images/161037164366101.jpg";
-const image3 = "../uploads/images/161060655013303.png";
-const image4 = "../uploads/images/161060655013301.png";
-const image5 = "../uploads/images/161060655013302.png";
+const ImgQRCode = getPathImg("167375512749501.png");
+const image1 = getPathImg("161037146399401.jpg");
+const image2 = getPathImg("161037164366101.jpg");
+const image3 = getPathImg("161060655013303.png");
+const image4 = getPathImg("161060655013301.png");
+const image5 = getPathImg("161060655013302.png");
 
 const imgQRCodeUrl = uploadImage(ImgQRCode);
 const image1Url = uploadImage(image1);
