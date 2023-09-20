@@ -1,7 +1,7 @@
 if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
 }
-const mongoose = require("mongoose");
+require("./utils/connectDatabase");
 
 const AdminModel = require("../models/admin_model");
 const MstInquiryModel = require("../models/mst_inquiry_model");
@@ -12,24 +12,6 @@ const adminSeed = require("./admin_seed");
 const mstInquirySeed = require("./mst_inquiry_seed");
 const mstContactSeed = require("./mst_contact_seed");
 const mstPostCommonSeed = require("./mst_post_common_seed");
-
-const user = process.env.DB_USR;
-const pass = process.env.DB_PASS;
-
-mongoose.set("strictQuery", false);
-mongoose.connect(
-    `mongodb+srv://${user}:${pass}@db-katazukesabisu.xr4io2a.mongodb.net/db-katazukesabisu`,
-    {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    }
-);
-
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error: "));
-db.once("open", () => {
-    console.log("Database Connected");
-});
 
 const seedDB = async () => {
     await AdminModel.deleteMany({});
