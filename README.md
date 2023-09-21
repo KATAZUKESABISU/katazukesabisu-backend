@@ -1,3 +1,3 @@
 # katazukesabisu-backend
 
-Using cyclic to deploy
+URL: https://katazukesabisu.cyclic.cloud
