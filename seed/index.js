@@ -1,7 +1,7 @@
 if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
 }
-require("./utils/connectDatabase");
+require("../utils/connectDatabase");
 
 const AdminModel = require("../models/admin_model");
 const MstInquiryModel = require("../models/mst_inquiry_model");
