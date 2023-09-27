@@ -22,7 +22,7 @@ const AdminSchema = new Schema({
     },
     saltRounds: {
         type: String,
-        required: true,
+        // required: true,
     },
 });
 

@@ -11,7 +11,4 @@ route.use(isAuthentication);
 route.get("/logout", adminController.logout);
 route.post("/token", adminController.refreshToken);
 
-route.post("/", (req, res) => {
-
-});
 module.exports = route;

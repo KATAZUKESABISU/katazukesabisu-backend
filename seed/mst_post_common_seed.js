@@ -1,18 +1,4 @@
-const { getPathImg } = require("../uploads/images");
-const { uploadImage } = require("../utils/commonUtil");
-const ImgQRCode = getPathImg("167375512749501.png");
-const image1 = getPathImg("161037146399401.jpg");
-const image2 = getPathImg("161037164366101.jpg");
-const image3 = getPathImg("161060655013303.png");
-const image4 = getPathImg("161060655013301.png");
-const image5 = getPathImg("161060655013302.png");
-
-const imgQRCodeUrl = uploadImage(ImgQRCode);
-const image1Url = uploadImage(image1);
-const image2Url = uploadImage(image2);
-const image3Url = uploadImage(image3);
-const image4Url = uploadImage(image4);
-const image5Url = uploadImage(image5);
+const { upload } = require("./upload_cloud");
 
 module.exports.notFound = {
     title: "お探しのページは見つかりませんでした",
@@ -25,7 +11,7 @@ module.exports.notFound = {
             },
         },
     ]),
-    type: 0,
+    contentType: 0,
 };
 
 module.exports.formNote = {
@@ -45,7 +31,7 @@ module.exports.formNote = {
             },
         },
     ]),
-    type: 1,
+    contentType: 1,
 };
 
 module.exports.privacyPolicy = {
@@ -72,39 +58,41 @@ module.exports.privacyPolicy = {
             },
         },
     ]),
-    type: 2,
+    contentType: 2,
 };
 
-module.exports.communicationMethod = {
-    title: "",
-    createDate: "2023-08-26 12:45",
-    content: JSON.stringify([
-        {
-            type: "header",
-            data: {
-                text: "LINEでのご依頼・お見積り",
-                withBacground: true,
-                level: 4,
-            },
-        },
-        {
-            type: "paragraph",
-            data: {
-                text: "こちらのQRコードを読み取るか、お友達登録ボタンをクリックして弊社公式LINEよりご連絡ください。",
-            },
-        },
-        {
-            type: "image",
-            data: {
-                caption: "",
-                alt: "",
-                file: {
-                    url: imgQRCodeUrl,
+module.exports.communicationMethod = async () => {
+    return {
+        title: "",
+        createDate: "2023-08-26 12:45",
+        content: JSON.stringify([
+            {
+                type: "header",
+                data: {
+                    text: "LINEでのご依頼・お見積り",
+                    withBacground: true,
+                    level: 4,
                 },
             },
-        },
-    ]),
-    type: 3,
+            {
+                type: "paragraph",
+                data: {
+                    text: "こちらのQRコードを読み取るか、お友達登録ボタンをクリックして弊社公式LINEよりご連絡ください。",
+                },
+            },
+            {
+                type: "image",
+                data: {
+                    caption: "",
+                    alt: "",
+                    file: {
+                        url: await upload.imgQRCodeUrl,
+                    },
+                },
+            },
+        ]),
+        contentType: 3,
+    };
 };
 
 module.exports.homePage = {
@@ -119,7 +107,7 @@ module.exports.homePage = {
                     type: "image",
                     data: {
                         file: {
-                            url: image1Url,
+                            url: upload.image1Url,
                         },
                         caption: "",
                     },
@@ -141,7 +129,7 @@ module.exports.homePage = {
                     type: "image",
                     data: {
                         file: {
-                            url: image2Url,
+                            url: upload.image2Url,
                         },
                         caption: "",
                     },
@@ -163,7 +151,7 @@ module.exports.homePage = {
                     type: "list",
                     data: {
                         style: "ordered",
-                        imageURL: image3Url,
+                        imageURL: upload.image3Url,
                         title: "最短30分以内に到着！",
                         description:
                             "We have been working on this project more than three years",
@@ -173,7 +161,7 @@ module.exports.homePage = {
                     type: "list",
                     data: {
                         style: "ordered",
-                        imageURL: image4Url,
+                        imageURL: upload.image4Url,
                         title: "24時間年中無休で対応可能！",
                         description:
                             "We have been working on this project more than three years.",
@@ -183,7 +171,7 @@ module.exports.homePage = {
                     type: "list",
                     data: {
                         style: "ordered",
-                        imageURL: image5Url,
+                        imageURL: upload.image5Url,
                         title: "コロナ対策を徹底しています！",
                         description:
                             "We have been working on this project more than three years. ",
@@ -200,7 +188,7 @@ module.exports.homePage = {
                     type: "list",
                     data: {
                         style: "ordered",
-                        imageURL: image2Url,
+                        imageURL: upload.image2Url,
                         title: "最短30分以内に到着！",
                         description:
                             "We have been working on this <strong>project</strong> more than three years",
@@ -210,7 +198,7 @@ module.exports.homePage = {
                     type: "list",
                     data: {
                         style: "ordered",
-                        imageURL: image2Url,
+                        imageURL: upload.image2Url,
                         title: "24時間年中無休で対応可能！",
                         description:
                             "We have been working on this project more than three years.",
@@ -220,7 +208,7 @@ module.exports.homePage = {
                     type: "list",
                     data: {
                         style: "ordered",
-                        imageURL: image2Url,
+                        imageURL: upload.image2Url,
                         title: "コロナ対策を徹底しています！",
                         description:
                             "We have been working on this project more than three years. ",
@@ -230,7 +218,7 @@ module.exports.homePage = {
                     type: "list",
                     data: {
                         style: "ordered",
-                        imageURL: image2Url,
+                        imageURL: upload.image2Url,
                         title: "コロナ対策を徹底しています！",
                         description:
                             "We have been working on this project more than three years. ",
@@ -240,7 +228,7 @@ module.exports.homePage = {
                     type: "list",
                     data: {
                         style: "ordered",
-                        imageURL: image2Url,
+                        imageURL: upload.image2Url,
                         title: "コロナ対策を徹底しています！",
                         description:
                             "We have been working on this project more than three years. ",
@@ -250,7 +238,7 @@ module.exports.homePage = {
                     type: "list",
                     data: {
                         style: "ordered",
-                        imageURL: image2Url,
+                        imageURL: upload.image2Url,
                         title: "コロナ対策を徹底しています！",
                         description:
                             "We have been working on this project more than three years. We have been working on this project more than three years. We have been working on this project more than three years. ",
@@ -274,7 +262,7 @@ module.exports.homePage = {
                     type: "list",
                     data: {
                         style: "ordered",
-                        imageURL: image2Url,
+                        imageURL: upload.image2Url,
                         title: "最短30分以内に到着！",
                         description:
                             "We have been working on this project more than three years",
@@ -284,7 +272,7 @@ module.exports.homePage = {
                     type: "list",
                     data: {
                         style: "ordered",
-                        imageURL: image2Url,
+                        imageURL: upload.image2Url,
                         title: "24時間年中無休で対応可能！",
                         description:
                             "We have been working on this project more than three years.",
@@ -301,7 +289,7 @@ module.exports.homePage = {
                     type: "list",
                     data: {
                         style: "ordered",
-                        imageURL: image2Url,
+                        imageURL: upload.image2Url,
                         title: "最短30分以内に到着！",
                         description:
                             "We have been working on this project more than three years",
@@ -339,5 +327,285 @@ module.exports.homePage = {
             ],
         },
     ]),
-    type: 4,
+    contentType: 4,
+};
+
+module.exports.aboutUs = {
+    title: "事業所概要",
+    createDate: "",
+    content: JSON.stringify([
+        {
+            type: "contact-list",
+            data: {
+                label: "事業所名",
+                value: "おたすけクリーン",
+            },
+        },
+        {
+            type: "contact-list",
+            data: {
+                label: "所在地",
+                value: "〒558-0011 大阪市住吉区苅田",
+            },
+        },
+        {
+            type: "contact-list",
+            data: {
+                label: "電話番号",
+                value: "0120-993-829",
+            },
+        },
+        {
+            type: "contact-list",
+            data: {
+                label: "営業時間",
+                value: "24時間",
+            },
+        },
+        {
+            type: "contact-list",
+            data: {
+                label: "定休日",
+                value: "年中無休",
+            },
+        },
+        {
+            type: "contact-list",
+            data: {
+                label: "事業内容",
+                value: "不用品買取・不用品回収、",
+            },
+        },
+    ]),
+    contentType: 5,
+};
+
+module.exports.footerContact = {
+    title: "事業所概要",
+    createDate: "",
+    content: JSON.stringify([
+        {
+            type: "contact-list",
+            data: {
+                label: "電話番号",
+                value: "0120-993-829",
+            },
+        },
+        {
+            type: "contact-list",
+            data: {
+                label: "受付時間",
+                value: "24時間／年中無休",
+            },
+        },
+        {
+            type: "contact-list",
+            data: {
+                label: "対応エリア",
+                value: "大阪・兵庫・奈良",
+            },
+        },
+        {
+            type: "contact-list",
+            data: {
+                label: "所在地",
+                value: "〒558-0011<br />大阪市住吉区苅田",
+            },
+        },
+    ]),
+    contentType: 6,
+};
+
+module.exports.summaryContent = {
+    title: "ご利用の流れ",
+    content: JSON.stringify([
+        { innerText: "回収までの流れ", location: "#f01" },
+        { innerText: "取り扱いクレジットカード", location: "#f02" },
+        { innerText: "LINEでのご相談方法", location: "#f03" },
+        { innerText: "よくあるご質問", location: "#f04" },
+    ]),
+    contentType: 7,
+};
+
+module.exports.collection = {
+    title: "回収までの流れ",
+    id: "f01",
+    content: JSON.stringify([
+        {
+            title: "1.お問い合わせ",
+            content:
+                'まずはお電話（<a class="tel-link" href="tel:0120569028">0120-569-028</a>）、<a href="https://lin.ee/9rjqYdx" rel="noopener" target="_blank">LINE</a>、<a href="/contact.html">メール</a>にてお問い合わせください。<br>初回のご相談・お見積りは無料ですので、お気軽にお申し付けください。',
+            button: [
+                { innerText: "お問い合わせフォーム", location: "/contact" },
+                { innerText: "LINEでのご相談方法", location: "#f03" },
+            ],
+        },
+        {
+            title: "2.お見積り",
+            content:
+                "お問い合わせの際、ご都合の良い日時をお伝えください。<br> ご指定いただいた日時に、弊社スタッフが現場までお伺いいたします。",
+        },
+        {
+            title: "3.片付け・回収作業",
+            content:
+                "お見積りに納得いただけたらご都合のよい日時を取り決め、作業にお伺いします。<br> もちろん即日対応も可能です。お見積りの際、スタッフにお申し付けください。",
+        },
+        {
+            title: "4.作業終了、お支払い",
+            content:
+                "作業終了後、現金またはクレジットカード、または後日振り込みにてお支払ください。",
+        },
+    ]),
+    contentType: 8,
+};
+
+module.exports.paymentMethod = {
+    title: "取り扱いクレジットカード",
+    id: "f02",
+    content: JSON.stringify([
+        {
+            src: upload.visaImgUrl,
+            alt: "クレジットカード支払_VISA",
+            caption: "",
+        },
+        {
+            src: upload.amexImgUrl,
+            alt: "クレジットカード支払_アメックス",
+            caption: "",
+        },
+        {
+            src: upload.masterCardImgUrl,
+            alt: "クレジットカード支払_マスター",
+            caption: "",
+        },
+        {
+            src: upload.jcbImgUrl,
+            alt: "クレジットカード支払_JCB",
+            caption: "",
+        },
+    ]),
+    contentType: 9,
+};
+
+module.exports.guide = {
+    title: "LINEでのご相談・お見積り方法",
+    id: "f03",
+    createDate: "",
+    content: JSON.stringify([
+        {
+            type: "paragraph",
+            data: {
+                text: "トーク機能で簡単に写真や文章を送っていただくことで、24時間無料でお見積りやご依頼ができます。<br />下記の友達追加バナーをクリックorタップ、またはQR読み込みで弊社の公式アカウントが開きますので、お友達追加の上、ご連絡ください。",
+            },
+        },
+        {
+            type: "paragraph",
+            data: {
+                text: "もちろん、ご不明な点などをご相談していただいても構いません。弊社スタッフが丁寧に対応いたします。",
+            },
+        },
+        {
+            type: "image",
+            data: {
+                caption: "",
+                alt: "LINEお見積り",
+                file: {
+                    url: upload.lineGuideUrl,
+                },
+            },
+        },
+    ]),
+    contentType: 10,
+};
+
+module.exports.lineTemplate = {
+    title: "",
+    id: "",
+    createDate: "",
+    content: JSON.stringify([
+        {
+            type: "header",
+            data: {
+                text: "LINEにて下記内容をお伝えください",
+                withBackground: true,
+                level: 4,
+            },
+        },
+        {
+            type: "list",
+            data: {
+                style: "unordered",
+                items: [
+                    "ご相談内容（見積り依頼）、お名前、住所、ご連絡先電話番号",
+                    "処分を希望する品物、またはそのお写真",
+                ],
+            },
+        },
+        {
+            type: "list",
+            data: {
+                style: "asterisk",
+                items: [
+                    "内容を確認後、その他に関しましては後程スタッフより詳細を伺うこともございます。",
+                    "写真添付は何枚でも可能です。",
+                ],
+            },
+        },
+        {
+            type: "image",
+            data: {
+                caption: "",
+                alt: "",
+                file: {
+                    url: upload.ImgQRCode,
+                },
+            },
+        },
+    ]),
+    contentType: 11,
+};
+
+module.exports.listQA = {
+    title: "よくあるご質問",
+    id: "f04",
+    content: JSON.stringify([
+        {
+            question: "見積りだけでも来てもらえますか？",
+            answer: "お電話でもおおよその料金を出すこともできますし、詳しいご要望をお伺いし正確な料金をご提示することもできます。",
+            button: [
+                { innerText: "お問い合わせフォーム", location: "/contact" },
+            ],
+        },
+        {
+            question: "電話した当日に作業してもらえますか？",
+            answer: "可能です！ご予約の状況にもよりますが、早急に近くの現場スタッフに確認をとり迅速に対応させていただきます！",
+        },
+        {
+            question: "梱包、分別は必要ですか？",
+            answer: "必要ありません！そのままの状態で問題ございませんので担当スタッフにお任せください！",
+        },
+        {
+            question: "電話し回収出来ないものはありますか？",
+            answer: "基本的にございませんので、何でもご相談ください！",
+        },
+    ]),
+    contentType: 12,
+};
+
+module.exports.contactUs = {
+    title: "お問い合わせはこちら",
+    createDate: "",
+    content: JSON.stringify([
+        {
+            type: "image",
+            data: {
+                caption: "",
+                alt: "",
+                file: {
+                    url: upload.ImgContactUsUrl,
+                },
+            },
+        },
+    ]),
+    contentType: 13,
 };

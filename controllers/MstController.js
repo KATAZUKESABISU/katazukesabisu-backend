@@ -11,13 +11,13 @@ module.exports.getMstInfo = async (req, res) => {
 
         const postCommon = await mstPostCommonModel.find();
         const formNote = postCommon.find(
-            (element) => element.type === _CONF.FORM_NOTE
+            (element) => element.contentType === _CONF.FORM_NOTE
         );
         const privacyPolicy = postCommon.find(
-            (element) => element.type === _CONF.PRIVACY_POLICY
+            (element) => element.contentType === _CONF.PRIVACY_POLICY
         );
         const communicationMethod = postCommon.find(
-            (element) => element.type === _CONF.COMMUNICATION_METHOD
+            (element) => element.contentType === _CONF.COMMUNICATION_METHOD
         );
 
         const data_masters = {

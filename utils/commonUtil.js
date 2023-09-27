@@ -37,7 +37,7 @@ module.exports.getNotFound = async (req, res) => {
         const errorNotFound = await mstPostCommonModel.findOne({
             type: _CONF.NOT_FOUND,
         });
-        return res.status(404).json({
+        return res.status(200).json({
             title: errorNotFound.title,
             createDate: errorNotFound.createDate,
             content: JSON.parse(errorNotFound.content),
@@ -58,7 +58,7 @@ module.exports.uploadImage = async (imagePath) => {
 
     try {
         const result = await cloudinary.uploader.upload(imagePath, options);
-        console.log(result);
+        console.log(result.secure_url);
         return result.secure_url;
     } catch (error) {
         console.error(error);

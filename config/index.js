@@ -23,6 +23,15 @@ const config = Object.freeze({
     PRIVACY_POLICY: 2,
     COMMUNICATION_METHOD: 3,
     HOME_PAGE: 4,
+    ABOUT_US: 5,
+    FOOTER_CONTACT: 6,
+    SUMMERY_CONTENT: 7,
+    COLLECTION: 8,
+    PAYMENT_METHOD: 9,
+    GUIDE: 10,
+    LINE_TEMPLATE: 11,
+    LIST_QA: 12,
+    CONTACT_US: 13,
 
     PROJECT_NAME: "KATAZUKESABISU",
 });

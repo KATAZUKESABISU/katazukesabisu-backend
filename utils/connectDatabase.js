@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const user = process.env.DB_USR;
 const pass = process.env.DB_PASS;
-const database = process.env.DB_NAME
+const database = process.env.DB_NAME;
 
 mongoose.set("strictQuery", false);
 mongoose.connect(
@@ -20,3 +20,5 @@ db.on("error", console.error.bind(console, "connection error: "));
 db.once("open", () => {
     console.log("Database Connected");
 });
+
+module.exports = { db };
