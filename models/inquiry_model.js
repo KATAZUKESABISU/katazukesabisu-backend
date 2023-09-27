@@ -37,6 +37,9 @@ const InquirySchema = new Schema({
     contentOfInquiry: {
         type: String,
         required: false,
+    },
+    answer: {
+        type : String,
     }
 })
 

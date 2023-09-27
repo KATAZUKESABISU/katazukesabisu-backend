@@ -1,5 +1,3 @@
-const { upload } = require("./upload_cloud");
-
 module.exports.notFound = {
     title: "お探しのページは見つかりませんでした",
     createDate: "",
@@ -61,43 +59,41 @@ module.exports.privacyPolicy = {
     contentType: 2,
 };
 
-module.exports.communicationMethod = async () => {
-    return {
-        title: "",
-        createDate: "2023-08-26 12:45",
-        content: JSON.stringify([
-            {
-                type: "header",
-                data: {
-                    text: "LINEでのご依頼・お見積り",
-                    withBacground: true,
-                    level: 4,
+module.exports.communicationMethod = {
+    title: "",
+    createDate: "2023-08-26 12:45",
+    content: [
+        {
+            type: "header",
+            data: {
+                text: "LINEでのご依頼・お見積り",
+                withBacground: true,
+                level: 4,
+            },
+        },
+        {
+            type: "paragraph",
+            data: {
+                text: "こちらのQRコードを読み取るか、お友達登録ボタンをクリックして弊社公式LINEよりご連絡ください。",
+            },
+        },
+        {
+            type: "image",
+            data: {
+                caption: "",
+                alt: "",
+                file: {
+                    url: "",
                 },
             },
-            {
-                type: "paragraph",
-                data: {
-                    text: "こちらのQRコードを読み取るか、お友達登録ボタンをクリックして弊社公式LINEよりご連絡ください。",
-                },
-            },
-            {
-                type: "image",
-                data: {
-                    caption: "",
-                    alt: "",
-                    file: {
-                        url: await upload.imgQRCodeUrl,
-                    },
-                },
-            },
-        ]),
-        contentType: 3,
-    };
+        },
+    ],
+    contentType: 3,
 };
 
 module.exports.homePage = {
     title: "不用品・粗大ゴミの回収ならおたすけクリーン",
-    content: JSON.stringify([
+    content: [
         {
             style: "normal",
             title: "その不用品の回収、お任せください！",
@@ -107,7 +103,7 @@ module.exports.homePage = {
                     type: "image",
                     data: {
                         file: {
-                            url: upload.image1Url,
+                            url: "",
                         },
                         caption: "",
                     },
@@ -129,7 +125,7 @@ module.exports.homePage = {
                     type: "image",
                     data: {
                         file: {
-                            url: upload.image2Url,
+                            url: "",
                         },
                         caption: "",
                     },
@@ -151,7 +147,7 @@ module.exports.homePage = {
                     type: "list",
                     data: {
                         style: "ordered",
-                        imageURL: upload.image3Url,
+                        imageURL: "",
                         title: "最短30分以内に到着！",
                         description:
                             "We have been working on this project more than three years",
@@ -161,7 +157,7 @@ module.exports.homePage = {
                     type: "list",
                     data: {
                         style: "ordered",
-                        imageURL: upload.image4Url,
+                        imageURL: "",
                         title: "24時間年中無休で対応可能！",
                         description:
                             "We have been working on this project more than three years.",
@@ -171,7 +167,7 @@ module.exports.homePage = {
                     type: "list",
                     data: {
                         style: "ordered",
-                        imageURL: upload.image5Url,
+                        imageURL: "",
                         title: "コロナ対策を徹底しています！",
                         description:
                             "We have been working on this project more than three years. ",
@@ -188,7 +184,7 @@ module.exports.homePage = {
                     type: "list",
                     data: {
                         style: "ordered",
-                        imageURL: upload.image2Url,
+                        imageURL: "",
                         title: "最短30分以内に到着！",
                         description:
                             "We have been working on this <strong>project</strong> more than three years",
@@ -198,7 +194,7 @@ module.exports.homePage = {
                     type: "list",
                     data: {
                         style: "ordered",
-                        imageURL: upload.image2Url,
+                        imageURL: "",
                         title: "24時間年中無休で対応可能！",
                         description:
                             "We have been working on this project more than three years.",
@@ -208,7 +204,7 @@ module.exports.homePage = {
                     type: "list",
                     data: {
                         style: "ordered",
-                        imageURL: upload.image2Url,
+                        imageURL: "",
                         title: "コロナ対策を徹底しています！",
                         description:
                             "We have been working on this project more than three years. ",
@@ -218,7 +214,7 @@ module.exports.homePage = {
                     type: "list",
                     data: {
                         style: "ordered",
-                        imageURL: upload.image2Url,
+                        imageURL: "",
                         title: "コロナ対策を徹底しています！",
                         description:
                             "We have been working on this project more than three years. ",
@@ -228,7 +224,7 @@ module.exports.homePage = {
                     type: "list",
                     data: {
                         style: "ordered",
-                        imageURL: upload.image2Url,
+                        imageURL: "",
                         title: "コロナ対策を徹底しています！",
                         description:
                             "We have been working on this project more than three years. ",
@@ -238,7 +234,7 @@ module.exports.homePage = {
                     type: "list",
                     data: {
                         style: "ordered",
-                        imageURL: upload.image2Url,
+                        imageURL: "",
                         title: "コロナ対策を徹底しています！",
                         description:
                             "We have been working on this project more than three years. We have been working on this project more than three years. We have been working on this project more than three years. ",
@@ -262,7 +258,7 @@ module.exports.homePage = {
                     type: "list",
                     data: {
                         style: "ordered",
-                        imageURL: upload.image2Url,
+                        imageURL: "",
                         title: "最短30分以内に到着！",
                         description:
                             "We have been working on this project more than three years",
@@ -272,7 +268,7 @@ module.exports.homePage = {
                     type: "list",
                     data: {
                         style: "ordered",
-                        imageURL: upload.image2Url,
+                        imageURL: "",
                         title: "24時間年中無休で対応可能！",
                         description:
                             "We have been working on this project more than three years.",
@@ -289,7 +285,7 @@ module.exports.homePage = {
                     type: "list",
                     data: {
                         style: "ordered",
-                        imageURL: upload.image2Url,
+                        imageURL: "",
                         title: "最短30分以内に到着！",
                         description:
                             "We have been working on this project more than three years",
@@ -326,7 +322,7 @@ module.exports.homePage = {
                 },
             ],
         },
-    ]),
+    ],
     contentType: 4,
 };
 
@@ -462,28 +458,28 @@ module.exports.collection = {
 module.exports.paymentMethod = {
     title: "取り扱いクレジットカード",
     id: "f02",
-    content: JSON.stringify([
+    content: [
         {
-            src: upload.visaImgUrl,
+            src: "",
             alt: "クレジットカード支払_VISA",
             caption: "",
         },
         {
-            src: upload.amexImgUrl,
+            src: "",
             alt: "クレジットカード支払_アメックス",
             caption: "",
         },
         {
-            src: upload.masterCardImgUrl,
+            src: "",
             alt: "クレジットカード支払_マスター",
             caption: "",
         },
         {
-            src: upload.jcbImgUrl,
+            src: "",
             alt: "クレジットカード支払_JCB",
             caption: "",
         },
-    ]),
+    ],
     contentType: 9,
 };
 
@@ -491,7 +487,7 @@ module.exports.guide = {
     title: "LINEでのご相談・お見積り方法",
     id: "f03",
     createDate: "",
-    content: JSON.stringify([
+    content: [
         {
             type: "paragraph",
             data: {
@@ -510,11 +506,11 @@ module.exports.guide = {
                 caption: "",
                 alt: "LINEお見積り",
                 file: {
-                    url: upload.lineGuideUrl,
+                    url: "",
                 },
             },
         },
-    ]),
+    ],
     contentType: 10,
 };
 
@@ -522,7 +518,7 @@ module.exports.lineTemplate = {
     title: "",
     id: "",
     createDate: "",
-    content: JSON.stringify([
+    content: [
         {
             type: "header",
             data: {
@@ -557,11 +553,11 @@ module.exports.lineTemplate = {
                 caption: "",
                 alt: "",
                 file: {
-                    url: upload.ImgQRCode,
+                    url: "",
                 },
             },
         },
-    ]),
+    ],
     contentType: 11,
 };
 
@@ -595,17 +591,17 @@ module.exports.listQA = {
 module.exports.contactUs = {
     title: "お問い合わせはこちら",
     createDate: "",
-    content: JSON.stringify([
+    content: [
         {
             type: "image",
             data: {
                 caption: "",
                 alt: "",
                 file: {
-                    url: upload.ImgContactUsUrl,
+                    url: "",
                 },
             },
         },
-    ]),
+    ],
     contentType: 13,
 };
