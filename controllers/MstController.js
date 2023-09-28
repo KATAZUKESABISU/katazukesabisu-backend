@@ -133,41 +133,41 @@ module.exports.getFooterContact = async (req, res) => {
 
 module.exports.getFlowPage = async (req, res) => {
     try {
-        const flowPage = await mstPostCommonModel.find({
+        const flowPageData = await mstPostCommonModel.find({
             contentType: _CONF.FLOW_PAGE,
         });
-        const listQA = await inquiryModel
+        const listQAData = await inquiryModel
             .find({
                 answer: { $ne: null },
             })
             .sort({ createAt: -1 });
-        let listQAData = [];
-        listQA?.forEach((element, index) => {
+        let listQA = [];
+        listQAData?.forEach((element, index) => {
             if (index === 0) {
-                listQAData[index] = {
+                listQA[index] = {
                     question: element?.contentOfInquiry,
                     answer: element?.answer,
                     button: "Get data master",
                 };
             } else {
-                listQAData[index] = {
+                listQA[index] = {
                     question: element?.contentOfInquiry,
                     answer: element?.answer,
                 };
             }
         });
 
-        let flowPageData = {};
-        flowPage?.forEach((element) => {
+        let flowPage = {};
+        flowPageData?.forEach((element) => {
             if (element?._name === _CONF.LIST_QA) {
-                flowPageData[element?._name] = {
+                flowPage[element?._name] = {
                     title: element?.title,
                     id: element?.id,
                     createDate: element?.createDate,
-                    content: listQAData,
+                    content: listQA,
                 };
             } else {
-                flowPageData[element?._name] = {
+                flowPage[element?._name] = {
                     title: element?.title,
                     id: element?.id,
                     createDate: element?.createDate,
@@ -177,10 +177,28 @@ module.exports.getFlowPage = async (req, res) => {
         });
         return res.status(200).json({
             message: "",
-            flowPageData,
+            flowPage,
         });
     } catch (error) {
         console.log(error);
         return res.status(500).json({ message: "Something went wrong!" });
     }
 };
+
+module.exports.getCommonBlock = async (req, res) => {
+    try {
+        const contactUsData = await mstPostCommonModel.findOne({ contentType: _CONF.CONTACT_US});
+        const contactUs = {
+            title: contactUsData?.title,
+            createDate: contactUsData?.createDate,
+            content: JSON.parse(contactUsData?.content)
+        };
+        return res.status(200).json({
+            message: "",
+            contactUs,
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: "Something went wrong!" }); 
+    }
+}

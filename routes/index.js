@@ -8,6 +8,7 @@ const {
     getAboutUs,
     getFooterContact,
     getFlowPage,
+    getCommonBlock
 } = require("../controllers/MstController");
 const { getNotFound } = require("../utils/commonUtil");
 
@@ -21,6 +22,7 @@ function route(app) {
     app.get("/public/about_us", getAboutUs);
     app.get("/public/footer_contact", getFooterContact);
     app.get("/public/flow_page", getFlowPage);
+    app.get("/public/common_block", getCommonBlock);
     // admin
     app.use("/api", adminRoute);
     app.use(isAuthentication);
