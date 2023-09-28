@@ -9,11 +9,14 @@
 		{
 			"name": "http://localhost:3000/api/login",
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"TruongVanLam\",\r\n    \"password\": \"G7ykCJ58\"\r\n}",
+					"raw": "{\r\n    \"username\": \"Admin\",\r\n    \"password\": \"katazukesabisu1998\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -120,11 +123,26 @@
 		{
 			"name": "http://localhost:3000/api/forget_password",
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZDg5MjM3YTg3YjhjNzUzYjlkZmU3YSIsInVzZXJuYW1lIjoiVHJ1b25nVmFuTGFtIiwiZW1haWwiOiJ0cnVvbmd2YW5sYW0xNzZAZ21haWwuY29tIiwicGhvbmUiOiIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2OTIxMTYxNTgsImV4cCI6MTY5MjExNjc1OH0.DPUuZPtp2ZUGOOeJfIaSgfuWQj4MiMrzmouLw9nivHs",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "email",
+						"value": "TTTT",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"truongvanlam176@gmail.com\" \r\n}",
+					"raw": "{\r\n    \"email\": \"katazukesabisu@gmail.com\" \r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -181,6 +199,149 @@
 					"path": [
 						"api",
 						"404_not_found"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/api/mst_info",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/public/mst_info",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"public",
+						"mst_info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/public/404_not_found",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/public/404_not_found",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"public",
+						"404_not_found"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/public/home_page",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/public/home_page",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"public",
+						"home_page"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/public/about_us",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/public/about_us",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"public",
+						"about_us"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/public/footer_contact",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/public/common_block",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"public",
+						"common_block"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/public/flow_page",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/public/flow_page",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"public",
+						"flow_page"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/public/common_block",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/public/common_block",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"public",
+						"common_block"
 					]
 				}
 			},
