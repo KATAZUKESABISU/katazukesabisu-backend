@@ -12,7 +12,27 @@ const MstPostCommonModel = require("../models/mst_post_common_model");
 const adminSeed = require("./admin_seed");
 const mstInquirySeed = require("./mst_inquiry_seed");
 const mstContactSeed = require("./mst_contact_seed");
-const mstPostCommonSeed = require("./mst_post_common_seed");
+const {
+    notFound,
+    formNote,
+    privacyPolicy,
+    communicationMethod,
+    introduction,
+    serviceIntro,
+    serviceList,
+    serviceGuide,
+    availableArea,
+    coupons,
+    aboutUs,
+    footerContact,
+    summary,
+    collection,
+    paymentMethod,
+    guide,
+    lineTemplate,
+    listQA,
+    contactUs,
+} = require("./mst_post_common_seed");
 
 const seedDB = async (result) => {
     console.log("Start Insert");
@@ -38,119 +58,170 @@ const seedDB = async (result) => {
 
     await MstPostCommonModel.deleteMany({});
 
-    const notFound = new MstPostCommonModel(mstPostCommonSeed.notFound);
-    await notFound.save();
+    const mstNotFound = new MstPostCommonModel(notFound);
+    await mstNotFound.save();
 
-    const mstFormNote = new MstPostCommonModel(mstPostCommonSeed.formNote);
+    const mstFormNote = new MstPostCommonModel(formNote);
     await mstFormNote.save();
-    const privacyPolicy = new MstPostCommonModel(
-        mstPostCommonSeed.privacyPolicy
-    );
-    await privacyPolicy.save();
 
-    mstPostCommonSeed.communicationMethod.content[2].data.file.url = result.imgQRCodeUrl;
+    const mstPrivacyPolicy = new MstPostCommonModel(privacyPolicy);
+    await mstPrivacyPolicy.save();
+
+    communicationMethod.content[2].data.file.url = result.imgQRCodeUrl;
     // Create data communicationMethod
     const communicationMethodData = {
-        title: mstPostCommonSeed.communicationMethod.title,
-        createDate: mstPostCommonSeed.communicationMethod.createDate,
-        content: JSON.stringify(mstPostCommonSeed.communicationMethod.content),
-        contentType: mstPostCommonSeed.communicationMethod.contentType
-    }
-    const communicationMethod = new MstPostCommonModel(communicationMethodData);
-    await communicationMethod.save();
-
-    mstPostCommonSeed.homePage.content[0].content[0].data.file.url = result.image1Url;
-    mstPostCommonSeed.homePage.content[1].content[0].data.file.url = result.image2Url;
-    mstPostCommonSeed.homePage.content[2].content[0].data.imageURL = result.image3Url;
-    mstPostCommonSeed.homePage.content[2].content[1].data.imageURL = result.image4Url;
-    mstPostCommonSeed.homePage.content[2].content[2].data.imageURL = result.image5Url;
-    mstPostCommonSeed.homePage.content[3].content[0].data.imageURL = result.image2Url;
-    mstPostCommonSeed.homePage.content[3].content[1].data.imageURL = result.image2Url;
-    mstPostCommonSeed.homePage.content[3].content[2].data.imageURL = result.image2Url;
-    mstPostCommonSeed.homePage.content[3].content[3].data.imageURL = result.image2Url;
-    mstPostCommonSeed.homePage.content[3].content[4].data.imageURL = result.image2Url;
-    mstPostCommonSeed.homePage.content[3].content[5].data.imageURL = result.image2Url;
-    mstPostCommonSeed.homePage.content[4].content[0].data.imageURL = result.image2Url;
-    mstPostCommonSeed.homePage.content[4].content[1].data.imageURL = result.image2Url;
-    mstPostCommonSeed.homePage.content[5].content[0].data.imageURL = result.image2Url;
-
-    // Create data homePage
-    const homePageData = {
-        title: mstPostCommonSeed.homePage.title,
-        content: JSON.stringify(mstPostCommonSeed.homePage.content),
-        contentType: mstPostCommonSeed.homePage.contentType
-    }
-    const homePage = new MstPostCommonModel(homePageData);
-    await homePage.save();
-
-    const aboutUs = new MstPostCommonModel(mstPostCommonSeed.aboutUs);
-    await aboutUs.save();
-
-    const footerContact = new MstPostCommonModel(
-        mstPostCommonSeed.footerContact
+        title: communicationMethod.title,
+        createDate: communicationMethod.createDate,
+        content: JSON.stringify(communicationMethod.content),
+        contentType: communicationMethod.contentType,
+    };
+    const mstCommunicationMethod = new MstPostCommonModel(
+        communicationMethodData
     );
-    await footerContact.save();
+    await mstCommunicationMethod.save();
 
-    const summaryContent = new MstPostCommonModel(
-        mstPostCommonSeed.summaryContent
-    );
-    await summaryContent.save();
+    introduction.content[0].data.file.url = result.image1Url;
+    const introductionData = {
+        title: introduction.title,
+        createDate: introduction.createDate,
+        content: JSON.stringify(introduction.content),
+        contentType: introduction.contentType,
+        _name: introduction._name,
+    };
+    const mstIntroduction = new MstPostCommonModel(introductionData);
+    await mstIntroduction.save();
 
-    const collection = new MstPostCommonModel(mstPostCommonSeed.collection);
-    await collection.save();
+    serviceIntro.content[0].data.file.url = result.image2Url;
+    const serviceIntroData = {
+        title: serviceIntro.title,
+        createDate: serviceIntro.createDate,
+        style: serviceIntro.style,
+        isDisplay: serviceIntro.isDisplay,
+        button: JSON.stringify(serviceIntro.button),
+        content: JSON.stringify(serviceIntro.content),
+        contentType: serviceIntro.contentType,
+        _name: serviceIntro._name,
+    };
+    const mstServiceIntro = new MstPostCommonModel(serviceIntroData);
+    await mstServiceIntro.save();
 
-    mstPostCommonSeed.paymentMethod.content[0].src = result.visaImgUrl;
-    mstPostCommonSeed.paymentMethod.content[1].src = result.amexImgUrl;
-    mstPostCommonSeed.paymentMethod.content[2].src = result.masterCardImgUrl;
-    mstPostCommonSeed.paymentMethod.content[3].src = result.jcbImgUrl;
+    serviceList.content[0].image = result.image3Url;
+    serviceList.content[1].image = result.image4Url;
+    serviceList.content[2].image = result.image5Url;
+    const serviceListData = {
+        title: serviceList.title,
+        content: JSON.stringify(serviceList.content),
+        contentType: serviceList.contentType,
+        _name: serviceList._name,
+    };
+    const mstServiceList = new MstPostCommonModel(serviceListData);
+    await mstServiceList.save();
+
+    serviceGuide.content[0].src = result.image2Url;
+    serviceGuide.content[1].src = result.image2Url;
+    serviceGuide.content[2].src = result.image2Url;
+    serviceGuide.content[3].src = result.image2Url;
+    serviceGuide.content[4].src = result.image2Url;
+    serviceGuide.content[5].src = result.image2Url;
+    const serviceGuideData = {
+        title: serviceGuide.title,
+        style: serviceGuide.style,
+        button: JSON.stringify(serviceGuide.button),
+        content: JSON.stringify(serviceGuide.content),
+        contentType: serviceGuide.contentType,
+        _name: serviceGuide._name,
+    };
+    const mstServiceGuide = new MstPostCommonModel(serviceGuideData);
+    await mstServiceGuide.save();
+
+    availableArea.content[0].src = result.image6Url;
+    availableArea.content[1].src = result.image7Url;
+    const availableAreaData = {
+        title: availableArea.title,
+        style: availableArea.style,
+        content: JSON.stringify(availableArea.content),
+        contentType: availableArea.contentType,
+        _name: availableArea._name,
+    };
+    const mstAvailableArea = new MstPostCommonModel(availableAreaData);
+    await mstAvailableArea.save();
+
+    const couponsData = {
+        title: coupons.title,
+        isDisplay: coupons.isDisplay,
+        content: JSON.stringify(coupons.content),
+        contentType: coupons.contentType,
+        _name: coupons._name,
+    };
+    const mstCoupons = new MstPostCommonModel(couponsData);
+    await mstCoupons.save();
+
+    const mstAboutUs = new MstPostCommonModel(aboutUs);
+    await mstAboutUs.save();
+
+    const mstFooterContact = new MstPostCommonModel(footerContact);
+    await mstFooterContact.save();
+
+    const mstSummary = new MstPostCommonModel(summary);
+    await mstSummary.save();
+
+    const mstCollection = new MstPostCommonModel(collection);
+    await mstCollection.save();
+
+    paymentMethod.content[0].src = result.visaImgUrl;
+    paymentMethod.content[1].src = result.amexImgUrl;
+    paymentMethod.content[2].src = result.masterCardImgUrl;
+    paymentMethod.content[3].src = result.jcbImgUrl;
     // Create data paymentMethod
     const paymentMethodData = {
-        title: mstPostCommonSeed.paymentMethod.title,
-        id: mstPostCommonSeed.paymentMethod.id,
-        content: JSON.stringify(mstPostCommonSeed.paymentMethod.content),
-        contentType: mstPostCommonSeed.paymentMethod.contentType
-    }
-    const paymentMethod = new MstPostCommonModel(
-        paymentMethodData
-    );
-    await paymentMethod.save();
+        title: paymentMethod.title,
+        id: paymentMethod.id,
+        content: JSON.stringify(paymentMethod.content),
+        contentType: paymentMethod.contentType,
+        _name: paymentMethod._name,
+    };
+    const mstPaymentMethod = new MstPostCommonModel(paymentMethodData);
+    await mstPaymentMethod.save();
 
-    mstPostCommonSeed.guide.content[2].data.file.url = result.lineGuideUrl;
+    guide.content[2].data.file.url = result.lineGuideUrl;
     // Create data guide
     const guideData = {
-        title: mstPostCommonSeed.guide.title,
-        id: mstPostCommonSeed.guide.id,
-        createDate: mstPostCommonSeed.guide.createDate,
-        content: JSON.stringify(mstPostCommonSeed.guide.content),
-        contentType: mstPostCommonSeed.guide.contentType
+        title: guide.title,
+        id: guide.id,
+        createDate: guide.createDate,
+        content: JSON.stringify(guide.content),
+        contentType: guide.contentType,
+        _name: guide._name,
     };
-    const guide = new MstPostCommonModel(guideData);
-    await guide.save();
+    const mstGuide = new MstPostCommonModel(guideData);
+    await mstGuide.save();
 
-    mstPostCommonSeed.lineTemplate.content[3].data.file.url = result.ImgQRCode;
+    lineTemplate.content[3].data.file.url = result.ImgQRCode;
     // Create data lineTemplate
     const lineTemplateData = {
-        title: mstPostCommonSeed.lineTemplate.title,
-        id: mstPostCommonSeed.lineTemplate.id,
-        createDate: mstPostCommonSeed.lineTemplate.createDate,
-        content: JSON.stringify(mstPostCommonSeed.lineTemplate.content),
-        contentType: mstPostCommonSeed.lineTemplate.contentType
+        title: lineTemplate.title,
+        id: lineTemplate.id,
+        createDate: lineTemplate.createDate,
+        content: JSON.stringify(lineTemplate.content),
+        contentType: lineTemplate.contentType,
+        _name: lineTemplate._name,
     };
-    const lineTemplate = new MstPostCommonModel(lineTemplateData);
-    await lineTemplate.save();
-    const listQA = new MstPostCommonModel(mstPostCommonSeed.listQA);
-    await listQA.save();
+    const mstLineTemplate = new MstPostCommonModel(lineTemplateData);
+    await mstLineTemplate.save();
 
-    mstPostCommonSeed.contactUs.content[0].data.file.url = result.ImgContactUsUrl;
+    const mstListQA = new MstPostCommonModel(listQA);
+    await mstListQA.save();
+
+    contactUs.content[0].data.file.url = result.ImgContactUsUrl;
     // Create data lineTemplate
     const contactUsData = {
-        title: mstPostCommonSeed.contactUs.title,
-        createDate: mstPostCommonSeed.contactUs.createDate,
-        content: JSON.stringify(mstPostCommonSeed.contactUs.content),
-        contentType: mstPostCommonSeed.contactUs.contentType
+        title: contactUs.title,
+        createDate: contactUs.createDate,
+        content: JSON.stringify(contactUs.content),
+        contentType: contactUs.contentType,
     };
-    const contactUs = new MstPostCommonModel(contactUsData);
-    await contactUs.save();
+    const mstContactUs = new MstPostCommonModel(contactUsData);
+    await mstContactUs.save();
     console.log("End Insert");
 };
 

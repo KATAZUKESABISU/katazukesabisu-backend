@@ -67,7 +67,7 @@ module.exports.communicationMethod = {
             type: "header",
             data: {
                 text: "LINEでのご依頼・お見積り",
-                withBacground: true,
+                withBackground: true,
                 level: 4,
             },
         },
@@ -91,239 +91,199 @@ module.exports.communicationMethod = {
     contentType: 3,
 };
 
-module.exports.homePage = {
-    title: "不用品・粗大ゴミの回収ならおたすけクリーン",
+module.exports.introduction = {
+    title: "その不用品の回収、お任せください！",
+    createDate: "",
     content: [
         {
-            style: "normal",
-            title: "その不用品の回収、お任せください！",
-            isDisplay: true,
-            content: [
-                {
-                    type: "image",
-                    data: {
-                        file: {
-                            url: "",
-                        },
-                        caption: "",
-                    },
+            type: "image",
+            data: {
+                file: {
+                    url: "",
                 },
-                {
-                    type: "paragraph",
-                    data: {
-                        text: "We have been working on this project more than three years. Several large media projects help us to test and debug the Editor, to make it's core more stable. At the same time we significantly improved the API. Now, it can be used to create any plugin for any task. Hope you enjoy. 😏",
-                    },
-                },
-            ],
+                caption: "",
+            },
         },
         {
-            style: "with-background",
-            title: "追加料金一切なし！",
-            isDisplay: true,
-            content: [
-                {
-                    type: "image",
-                    data: {
-                        file: {
-                            url: "",
-                        },
-                        caption: "",
-                    },
-                },
-                {
-                    type: "paragraph",
-                    data: {
-                        text: "We have been working on this project more than three years. Several large media projects help us to test and debug the Editor, to make it's core more stable. At the same time we significantly improved the API. Now, it can be used to create any plugin for any task. Hope you enjoy. 😏",
-                    },
-                },
-            ],
+            type: "paragraph",
+            data: {
+                text: 'お客様は立ち合いのみ、事前の分別も不要です！全てお任せください！<br />他社では別途請求となる<strong className="bg-[#f76600] text-[110%]">搬出作業費（大型家電含む）・お掃除作業費・車両費・出張費・梱包作業費などが全て込みの料金</strong>です。',
+            },
         },
         {
-            style: "list-service",
-            title: "おたすけクリーンのお約束",
-            isDisplay: true,
-            content: [
-                {
-                    type: "list",
-                    data: {
-                        style: "ordered",
-                        imageURL: "",
-                        title: "最短30分以内に到着！",
-                        description:
-                            "We have been working on this project more than three years",
-                    },
-                },
-                {
-                    type: "list",
-                    data: {
-                        style: "ordered",
-                        imageURL: "",
-                        title: "24時間年中無休で対応可能！",
-                        description:
-                            "We have been working on this project more than three years.",
-                    },
-                },
-                {
-                    type: "list",
-                    data: {
-                        style: "ordered",
-                        imageURL: "",
-                        title: "コロナ対策を徹底しています！",
-                        description:
-                            "We have been working on this project more than three years. ",
-                    },
-                },
-            ],
-        },
-        {
-            style: "image-gallery-caption",
-            title: "サービス案内",
-            isDisplay: true,
-            content: [
-                {
-                    type: "list",
-                    data: {
-                        style: "ordered",
-                        imageURL: "",
-                        title: "最短30分以内に到着！",
-                        description:
-                            "We have been working on this <strong>project</strong> more than three years",
-                    },
-                },
-                {
-                    type: "list",
-                    data: {
-                        style: "ordered",
-                        imageURL: "",
-                        title: "24時間年中無休で対応可能！",
-                        description:
-                            "We have been working on this project more than three years.",
-                    },
-                },
-                {
-                    type: "list",
-                    data: {
-                        style: "ordered",
-                        imageURL: "",
-                        title: "コロナ対策を徹底しています！",
-                        description:
-                            "We have been working on this project more than three years. ",
-                    },
-                },
-                {
-                    type: "list",
-                    data: {
-                        style: "ordered",
-                        imageURL: "",
-                        title: "コロナ対策を徹底しています！",
-                        description:
-                            "We have been working on this project more than three years. ",
-                    },
-                },
-                {
-                    type: "list",
-                    data: {
-                        style: "ordered",
-                        imageURL: "",
-                        title: "コロナ対策を徹底しています！",
-                        description:
-                            "We have been working on this project more than three years. ",
-                    },
-                },
-                {
-                    type: "list",
-                    data: {
-                        style: "ordered",
-                        imageURL: "",
-                        title: "コロナ対策を徹底しています！",
-                        description:
-                            "We have been working on this project more than three years. We have been working on this project more than three years. We have been working on this project more than three years. ",
-                    },
-                },
-                {
-                    type: "button",
-                    data: {
-                        style: "red",
-                        name: "Button 1",
-                    },
-                },
-            ],
-        },
-        {
-            style: "image-gallery",
-            title: "対応エリア",
-            isDisplay: true,
-            content: [
-                {
-                    type: "list",
-                    data: {
-                        style: "ordered",
-                        imageURL: "",
-                        title: "最短30分以内に到着！",
-                        description:
-                            "We have been working on this project more than three years",
-                    },
-                },
-                {
-                    type: "list",
-                    data: {
-                        style: "ordered",
-                        imageURL: "",
-                        title: "24時間年中無休で対応可能！",
-                        description:
-                            "We have been working on this project more than three years.",
-                    },
-                },
-            ],
-        },
-        {
-            style: "image-gallery",
-            title: "対応エリア",
-            isDisplay: true,
-            content: [
-                {
-                    type: "list",
-                    data: {
-                        style: "ordered",
-                        imageURL: "",
-                        title: "最短30分以内に到着！",
-                        description:
-                            "We have been working on this project more than three years",
-                    },
-                },
-            ],
-        },
-        {
-            style: "list-sub",
-            title: "Title1",
-            isDisplay: true,
-            content: [
-                {
-                    type: "list",
-                    data: {
-                        style: "ordered",
-                        title: "キャンペーン実施中！",
-                        subTitle: "お得に不用品回収・買取をしませんか？",
-                        listContent: [
-                            {
-                                title: "CAMPAIGN 01",
-                                description1:
-                                    "見積り時に「ホームページを見た」と お伝えいただければ",
-                                description2: "最大10,000円",
-                            },
-                            {
-                                title: "CAMPAIGN 02",
-                                description1:
-                                    "おたすけクリーンをご利用いただいた人の紹介なら",
-                                description2: "3,000円OFF",
-                            },
-                        ],
-                    },
-                },
-            ],
+            type: "paragraph",
+            data: {
+                text: '<strong className="bg-[#0000ff] text-[110%]">大阪．兵庫．奈良</strong>で不用品回収・買取・粗大ゴミの回収、遺品整理などでお困りの方はご相談ください。<br /><strong className="bg-[#f76600] text-[110%]">お見積りは無料</strong>ですので安心してご連絡ください！',
+            },
         },
     ],
     contentType: 4,
+    _name: "introduction",
+};
+
+module.exports.serviceIntro = {
+    title: "追加料金一切なし！",
+    createDate: "",
+    style: "with-background",
+    isDisplay: true,
+    button: [{ innerText: "料金プランはこちら", location: "/service#price" }],
+    content: [
+        {
+            type: "image",
+            data: {
+                file: {
+                    url: "",
+                },
+                caption: "",
+            },
+        },
+        {
+            type: "header",
+            data: {
+                text: "出張費・お見積り・基本料金無料！",
+                withBackground: true,
+                level: 4,
+            },
+        },
+        {
+            type: "paragraph",
+            data: {
+                text: "お客様は立ち合いのみ、事前の分別も不要です！全てお任せください！",
+            },
+        },
+        {
+            type: "paragraph",
+            data: {
+                text: '他社では別途請求となる<strong className="bg-[#f76600] text-[110%]">搬出作業費（大型家電含む）・お掃除作業費・車両費・出張費・梱包作業費などが全て込みの料金</strong>です。',
+            },
+        },
+    ],
+    contentType: 4,
+    _name: "serviceIntro",
+};
+
+module.exports.serviceList = {
+    title: "おたすけクリーンのお約束",
+    content: [
+        {
+            image: "",
+            title: "最短30分以内に到着！",
+            content: "お申し込みいただいてから最短で30分で作業を開始します。",
+        },
+        {
+            image: "",
+            title: "24時間年中無休で対応可能！",
+            content:
+                "思い立った時にお申し込みください。24時間体制で即日対応可能です。",
+        },
+        {
+            image: "",
+            title: "コロナ対策を徹底しています！",
+            content:
+                "手洗い・検温・消毒・マスクの着用など、感染拡大防止策を徹底しております。",
+        },
+    ],
+    contentType: 4,
+    _name: "serviceList",
+};
+
+module.exports.serviceGuide = {
+    title: "サービス案内",
+    style: "width-background",
+    button: [{ innerText: "サービス・料金案内はこちら", location: "/service" }],
+    content: [
+        {
+            src: "",
+            subTitle: "最短30分以内に到着！",
+            alt: "クレジットカード支払_VISA",
+            caption:
+                "We have been working on this project more than three years.",
+        },
+        {
+            src: "",
+            subTitle: "最短30分以内に到着！",
+            alt: "クレジットカード支払_VISA",
+            caption:
+                "We have been working on this project more than three years.",
+        },
+
+        {
+            src: "",
+            subTitle: "最短30分以内に到着！",
+            alt: "クレジットカード支払_VISA",
+            caption:
+                "We have been working on this project more than three years.",
+        },
+        {
+            src: "",
+            subTitle: "最短30分以内に到着！",
+            alt: "クレジットカード支払_VISA",
+            caption:
+                "We have been working on this project more than three years. We have been working on this project more than three years.",
+        },
+        {
+            src: "",
+            subTitle: "最短30分以内に到着！",
+            alt: "クレジットカード支払_VISA",
+            caption:
+                "We have been working on this project more than three years.",
+        },
+        {
+            src: "",
+            subTitle: "最短30分以内に到着！",
+            alt: "クレジットカード支払_VISA",
+            caption:
+                "最短30分以内に到着！最短30分以内に到着！最短30分以内に到着！最短30分以内に到着！最短30分以内に到着！",
+        },
+    ],
+    contentType: 4,
+    _name: "serviceGuide",
+};
+
+module.exports.availableArea = {
+    title: "対応エリア",
+    style: "grid-cols-2",
+    content: [
+        {
+            src: "",
+            alt: "大阪．兵庫．奈良エリア",
+            caption: "大阪．兵庫．奈良",
+        },
+        {
+            src: "",
+            alt: "大阪府エリア",
+            caption: "大阪府",
+        },
+    ],
+    contentType: 4,
+    _name: "availableArea",
+};
+
+module.exports.coupons = {
+    title: "キャンペーン実施中！",
+    isDisplay: true,
+    content: {
+        heading: {
+            text: "出張費・お見積り・基本料金無料！",
+            level: 4,
+        },
+        coupons: [
+            {
+                title: "CAMPAIGN 01",
+                description:
+                    "見積り時に「<strong>ホームページを見た</strong>」と <br/> お伝えいただければ",
+                saleAmount: "最大<strong>10,000</strong>円OFF",
+            },
+            {
+                title: "CAMPAIGN 02",
+                description:
+                    "おたすけクリーンを <br/> ご利用いただいた人の紹介なら",
+                saleAmount: "最大<strong>10,000</strong>円OFF",
+            },
+        ],
+    },
+    contentType: 4,
+    _name: "coupons",
 };
 
 module.exports.aboutUs = {
@@ -412,7 +372,7 @@ module.exports.footerContact = {
     contentType: 6,
 };
 
-module.exports.summaryContent = {
+module.exports.summary = {
     title: "ご利用の流れ",
     content: JSON.stringify([
         { innerText: "回収までの流れ", location: "#f01" },
@@ -421,6 +381,7 @@ module.exports.summaryContent = {
         { innerText: "よくあるご質問", location: "#f04" },
     ]),
     contentType: 7,
+    _name: "summary",
 };
 
 module.exports.collection = {
@@ -452,7 +413,8 @@ module.exports.collection = {
                 "作業終了後、現金またはクレジットカード、または後日振り込みにてお支払ください。",
         },
     ]),
-    contentType: 8,
+    contentType: 7,
+    _name: "collection",
 };
 
 module.exports.paymentMethod = {
@@ -480,7 +442,8 @@ module.exports.paymentMethod = {
             caption: "",
         },
     ],
-    contentType: 9,
+    contentType: 7,
+    _name: "paymentMethod",
 };
 
 module.exports.guide = {
@@ -511,7 +474,8 @@ module.exports.guide = {
             },
         },
     ],
-    contentType: 10,
+    contentType: 7,
+    _name: "guide",
 };
 
 module.exports.lineTemplate = {
@@ -558,7 +522,8 @@ module.exports.lineTemplate = {
             },
         },
     ],
-    contentType: 11,
+    contentType: 7,
+    _name: "lineTemplate",
 };
 
 module.exports.listQA = {
@@ -585,7 +550,8 @@ module.exports.listQA = {
             answer: "基本的にございませんので、何でもご相談ください！",
         },
     ]),
-    contentType: 12,
+    contentType: 7,
+    _name: "listQA",
 };
 
 module.exports.contactUs = {

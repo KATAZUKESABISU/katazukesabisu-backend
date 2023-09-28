@@ -1,3 +1,4 @@
+const { boolean } = require("joi");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
@@ -5,8 +6,14 @@ const MstPostCommonSchema = new Schema({
     title: {
         type: String,
     },
-    id: {
+    style: {
         type: String,
+    },
+    button: {
+        type: String,
+    },
+    isDisplay: {
+        type: Boolean,
     },
     createDate: {
         type: String,
@@ -31,7 +38,7 @@ const MstPostCommonSchema = new Schema({
         // 12: listQA
         // 13: contactUs
     },
-    type: {
+    _name: {
         type: String,
     },
 });

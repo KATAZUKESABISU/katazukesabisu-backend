@@ -5,7 +5,6 @@ module.exports.createInquiry = async (req, res) => {
     try {
         await inquiryModel.create({ ...data });
         return res.status(200).json({
-            status: 200,
             message: "create successfully!",
         });
     } catch (error) {
@@ -20,7 +19,6 @@ module.exports.updateInquiry = async (req, res) => {
     try {
         await inquiryModel.findByIdAndUpdate(id, { ...data });
         return res.status(200).json({
-            status: 200,
             message: "update successfully!",
         });
     } catch (error) {
@@ -34,7 +32,7 @@ module.exports.getInquiry = async (req, res) => {
     try {
         const inquiry = await inquiryModel.findById(id);
         return res.status(200).json({
-            status: 200,
+            message: "",
             inquiry,
         });
     } catch (error) {
@@ -47,7 +45,7 @@ module.exports.getInquiries = async (req, res) => {
     try {
         const inquiries = await inquiryModel.find({});
         return res.status(200).json({
-            status: 200,
+            message: "",
             inquiries,
         });
     } catch (error) {

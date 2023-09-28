@@ -12,6 +12,7 @@ module.exports.login = async (req, res) => {
     const { username, password } = req.body;
     try {
         const user = await adminModel.findOne({ username });
+        console.log(user);
         if (user) {
             const matchPassword = await bcrypt.compare(password, user.password);
             if (!matchPassword) {
@@ -33,7 +34,6 @@ module.exports.login = async (req, res) => {
             });
 
             const response = {
-                status: "200",
                 message: "Logged in",
                 user: userInfo,
                 token: token,
@@ -83,7 +83,7 @@ module.exports.forgetPassword = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
-        return res.status(404).json({ message: "Something went wrong!" });
+        return res.status(500).json({ message: "Something went wrong!" });
     }
 };
 
@@ -130,7 +130,7 @@ module.exports.resetPassword = (req, res) => {
         }
     } catch (error) {
         console.log(error);
-        return res.status(404).json({ message: "Something went wrong!" });
+        return res.status(500).json({ message: "Something went wrong!" });
     }
 };
 
@@ -143,7 +143,6 @@ module.exports.refreshToken = (req, res) => {
             expiresIn: _CONF.tokenLife,
         });
         const response = {
-            status: "200",
             message: "Logged in",
             user: userInfo,
             token: token,

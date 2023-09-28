@@ -35,13 +35,16 @@ module.exports.sendMail = async (subject, content, email) => {
 module.exports.getNotFound = async (req, res) => {
     try {
         const errorNotFound = await mstPostCommonModel.findOne({
-            type: _CONF.NOT_FOUND,
+            contentType: _CONF.NOT_FOUND,
         });
-        return res.status(200).json({
-            title: errorNotFound.title,
-            createDate: errorNotFound.createDate,
-            content: JSON.parse(errorNotFound.content),
-        });
+        if (errorNotFound) {
+            return res.status(200).json({
+                title: errorNotFound.title,
+                createDate: errorNotFound.createDate,
+                content: JSON.parse(errorNotFound.content),
+            });
+        }
+        return res.status(200).json({});
     } catch (error) {
         console.log(error);
         return res.status(500).json({ message: "Something went wrong!" });
