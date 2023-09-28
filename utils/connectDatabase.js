@@ -6,8 +6,8 @@ const database = process.env.DB_NAME;
 
 mongoose.set("strictQuery", false);
 mongoose.connect(
-    `mongodb+srv://admin-lamtv:St0swxQFpXWH0W7A@db-katazukesabisu.xr4io2a.mongodb.net/db-katazukesabisu`,
-    //`mongodb+srv://${user}:${pass}@tokyo-cluster.cerxhwj.mongodb.net/${database}`,
+    // `mongodb+srv://admin-lamtv:St0swxQFpXWH0W7A@db-katazukesabisu.xr4io2a.mongodb.net/db-katazukesabisu`,
+    `mongodb+srv://${user}:${pass}@tokyo-cluster.cerxhwj.mongodb.net/${database}`,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
