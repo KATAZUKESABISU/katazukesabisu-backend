@@ -225,6 +225,7 @@ const seedDB = async (result) => {
     const mstContactUs = new MstPostCommonModel(contactUsData);
     await mstContactUs.save();
 
+    await MstButtonModel.deleteMany({});
     const mstButton = new MstButtonModel(buttonQA);
     await mstButton.save();
     console.log("End Insert");
