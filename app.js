@@ -1,26 +1,27 @@
 if (process.env.NODE_ENV !== "production") {
-    require('dotenv').config();
+    require("dotenv").config();
 }
 
-require('./utils/connectDatabase');
-const express          = require('express');
-const path             = require('path');
-const ejsMate          = require('ejs-mate');
-const bodyParser = require('body-parser');
+require("./utils/connectDatabase");
+const express = require("express");
+const bodyParser = require("body-parser");
 
-const route           = require('./routes');
+const route = require("./routes");
 
 const app = express();
 
-app.engine('ejs', ejsMate)
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+// Access-Control-Allow-Origin header
+app.use((req, res, next) => {
+    req.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    req.header("Access-Control-Allow-Origin", "https://katazukesabisu.com");
+    next();
+});
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-route(app)
+route(app);
 
-app.listen(process.env.PORT || '3000', () => {
-    console.log('Serving on port 3000');
-})
+app.listen(process.env.PORT || "3000", () => {
+    console.log("Serving on port 3000");
+});
