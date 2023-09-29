@@ -33,6 +33,8 @@ const config = Object.freeze({
     LIST_QA: "listQA",
     CONTACT_US: 13,
 
+    BUTTON_QA: 0,
+
     PROJECT_NAME: "KATAZUKESABISU",
 });
 

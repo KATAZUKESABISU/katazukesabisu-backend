@@ -8,6 +8,7 @@ const AdminModel = require("../models/admin_model");
 const MstInquiryModel = require("../models/mst_inquiry_model");
 const MstContactModel = require("../models/mst_contact_model");
 const MstPostCommonModel = require("../models/mst_post_common_model");
+const MstButtonModel = require("../models/mst_button_model");
 
 const adminSeed = require("./admin_seed");
 const mstInquirySeed = require("./mst_inquiry_seed");
@@ -33,6 +34,7 @@ const {
     listQA,
     contactUs,
 } = require("./mst_post_common_seed");
+const buttonQA = require("./mst_button_seed");
 
 const seedDB = async (result) => {
     console.log("Start Insert");
@@ -222,6 +224,9 @@ const seedDB = async (result) => {
     };
     const mstContactUs = new MstPostCommonModel(contactUsData);
     await mstContactUs.save();
+
+    const mstButton = new MstButtonModel(buttonQA);
+    await mstButton.save();
     console.log("End Insert");
 };
 

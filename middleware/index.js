@@ -7,16 +7,15 @@ module.exports.isAuthentication = (req, res, next) => {
     if (token) {
         // verifies secret and checks exp
         jwt.verify(token, _CONF.SECRET, function (err, decoded) {
-            console.log(decoded);
             if (err) {
-                delete _CONF.refreshTokens[decoded.id];
+                delete _CONF.refreshTokens[decoded?.id];
                 console.error(err.toString());
                 return res.status(401).json({
                     error: true,
                     message: "Unauthorized access.",
                     err,
                 });
-            } else if (_CONF.refreshTokens[decoded.id]?.token === token) {
+            } else if (_CONF.refreshTokens[decoded?.id]?.token === token) {
                 req.user = decoded;
                 next();
             } else {
