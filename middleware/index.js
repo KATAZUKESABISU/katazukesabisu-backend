@@ -6,7 +6,7 @@ module.exports.isAuthentication = (req, res, next) => {
     // decode token
     if (Authorization) {
         // verifies secret and checks exp
-        jwt.verify(Authorization, _CONF.SECRET, function (err, decoded) {
+        jwt.verify(Authorization.replace('Bearer ', ''), _CONF.SECRET, function (err, decoded) {
             if (err) {
                 delete _CONF.refreshTokens[decoded?.id];
                 console.error(err.toString());
