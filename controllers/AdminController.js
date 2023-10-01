@@ -12,7 +12,6 @@ module.exports.login = async (req, res) => {
     const { username, password } = req.body;
     try {
         const user = await adminModel.findOne({ username });
-        console.log(user);
         if (user) {
             const matchPassword = await bcrypt.compare(password, user.password);
             if (!matchPassword) {

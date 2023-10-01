@@ -2,6 +2,7 @@ const mstContactModel = require("../models/mst_contact_model");
 const mstPostCommonModel = require("../models/mst_post_common_model");
 const mstInquiryModel = require("../models/mst_inquiry_model");
 const inquiryModel = require("../models/inquiry_model");
+const mstButtonModel = require("../models/mst_button_model");
 const _CONF = require("../config");
 
 module.exports.getMstInfo = async (req, res) => {
@@ -138,16 +139,19 @@ module.exports.getFlowPage = async (req, res) => {
         });
         const listQAData = await inquiryModel
             .find({
-                answer: { $ne: null },
+                answer: { $nin: [null, ""] },
             })
             .sort({ createAt: -1 });
+        const buttonData = await mstButtonModel.findOne({
+            category: _CONF.BUTTON_QA,
+        });
         let listQA = [];
         listQAData?.forEach((element, index) => {
             if (index === 0) {
                 listQA[index] = {
                     question: element?.contentOfInquiry,
                     answer: element?.answer,
-                    button: "Get data master",
+                    button: JSON.parse(buttonData.button),
                 };
             } else {
                 listQA[index] = {
@@ -187,11 +191,13 @@ module.exports.getFlowPage = async (req, res) => {
 
 module.exports.getCommonBlock = async (req, res) => {
     try {
-        const contactUsData = await mstPostCommonModel.findOne({ contentType: _CONF.CONTACT_US});
+        const contactUsData = await mstPostCommonModel.findOne({
+            contentType: _CONF.CONTACT_US,
+        });
         const contactUs = {
             title: contactUsData?.title,
             createDate: contactUsData?.createDate,
-            content: JSON.parse(contactUsData?.content)
+            content: JSON.parse(contactUsData?.content),
         };
         return res.status(200).json({
             message: "",
@@ -199,6 +205,6 @@ module.exports.getCommonBlock = async (req, res) => {
         });
     } catch (error) {
         console.log(error);
-        return res.status(500).json({ message: "Something went wrong!" }); 
+        return res.status(500).json({ message: "Something went wrong!" });
     }
-}
+};
