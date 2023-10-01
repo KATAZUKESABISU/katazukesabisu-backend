@@ -2,11 +2,11 @@ const jwt = require("jsonwebtoken");
 const _CONF = require("../config");
 
 module.exports.isAuthentication = (req, res, next) => {
-    const { token } = req.headers;
+    const { Authorization } = req.headers;
     // decode token
-    if (token) {
+    if (Authorization) {
         // verifies secret and checks exp
-        jwt.verify(token, _CONF.SECRET, function (err, decoded) {
+        jwt.verify(Authorization, _CONF.SECRET, function (err, decoded) {
             if (err) {
                 delete _CONF.refreshTokens[decoded?.id];
                 console.error(err.toString());
@@ -15,7 +15,7 @@ module.exports.isAuthentication = (req, res, next) => {
                     message: "Unauthorized access.",
                     err,
                 });
-            } else if (_CONF.refreshTokens[decoded?.id]?.token === token) {
+            } else if (_CONF.refreshTokens[decoded?.id]?.token === Authorization) {
                 req.user = decoded;
                 next();
             } else {
