@@ -77,7 +77,9 @@ module.exports.getDataHomePage = async (req, res) => {
                 title: element?.title,
                 createDate: element?.createDate,
                 style: element?.style,
-                button: JSON.parse(element?.button),
+                button: element?.button
+                    ? JSON.parse(element?.button)
+                    : undefined,
                 isDisplay: element?.isDisplay,
                 content: JSON.parse(element?.content),
             };
