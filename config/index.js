@@ -4,8 +4,8 @@ const config = Object.freeze({
     SECRET_REFRESH: "SECRET_REFRESH_TRUONGVANLAM",
 
     // expiresIn token
-    tokenLife: 600,
-    refreshTokenLife: 120,
+    tokenLife: 600, // 10 minutes
+    refreshTokenLife: 86400, // 1 day
     refreshTokens: {},
 
     // gmail

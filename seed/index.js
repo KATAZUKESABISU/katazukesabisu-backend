@@ -9,6 +9,7 @@ const MstInquiryModel = require("../models/mst_inquiry_model");
 const MstContactModel = require("../models/mst_contact_model");
 const MstPostCommonModel = require("../models/mst_post_common_model");
 const MstButtonModel = require("../models/mst_button_model");
+const SeoHelmetModel = require("../models/seo_helmet_model");
 
 const adminSeed = require("./admin_seed");
 const mstInquirySeed = require("./mst_inquiry_seed");
@@ -35,6 +36,7 @@ const {
     contactUs,
 } = require("./mst_post_common_seed");
 const buttonQA = require("./mst_button_seed");
+const { seoHelmet } = require("./seo_helmet_seed");
 
 const seedDB = async (result) => {
     console.log("Start Insert");
@@ -228,6 +230,15 @@ const seedDB = async (result) => {
     await MstButtonModel.deleteMany({});
     const mstButton = new MstButtonModel(buttonQA);
     await mstButton.save();
+
+    // Create data seoHelmet
+    seoHelmet[0].content = result.imageSEOUrl;
+    const seoHelmetData = {
+        content: JSON.stringify(seoHelmet)
+    };
+    await SeoHelmetModel.deleteMany({});
+    const seoHelmetModel = new SeoHelmetModel(seoHelmetData);
+    await seoHelmetModel.save();
     console.log("End Insert");
 };
 

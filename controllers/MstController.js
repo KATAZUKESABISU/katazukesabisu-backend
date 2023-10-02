@@ -22,7 +22,7 @@ module.exports.getMstInfo = async (req, res) => {
             (element) => element.contentType === _CONF.COMMUNICATION_METHOD
         );
 
-        const data_masters = {
+        const masterInfo = {
             contactInfo: {
                 title: contact?.title,
                 createDate: contact?.createDate,
@@ -57,8 +57,10 @@ module.exports.getMstInfo = async (req, res) => {
             },
         };
         return res.status(200).json({
-            message: "",
-            data_masters,
+            message: "Get data masters successfully!",
+            data: {
+                masterInfo
+            },
         });
     } catch (error) {
         console.log(error);
@@ -85,8 +87,8 @@ module.exports.getDataHomePage = async (req, res) => {
             };
         });
         return res.status(200).json({
-            message: "",
-            homePageData,
+            message: "Get data home page successfully!",
+            data: { homePageData },
         });
     } catch (error) {
         console.log(error);
@@ -105,8 +107,8 @@ module.exports.getAboutUs = async (req, res) => {
             content: JSON.parse(aboutUs?.content),
         };
         return res.status(200).json({
-            message: "",
-            aboutUsData,
+            message: "Get data about us successfully!",
+            data: { aboutUsData },
         });
     } catch (error) {
         console.log(error);
@@ -125,8 +127,8 @@ module.exports.getFooterContact = async (req, res) => {
             content: JSON.parse(footerContact?.content),
         };
         return res.status(200).json({
-            message: "",
-            footerContactData,
+            message: "Get footer contact successfully!",
+            data: { footerContactData },
         });
     } catch (error) {
         console.log(error);
@@ -182,8 +184,8 @@ module.exports.getFlowPage = async (req, res) => {
             }
         });
         return res.status(200).json({
-            message: "",
-            flowPage,
+            message: "Get flow page successfully!",
+            data: { flowPage },
         });
     } catch (error) {
         console.log(error);
@@ -202,8 +204,8 @@ module.exports.getCommonBlock = async (req, res) => {
             content: JSON.parse(contactUsData?.content),
         };
         return res.status(200).json({
-            message: "",
-            contactUs,
+            message: "Get common block successfully!",
+            data: { contactUs },
         });
     } catch (error) {
         console.log(error);

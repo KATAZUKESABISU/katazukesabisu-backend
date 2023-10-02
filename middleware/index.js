@@ -12,7 +12,6 @@ module.exports.isAuthentication = (req, res, next) => {
                 delete _CONF.refreshTokens[decoded?.id];
                 console.error(err.toString());
                 return res.status(401).json({
-                    error: true,
                     message: "Unauthorized access.",
                     err,
                 });
@@ -27,7 +26,6 @@ module.exports.isAuthentication = (req, res, next) => {
         });
     } else {
         return res.status(403).json({
-            error: true,
             message: "No token provided.",
         });
     }
@@ -42,7 +40,6 @@ module.exports.isAuth = (req, res, next) => {
                 delete _CONF.refreshTokens[decoded.id];
                 console.error(err.toString());
                 return res.status(401).json({
-                    error: true,
                     message: "Unauthorized access.",
                     err,
                 });
@@ -51,11 +48,10 @@ module.exports.isAuth = (req, res, next) => {
             }
             return res
                 .status(401)
-                .json({ error: true, message: "Unauthorized access." });
+                .json({ message: "Unauthorized access." });
         });
     } else {
         return res.status(403).json({
-            error: true,
             message: "No refreshToken provided.",
         });
     }

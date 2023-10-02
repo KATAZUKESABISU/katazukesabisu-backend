@@ -3,12 +3,12 @@ const Schema = mongoose.Schema;
 const MstButtonSchema = new Schema({
     button: {
         type: String,
-        required: true,
+        // required: true,
     },
     category: {
         // 0: QA
         type: Number,
-        required: true,
+        // required: true,
     },
 });
 

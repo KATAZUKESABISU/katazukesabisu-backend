@@ -17,6 +17,7 @@ module.exports.upload = async () => {
     const lineGuide = getPathImg("line_guide.png");
     const ImgContactUs = getPathImg("167418631395101.png");
     const ImgContact = getPathImg("167418631395102.png");
+    const imageSEO = getPathImg("161067216639801.png");
 
     const imgQRCodeUrl = await uploadImage(ImgQRCode);
     const image1Url = await uploadImage(image1);
@@ -33,6 +34,7 @@ module.exports.upload = async () => {
     const lineGuideUrl = await uploadImage(lineGuide);
     const ImgContactUsUrl = await uploadImage(ImgContactUs);
     const ImgContactUrl = await uploadImage(ImgContact);
+    const imageSEOUrl = await uploadImage(imageSEO);
 
     return {
         imgQRCodeUrl,
@@ -50,5 +52,6 @@ module.exports.upload = async () => {
         lineGuideUrl,
         ImgContactUsUrl,
         ImgContactUrl,
+        imageSEOUrl
     };
 };

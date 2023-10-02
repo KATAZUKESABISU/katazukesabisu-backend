@@ -38,13 +38,15 @@ module.exports.getNotFound = async (req, res) => {
             contentType: _CONF.NOT_FOUND,
         });
         if (errorNotFound) {
-            return res.status(200).json({
-                title: errorNotFound.title,
-                createDate: errorNotFound.createDate,
-                content: JSON.parse(errorNotFound.content),
+            return res.status(200).json({ 
+                message: "Get not found successfully",
+                data: {
+                    title: errorNotFound.title,
+                    createDate: errorNotFound.createDate,
+                    content: JSON.parse(errorNotFound.content),
+                }
             });
         }
-        return res.status(200).json({});
     } catch (error) {
         console.log(error);
         return res.status(500).json({ message: "Something went wrong!" });
@@ -65,5 +67,14 @@ module.exports.uploadImage = async (imagePath) => {
         return result.secure_url;
     } catch (error) {
         console.error(error);
+    }
+};
+
+module.exports.response = async (statusCode, message, data ) => {
+    return {
+        statusCode,
+        message,
+        data,
+        seoHelmet: statusCode == 200 ? seoHelmet : undefined
     }
 };

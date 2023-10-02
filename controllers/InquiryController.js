@@ -3,9 +3,12 @@ const inquiryModel = require("../models/inquiry_model");
 module.exports.createInquiry = async (req, res) => {
     const data = req.body;
     try {
-        await inquiryModel.create({ ...data });
+        const result = await inquiryModel.create({ ...data });
         return res.status(200).json({
             message: "create successfully!",
+            data: {
+                id: result._id,
+            }
         });
     } catch (error) {
         console.log(error);
@@ -20,6 +23,9 @@ module.exports.updateInquiry = async (req, res) => {
         await inquiryModel.findByIdAndUpdate(id, { ...data });
         return res.status(200).json({
             message: "update successfully!",
+            data: {
+                id
+            }
         });
     } catch (error) {
         console.log(error);
@@ -32,8 +38,10 @@ module.exports.getInquiry = async (req, res) => {
     try {
         const inquiry = await inquiryModel.findById(id);
         return res.status(200).json({
-            message: "",
-            inquiry,
+            message: "Get detail inquiry successfully!",
+            data: {
+                inquiry,
+            }
         });
     } catch (error) {
         console.log(error);
@@ -45,8 +53,10 @@ module.exports.getInquiries = async (req, res) => {
     try {
         const inquiries = await inquiryModel.find({});
         return res.status(200).json({
-            message: "",
-            inquiries,
+            message: "Get list inquiry successfully!",
+            data: {
+                inquiries,
+            }
         });
     } catch (error) {
         console.log(error);

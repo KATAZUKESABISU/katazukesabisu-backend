@@ -25,18 +25,20 @@ module.exports.login = async (req, res) => {
                 role: "admin",
             };
 
-            const token = jwt.sign(userInfo, _CONF.SECRET, {
+            const token = jwt.sign({id: user._id, username: user.username}, _CONF.SECRET, {
                 expiresIn: _CONF.tokenLife,
             });
-            const refreshToken = jwt.sign(userInfo, _CONF.SECRET_REFRESH, {
+            const refreshToken = jwt.sign({id: user._id, username: user.username}, _CONF.SECRET_REFRESH, {
                 expiresIn: _CONF.refreshTokenLife,
             });
 
             const response = {
                 message: "Logged in",
-                user: userInfo,
-                token: token,
-                refreshToken: refreshToken,
+                data:{
+                    user: userInfo,
+                    token: token,
+                    refreshToken: refreshToken,
+                }
             };
             _CONF.refreshTokens[userInfo.id] = {
                 token,
@@ -56,7 +58,7 @@ module.exports.logout = (req, res) => {
     const id = req.user.id;
     try {
         delete _CONF.refreshTokens[id];
-        return res.status(200).json({ message: "Logout successful" });
+        return res.status(200).json({ message: "Logout successful", data: {} });
     } catch (error) {
         console.log(error);
         return res.status(401).json({ message: "Invalid token!" });
@@ -76,7 +78,7 @@ module.exports.forgetPassword = async (req, res) => {
             const subject = `${_CONF.PROJECT_NAME} - confirmation code`;
             const content = templateForgetPassword(user.username, code);
             await sendMail(subject, content, email);
-            return res.status(200).json({ message: "Check mail!" });
+            return res.status(200).json({ message: "Check mail!", data: {} });
         } else {
             return res.status(404).json({ message: "User not found" });
         }
@@ -118,8 +120,10 @@ module.exports.resetPassword = (req, res) => {
                                 .json({ message: "User not found" });
                         }
                         return res.status(200).json({
-                            email,
                             message: "Reset password successful",
+                            data: {
+                                email,
+                            }
                         });
                     }
                 );
@@ -134,18 +138,20 @@ module.exports.resetPassword = (req, res) => {
 };
 
 module.exports.refreshToken = (req, res) => {
-    const { refreshToken } = req.body;
+    const { refreshToken, user } = req.body;
     // if refresh token exists
-    if (refreshToken && refreshToken in _CONF.refreshTokens[req.user.id]) {
+    if (refreshToken && refreshToken in _CONF.refreshTokens[user.id]) {
         const userInfo = req.user;
-        const token = jwt.sign(userInfo, _CONF.SECRET, {
+        const token = jwt.sign({id: user.id, username: user.username}, _CONF.SECRET, {
             expiresIn: _CONF.tokenLife,
         });
         const response = {
-            message: "Logged in",
-            user: userInfo,
-            token: token,
-            refreshToken: refreshToken,
+            message: "Reset token successfully!",
+            data: {
+                user: userInfo,
+                token: token,
+                refreshToken: refreshToken,
+            }
         };
         // update the token in the list
         _CONF.refreshTokens[req.user.id].token = token;
