@@ -4,6 +4,7 @@ const mstInquiryModel = require("../models/mst_inquiry_model");
 const inquiryModel = require("../models/inquiry_model");
 const mstButtonModel = require("../models/mst_button_model");
 const _CONF = require("../config");
+const { response } = require("../utils/commonUtil");
 
 module.exports.getMstInfo = async (req, res) => {
     try {
@@ -56,26 +57,27 @@ module.exports.getMstInfo = async (req, res) => {
                 content: JSON.parse(communicationMethod?.content),
             },
         };
-        return res.status(200).json({
-            message: "Get data masters successfully!",
-            data: {
-                masterInfo
-            },
-        });
+        const result = await response(
+            "Get data masters successfully!",
+            200,
+            masterInfo
+        );
+        return res.status(200).json(result);
     } catch (error) {
         console.log(error);
-        return res.status(500).json({ message: "Something went wrong!" });
+        const result = await response("Something went wrong!", 500);
+        return res.status(500).json(result);
     }
 };
 
 module.exports.getDataHomePage = async (req, res) => {
     try {
-        const homePage = await mstPostCommonModel.find({
+        const homePageData = await mstPostCommonModel.find({
             contentType: _CONF.HOME_PAGE,
         });
-        let homePageData = {};
-        homePage?.forEach((element) => {
-            homePageData[element?._name] = {
+        let homePage = {};
+        homePageData?.forEach((element) => {
+            homePage[element?._name] = {
                 title: element?.title,
                 createDate: element?.createDate,
                 style: element?.style,
@@ -86,53 +88,62 @@ module.exports.getDataHomePage = async (req, res) => {
                 content: JSON.parse(element?.content),
             };
         });
-        return res.status(200).json({
-            message: "Get data home page successfully!",
-            data: { homePageData },
-        });
+        const result = await response(
+            "Get data home page successfully!",
+            200,
+            homePage
+        );
+        return res.status(200).json(result);
     } catch (error) {
         console.log(error);
-        return res.status(500).json({ message: "Something went wrong!" });
+        const result = await response("Something went wrong!", 500);
+        return res.status(500).json(result);
     }
 };
 
 module.exports.getAboutUs = async (req, res) => {
     try {
-        const aboutUs = await mstPostCommonModel.findOne({
+        const aboutUsData = await mstPostCommonModel.findOne({
             contentType: _CONF.ABOUT_US,
         });
-        const aboutUsData = {
-            title: aboutUs?.title,
-            createDate: aboutUs?.createDate,
-            content: JSON.parse(aboutUs?.content),
+        const aboutUs = {
+            title: aboutUsData?.title,
+            createDate: aboutUsData?.createDate,
+            content: JSON.parse(aboutUsData?.content),
         };
-        return res.status(200).json({
-            message: "Get data about us successfully!",
-            data: { aboutUsData },
-        });
+        const result = await response(
+            "Get data about us successfully!",
+            200,
+            aboutUs
+        );
+        return res.status(200).json(result);
     } catch (error) {
         console.log(error);
-        return res.status(500).json({ message: "Something went wrong!" });
+        const result = await response("Something went wrong!", 500);
+        return res.status(500).json(result);
     }
 };
 
 module.exports.getFooterContact = async (req, res) => {
     try {
-        const footerContact = await mstPostCommonModel.findOne({
+        const footerContactData = await mstPostCommonModel.findOne({
             contentType: _CONF.FOOTER_CONTACT,
         });
-        const footerContactData = {
-            title: footerContact?.title,
-            createDate: footerContact?.createDate,
-            content: JSON.parse(footerContact?.content),
+        const footerContact = {
+            title: footerContactData?.title,
+            createDate: footerContactData?.createDate,
+            content: JSON.parse(footerContactData?.content),
         };
-        return res.status(200).json({
-            message: "Get footer contact successfully!",
-            data: { footerContactData },
-        });
+        const result = await response(
+            "Get footer contact successfully!",
+            200,
+            footerContact
+        );
+        return res.status(200).json(result);
     } catch (error) {
         console.log(error);
-        return res.status(500).json({ message: "Something went wrong!" });
+        const result = await response("Something went wrong!", 500);
+        return res.status(500).json(result);
     }
 };
 
@@ -183,13 +194,16 @@ module.exports.getFlowPage = async (req, res) => {
                 };
             }
         });
-        return res.status(200).json({
-            message: "Get flow page successfully!",
-            data: { flowPage },
-        });
+        const result = await response(
+            "Get flow page successfully!",
+            200,
+            flowPage
+        );
+        return res.status(200).json(result);
     } catch (error) {
         console.log(error);
-        return res.status(500).json({ message: "Something went wrong!" });
+        const result = await response("Something went wrong!", 500);
+        return res.status(500).json(result);
     }
 };
 
@@ -203,12 +217,15 @@ module.exports.getCommonBlock = async (req, res) => {
             createDate: contactUsData?.createDate,
             content: JSON.parse(contactUsData?.content),
         };
-        return res.status(200).json({
-            message: "Get common block successfully!",
-            data: { contactUs },
-        });
+        const result = await response(
+            "Get common block successfully!",
+            200,
+            contactUs
+        );
+        return res.status(200).json(result);
     } catch (error) {
         console.log(error);
-        return res.status(500).json({ message: "Something went wrong!" });
+        const result = await response("Something went wrong!", 500);
+        return res.status(500).json(result);
     }
 };

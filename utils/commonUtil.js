@@ -2,6 +2,7 @@ const _CONF = require("../config");
 const nodemailer = require("nodemailer");
 const mstPostCommonModel = require("../models/mst_post_common_model");
 const { cloudinary } = require("../cloudinary");
+const seoHelmetModel = require("../models/seo_helmet_model");
 
 module.exports.sendMail = async (subject, content, email) => {
     try {
@@ -38,18 +39,21 @@ module.exports.getNotFound = async (req, res) => {
             contentType: _CONF.NOT_FOUND,
         });
         if (errorNotFound) {
-            return res.status(200).json({ 
-                message: "Get not found successfully",
-                data: {
+            const result = await this.response(
+                "Get not found successfully!",
+                200,
+                {
                     title: errorNotFound.title,
                     createDate: errorNotFound.createDate,
                     content: JSON.parse(errorNotFound.content),
                 }
-            });
+            );
+            return res.status(200).json(result);
         }
     } catch (error) {
         console.log(error);
-        return res.status(500).json({ message: "Something went wrong!" });
+        const result = await this.response("Something went wrong!", 500);
+        return res.status(500).json(result);
     }
 };
 
@@ -70,11 +74,16 @@ module.exports.uploadImage = async (imagePath) => {
     }
 };
 
-module.exports.response = async (statusCode, message, data ) => {
+module.exports.response = async (message, statusCode, data = undefined) => {
+    let seoHelmet = undefined;
+    if (statusCode == 200) {
+        const seoHelmetData = await seoHelmetModel.findOne();
+        seoHelmet = JSON.parse(seoHelmetData.content);
+    }
     return {
         statusCode,
         message,
         data,
-        seoHelmet: statusCode == 200 ? seoHelmet : undefined
-    }
+        seoHelmet,
+    };
 };

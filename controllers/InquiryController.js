@@ -1,35 +1,36 @@
 const inquiryModel = require("../models/inquiry_model");
+const { response } = require("../utils/commonUtil");
 
 module.exports.createInquiry = async (req, res) => {
-    const data = req.body;
+    const inquiry = req.body;
     try {
-        const result = await inquiryModel.create({ ...data });
-        return res.status(200).json({
-            message: "create successfully!",
-            data: {
-                id: result._id,
-            }
-        });
+        const id = (await inquiryModel.create({ ...inquiry }))._id;
+        const data = {
+            id,
+        };
+        const result = await response("Create successfully!", 200, data);
+        return res.status(200).json(result);
     } catch (error) {
         console.log(error);
-        return res.status(500).json({ message: "Something went wrong!" });
+        const result = await response("Something went wrong!", 500);
+        return res.status(500).json(result);
     }
 };
 
 module.exports.updateInquiry = async (req, res) => {
     const id = req.body._id;
-    const data = req.body;
+    const inquiry = req.body;
     try {
-        await inquiryModel.findByIdAndUpdate(id, { ...data });
-        return res.status(200).json({
-            message: "update successfully!",
-            data: {
-                id
-            }
-        });
+        await inquiryModel.findByIdAndUpdate(id, { ...inquiry });
+        const data = {
+            id,
+        };
+        const result = await response("Update successfully!", 200, data);
+        return res.status(200).json(result);
     } catch (error) {
         console.log(error);
-        return res.status(500).json({ message: "Something went wrong!" });
+        const result = await response("Something went wrong!", 500);
+        return res.status(500).json(result);
     }
 };
 
@@ -37,29 +38,31 @@ module.exports.getInquiry = async (req, res) => {
     const { id } = req.params;
     try {
         const inquiry = await inquiryModel.findById(id);
-        return res.status(200).json({
-            message: "Get detail inquiry successfully!",
-            data: {
-                inquiry,
-            }
-        });
+        const result = await response(
+            "Get detail inquiry successfully!",
+            200,
+            inquiry
+        );
+        return res.status(200).json(result);
     } catch (error) {
         console.log(error);
-        return res.status(500).json({ message: "Something went wrong!" });
+        const result = await response("Something went wrong!", 500);
+        return res.status(500).json(result);
     }
 };
 
 module.exports.getInquiries = async (req, res) => {
     try {
         const inquiries = await inquiryModel.find({});
-        return res.status(200).json({
-            message: "Get list inquiry successfully!",
-            data: {
-                inquiries,
-            }
-        });
+        const result = await response(
+            "Get list inquiry successfully!",
+            200,
+            inquiries
+        );
+        return res.status(200).json(result);
     } catch (error) {
         console.log(error);
-        return res.status(500).json({ message: "Something went wrong!" });
+        const result = await response("Something went wrong!", 500);
+        return res.status(500).json(result);
     }
 };
