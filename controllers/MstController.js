@@ -3,6 +3,7 @@ const mstPostCommonModel = require("../models/mst_post_common_model");
 const mstInquiryModel = require("../models/mst_inquiry_model");
 const inquiryModel = require("../models/inquiry_model");
 const mstButtonModel = require("../models/mst_button_model");
+const mstServicePageModel = require("../models/mst_service_page_model");
 const _CONF = require("../config");
 const { response } = require("../utils/commonUtil");
 
@@ -221,6 +222,46 @@ module.exports.getCommonBlock = async (req, res) => {
             "Get common block successfully!",
             200,
             contactUs
+        );
+        return res.status(200).json(result);
+    } catch (error) {
+        console.log(error);
+        const result = await response("Something went wrong!", 500);
+        return res.status(500).json(result);
+    }
+};
+
+module.exports.getServicePriceInfor = async (req, res) => {
+    try {
+        const servicePriceData = await mstServicePageModel.findOne({ contentType: _CONF.SERVICE_PRICE_INFO});
+        const servicePriceInfo = {
+            heading: servicePriceData.heading,
+            section: JSON.parse(servicePriceData.section),
+        }
+        const result = await response(
+            "Get service price info successfully!",
+            200,
+            servicePriceInfo
+        );
+        return res.status(200).json(result);
+    } catch (error) {
+        console.log(error);
+        const result = await response("Something went wrong!", 500);
+        return res.status(500).json(result);
+    }
+};
+
+module.exports.getRatePlan = async (req, res) => {
+    try {
+        const ratePlaneData = await mstServicePageModel.findOne({ contentType: _CONF.RATE_PLAN})
+        const ratePlan = {
+            heading: ratePlaneData.heading,
+            section: JSON.parse(ratePlaneData.section),
+        }
+        const result = await response(
+            "Get rate plan successfully!",
+            200,
+            ratePlan
         );
         return res.status(200).json(result);
     } catch (error) {

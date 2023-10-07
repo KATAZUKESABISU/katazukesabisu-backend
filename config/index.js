@@ -34,6 +34,8 @@ const config = Object.freeze({
     CONTACT_US: 13,
 
     BUTTON_QA: 0,
+    SERVICE_PRICE_INFO: 0,
+    RATE_PLAN: 1,
 
     PROJECT_NAME: "KATAZUKESABISU",
 });

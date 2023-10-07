@@ -10,6 +10,7 @@ const MstContactModel = require("../models/mst_contact_model");
 const MstPostCommonModel = require("../models/mst_post_common_model");
 const MstButtonModel = require("../models/mst_button_model");
 const SeoHelmetModel = require("../models/seo_helmet_model");
+const ServicePageModel = require("../models/mst_service_page_model"); 
 
 const adminSeed = require("./admin_seed");
 const mstInquirySeed = require("./mst_inquiry_seed");
@@ -37,6 +38,7 @@ const {
 } = require("./mst_post_common_seed");
 const buttonQA = require("./mst_button_seed");
 const { seoHelmet } = require("./seo_helmet_seed");
+const { servicePriceInfor, ratePlan} = require("./mst_service_page_seed");
 
 const seedDB = async (result) => {
     console.log("Start Insert");
@@ -239,6 +241,37 @@ const seedDB = async (result) => {
     await SeoHelmetModel.deleteMany({});
     const seoHelmetModel = new SeoHelmetModel(seoHelmetData);
     await seoHelmetModel.save();
+
+    await ServicePageModel.deleteMany();
+    // Create data service
+    servicePriceInfor.section[0].content[0].data.imageURL = result.imageUrl;
+    servicePriceInfor.section[0].content[1].data.imageURL = result.imageUrl;
+    servicePriceInfor.section[0].content[2].data.imageURL = result.imageUrl;
+    servicePriceInfor.section[0].content[3].data.imageURL = result.imageUrl;
+    servicePriceInfor.section[0].content[4].data.imageURL = result.imageUrl;
+    servicePriceInfor.section[0].content[5].data.imageURL = result.imageUrl;
+    const servicePriceInforData = {
+        heading: servicePriceInfor.heading,
+        section: JSON.stringify(servicePriceInfor.section),
+        contentType: servicePriceInfor.contentType,
+    }
+    const servicePriceInforModel = new ServicePageModel(servicePriceInforData);
+    await servicePriceInforModel.save();
+
+    ratePlan.section[0].content[0].data.imageURL = result.image1Url;
+    ratePlan.section[0].content[1].data.imageURL = result.image1Url;
+    ratePlan.section[0].content[2].data.imageURL = result.image1Url;
+    ratePlan.section[0].content[3].data.imageURL = result.image1Url;
+    ratePlan.section[1].content[0].data.file.url = result.image2Url;
+    ratePlan.section[1].content[1].data.imageURL = result.image2Url;
+    const ratePlanData = {
+        heading: ratePlan.heading,
+        section: JSON.stringify(ratePlan.section),
+        contentType: ratePlan.contentType,
+    }
+    const ratePlanModel = new ServicePageModel(ratePlanData);
+    await ratePlanModel.save();
+
     console.log("End Insert");
 };
 

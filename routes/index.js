@@ -8,7 +8,9 @@ const {
     getAboutUs,
     getFooterContact,
     getFlowPage,
-    getCommonBlock
+    getCommonBlock,
+    getServicePriceInfor,
+    getRatePlan,
 } = require("../controllers/MstController");
 const { getNotFound } = require("../utils/commonUtil");
 
@@ -23,6 +25,8 @@ function route(app) {
     app.get("/public/footer_contact", getFooterContact);
     app.get("/public/flow_page", getFlowPage);
     app.get("/public/common_block", getCommonBlock);
+    app.get("/public/service_price_infor", getServicePriceInfor);
+    app.get("/public/rate_plan", getRatePlan);
     // admin
     app.use("/api", adminRoute);
     app.use(isAuthentication);
