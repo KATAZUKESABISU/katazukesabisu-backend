@@ -40,7 +40,7 @@ const {
 } = require("./mst_post_common_seed");
 const { buttonQA } = require("./mst_button_seed");
 const { seoHelmet } = require("./seo_helmet_seed");
-const { servicePriceInfor, ratePlan} = require("./mst_service_page_seed");
+const { servicePriceInfor, ratePlan } = require("./mst_service_page_seed");
 const { blog } = require("./blog_seed");
 
 const seedDB = async (result) => {
@@ -250,12 +250,12 @@ const seedDB = async (result) => {
 
     await ServicePageModel.deleteMany();
     // Create data service
-    servicePriceInfor.section[0].content[0].data.imageURL = result.imageUrl;
-    servicePriceInfor.section[0].content[1].data.imageURL = result.imageUrl;
-    servicePriceInfor.section[0].content[2].data.imageURL = result.imageUrl;
-    servicePriceInfor.section[0].content[3].data.imageURL = result.imageUrl;
-    servicePriceInfor.section[0].content[4].data.imageURL = result.imageUrl;
-    servicePriceInfor.section[0].content[5].data.imageURL = result.imageUrl;
+    servicePriceInfor.section[0].content[0].data.imageURL = result.image1Url;
+    servicePriceInfor.section[0].content[1].data.imageURL = result.image1Url;
+    servicePriceInfor.section[0].content[2].data.imageURL = result.image1Url;
+    servicePriceInfor.section[0].content[3].data.imageURL = result.image1Url;
+    servicePriceInfor.section[0].content[4].data.imageURL = result.image1Url;
+    servicePriceInfor.section[0].content[5].data.imageURL = result.image1Url;
     const servicePriceInforData = {
         heading: servicePriceInfor.heading,
         section: JSON.stringify(servicePriceInfor.section),
@@ -269,7 +269,7 @@ const seedDB = async (result) => {
     ratePlan.section[0].content[2].data.imageURL = result.image1Url;
     ratePlan.section[0].content[3].data.imageURL = result.image1Url;
     ratePlan.section[1].content[0].data.file.url = result.image2Url;
-    ratePlan.section[1].content[1].data.imageURL = result.image2Url;
+    ratePlan.section[2].content[0].data.imageURL = result.image2Url;
     const ratePlanData = {
         heading: ratePlan.heading,
         section: JSON.stringify(ratePlan.section),
