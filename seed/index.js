@@ -11,6 +11,7 @@ const MstPostCommonModel = require("../models/mst_post_common_model");
 const MstButtonModel = require("../models/mst_button_model");
 const SeoHelmetModel = require("../models/seo_helmet_model");
 const ServicePageModel = require("../models/mst_service_page_model"); 
+const BlogModel = require("../models/blog_model");
 
 const adminSeed = require("./admin_seed");
 const mstInquirySeed = require("./mst_inquiry_seed");
@@ -35,10 +36,12 @@ const {
     lineTemplate,
     listQA,
     contactUs,
+    blogCommon
 } = require("./mst_post_common_seed");
-const buttonQA = require("./mst_button_seed");
+const { buttonQA } = require("./mst_button_seed");
 const { seoHelmet } = require("./seo_helmet_seed");
 const { servicePriceInfor, ratePlan} = require("./mst_service_page_seed");
+const { blog } = require("./blog_seed");
 
 const seedDB = async (result) => {
     console.log("Start Insert");
@@ -229,6 +232,9 @@ const seedDB = async (result) => {
     const mstContactUs = new MstPostCommonModel(contactUsData);
     await mstContactUs.save();
 
+    const mstBlogCommon = new MstPostCommonModel(blogCommon);
+    await mstBlogCommon.save();
+
     await MstButtonModel.deleteMany({});
     const mstButton = new MstButtonModel(buttonQA);
     await mstButton.save();
@@ -271,6 +277,11 @@ const seedDB = async (result) => {
     }
     const ratePlanModel = new ServicePageModel(ratePlanData);
     await ratePlanModel.save();
+
+    await BlogModel.deleteMany();
+    await BlogModel.insertMany(blog);
+    // const blogModel = new BlogModel(blog);
+    // await blogModel.save();
 
     console.log("End Insert");
 };

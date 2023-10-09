@@ -39,6 +39,7 @@ const MstPostCommonSchema = new Schema({
         // 11: lineTemplate
         // 12: listQA
         // 13: contactUs
+        // 14: blogCommon
     },
     _name: {
         type: String,

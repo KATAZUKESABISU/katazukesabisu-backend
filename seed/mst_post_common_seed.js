@@ -571,3 +571,10 @@ module.exports.contactUs = {
     ],
     contentType: 13,
 };
+
+module.exports.blogCommon = {
+    title: "ブログ",
+    createDate: "",
+    content: "",
+    contentType: 14,
+}

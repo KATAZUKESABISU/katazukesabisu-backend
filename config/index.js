@@ -32,10 +32,13 @@ const config = Object.freeze({
     // LINE_TEMPLATE: 11,
     LIST_QA: "listQA",
     CONTACT_US: 13,
+    BLOG_COMMON: 14,
 
     BUTTON_QA: 0,
     SERVICE_PRICE_INFO: 0,
     RATE_PLAN: 1,
+
+    PER_PAGE_DEFAULT: 5,
 
     PROJECT_NAME: "KATAZUKESABISU",
 });

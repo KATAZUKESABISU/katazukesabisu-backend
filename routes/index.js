@@ -13,6 +13,7 @@ const {
     getRatePlan,
 } = require("../controllers/MstController");
 const { getNotFound } = require("../utils/commonUtil");
+const { getBlog, getBlogs } = require("../controllers/BlogController");
 
 function route(app) {
     // client
@@ -27,6 +28,8 @@ function route(app) {
     app.get("/public/common_block", getCommonBlock);
     app.get("/public/service_price_infor", getServicePriceInfor);
     app.get("/public/rate_plan", getRatePlan);
+    app.get("/public/list_blog", getBlogs);
+    app.get("/public/blog/:id", getBlog);
     // admin
     app.use("/api", adminRoute);
     app.use(isAuthentication);
