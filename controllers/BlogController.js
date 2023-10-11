@@ -42,15 +42,23 @@ module.exports.getBlogs = async (req, res) => {
         const totalPage = Math.ceil( await blogModel.count() / (perPage) );
         if (currentPage > totalPage) {
             const result = await response("CurentPage not found!", 404);
-            return res.status(404).json(result); 
+            return res.status(404).json(result);
         }
 
         const blogCommon = await mstPostCommonModel.findOne({ contentType: _CONF.BLOG_COMMON });
         const blog = await blogModel.find().skip(perPage * currentPage - perPage).limit(perPage);
+
+        
         const blogData = {
             title: blogCommon.title,
             createDate: blogCommon.createDate,
-            content: blog
+            content: blog.map(item => ({
+                id: item._id,
+                title: item.title,
+                createDate: item.createDate,
+                image: item.image,
+                content: item.content
+            })),
         }
         let result = await response("Get list blog successfully!", 200, blogData);
         result.currentPage = currentPage;
@@ -59,6 +67,6 @@ module.exports.getBlogs = async (req, res) => {
     } catch (error) {
         console.log(error);
         const result = await response("Something went wrong!", 500);
-        return res.status(500).json(result);  
+        return res.status(500).json(result);
     }
 }
