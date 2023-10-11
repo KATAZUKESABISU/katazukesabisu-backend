@@ -66,7 +66,7 @@ module.exports.login = async (req, res) => {
 };
 
 module.exports.logout = async (req, res) => {
-    const userId = req.body;
+    const { userId } = req.body;
     try {
         if (!userId) {
             const result = await response("userId is required!", 400);
