@@ -8,7 +8,7 @@ route.post("/forget_password", adminController.forgetPassword);
 route.post("/reset_password", adminController.resetPassword);
 
 route.use(isAuthentication);
-route.get("/logout", adminController.logout);
+route.post("/logout", adminController.logout);
 route.post("/token", adminController.refreshToken);
 
 module.exports = route;

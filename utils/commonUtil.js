@@ -74,11 +74,11 @@ module.exports.uploadImage = async (imagePath) => {
     }
 };
 
-module.exports.response = async (message, statusCode, data = undefined) => {
+module.exports.response = async (message, statusCode, page = null, data = undefined) => {
     let seoHelmet = undefined;
     if (statusCode == 200) {
-        const seoHelmetData = await seoHelmetModel.findOne();
-        seoHelmet = JSON.parse(seoHelmetData.content);
+        const seoHelmetData = await seoHelmetModel.findOne({nameSeo: page});
+        seoHelmet = seoHelmetData ? JSON.parse(seoHelmetData.content) : {};
     }
     return {
         statusCode,

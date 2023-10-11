@@ -21,9 +21,11 @@ module.exports.login = async (req, res) => {
             const userInfo = {
                 id: user._id,
                 username: user.username,
+                displayName: user.displayName,
                 email: user.email,
                 phone: user.phone,
-                role: "admin",
+                photoUrl: user.photoUrl,
+                role: user.role,
             };
 
             const token = jwt.sign(
@@ -46,7 +48,7 @@ module.exports.login = async (req, res) => {
                 token: token,
                 refreshToken: refreshToken,
             };
-            const result = await response("Logged in", 200, data);
+            const result = await response("Logged in", 200, null, data);
             _CONF.refreshTokens[userInfo.id] = {
                 token,
                 refreshToken,
@@ -64,10 +66,21 @@ module.exports.login = async (req, res) => {
 };
 
 module.exports.logout = async (req, res) => {
-    const id = req.user.id;
+    const userId = req.body;
     try {
-        delete _CONF.refreshTokens[id];
-        const result = await response("Logout successful", 200);
+        if (!userId) {
+            const result = await response("userId is required!", 400);
+            return res.status(400).json(result);
+        } else if (!_CONF.refreshTokens.hasOwnProperty(userId)) {
+            const result = await response("userId not exist!", 400);
+            return res.status(400).json(result);
+        }
+        delete _CONF.refreshTokens[userId];
+        const result = {
+            statusCode: 200,
+            message: "Logout successful!",
+            data: []
+        };
         return res.status(200).json(result);
     } catch (error) {
         console.log(error);

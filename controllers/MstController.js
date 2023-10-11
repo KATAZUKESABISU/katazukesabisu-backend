@@ -61,6 +61,7 @@ module.exports.getMstInfo = async (req, res) => {
         const result = await response(
             "Get data masters successfully!",
             200,
+            null,
             masterInfo
         );
         return res.status(200).json(result);
@@ -92,6 +93,7 @@ module.exports.getDataHomePage = async (req, res) => {
         const result = await response(
             "Get data home page successfully!",
             200,
+            'home_page',
             homePage
         );
         return res.status(200).json(result);
@@ -115,6 +117,7 @@ module.exports.getAboutUs = async (req, res) => {
         const result = await response(
             "Get data about us successfully!",
             200,
+            'about_us',
             aboutUs
         );
         return res.status(200).json(result);
@@ -138,6 +141,7 @@ module.exports.getFooterContact = async (req, res) => {
         const result = await response(
             "Get footer contact successfully!",
             200,
+            "footer_contact",
             footerContact
         );
         return res.status(200).json(result);
@@ -198,6 +202,7 @@ module.exports.getFlowPage = async (req, res) => {
         const result = await response(
             "Get flow page successfully!",
             200,
+            "flow_page",
             flowPage
         );
         return res.status(200).json(result);
@@ -221,6 +226,7 @@ module.exports.getCommonBlock = async (req, res) => {
         const result = await response(
             "Get common block successfully!",
             200,
+            "common_block",
             contactUs
         );
         return res.status(200).json(result);
@@ -241,6 +247,7 @@ module.exports.getServicePriceInfor = async (req, res) => {
         const result = await response(
             "Get service price info successfully!",
             200,
+            "service_price_info",
             servicePriceInfo
         );
         return res.status(200).json(result);
@@ -261,6 +268,7 @@ module.exports.getRatePlan = async (req, res) => {
         const result = await response(
             "Get rate plan successfully!",
             200,
+            "rate_plan",
             ratePlan
         );
         return res.status(200).json(result);

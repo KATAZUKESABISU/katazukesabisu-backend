@@ -23,7 +23,7 @@ module.exports.getBlog = async (req, res) => {
             image: blog.image,
             content: blog.content
         }
-        let result = await response("Get detail blog successfully!", 200, blogData);
+        let result = await response("Get detail blog successfully!", 200, 'blog_detail', blogData);
         result.currentPage = currentPage ?? 1;
         result.totalPage = totalPage;
         return res.status(200).json(result);
@@ -60,7 +60,7 @@ module.exports.getBlogs = async (req, res) => {
                 content: item.content
             })),
         }
-        let result = await response("Get list blog successfully!", 200, blogData);
+        let result = await response("Get list blog successfully!", 200, 'Blog', blogData);
         result.currentPage = currentPage;
         result.totalPage = totalPage;
         return res.status(200).json(result);

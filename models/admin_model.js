@@ -8,12 +8,21 @@ const AdminSchema = new Schema({
         required: true,
         unique: true,
     },
+    displayName: {
+        type: String,
+    },
     email: {
         type: String,
         required: true,
         unique: true,
     },
     phone: {
+        type: String,
+    },
+    photoUrl: {
+        type: String,
+    },
+    role: {
         type: String,
     },
     password: {

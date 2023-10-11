@@ -8,7 +8,7 @@ module.exports.createInquiry = async (req, res) => {
         const data = {
             id,
         };
-        const result = await response("Create successfully!", 200, data);
+        const result = await response("Create successfully!", 200, null, data);
         return res.status(200).json(result);
     } catch (error) {
         console.log(error);
@@ -25,7 +25,7 @@ module.exports.updateInquiry = async (req, res) => {
         const data = {
             id,
         };
-        const result = await response("Update successfully!", 200, data);
+        const result = await response("Update successfully!", 200, null, data);
         return res.status(200).json(result);
     } catch (error) {
         console.log(error);
@@ -41,6 +41,7 @@ module.exports.getInquiry = async (req, res) => {
         const result = await response(
             "Get detail inquiry successfully!",
             200,
+            'inquiry_details',
             inquiry
         );
         return res.status(200).json(result);
@@ -57,6 +58,7 @@ module.exports.getInquiries = async (req, res) => {
         const result = await response(
             "Get list inquiry successfully!",
             200,
+            'inquiries',
             inquiries
         );
         return res.status(200).json(result);

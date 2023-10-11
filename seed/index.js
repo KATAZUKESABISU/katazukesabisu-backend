@@ -46,6 +46,7 @@ const { blog } = require("./blog_seed");
 const seedDB = async (result) => {
     console.log("Start Insert");
     await AdminModel.deleteMany({});
+    adminSeed.photoUrl = result.avatarUrl;
     const admin = new AdminModel(adminSeed);
     await admin.save();
 
@@ -240,13 +241,13 @@ const seedDB = async (result) => {
     await mstButton.save();
 
     // Create data seoHelmet
-    seoHelmet[0].content = result.imageSEOUrl;
-    const seoHelmetData = {
-        content: JSON.stringify(seoHelmet)
-    };
+    seoHelmet[0].content[0].content = result.imageSEOUrl;
+    const seoHelmetData = seoHelmet.map(item => ({
+        nameSeo: item.nameSeo,
+        content: JSON.stringify(item.content)
+    }))
     await SeoHelmetModel.deleteMany({});
-    const seoHelmetModel = new SeoHelmetModel(seoHelmetData);
-    await seoHelmetModel.save();
+    await SeoHelmetModel.insertMany(seoHelmetData);
 
     await ServicePageModel.deleteMany();
     // Create data service
