@@ -79,7 +79,7 @@ module.exports.logout = async (req, res) => {
         const result = {
             statusCode: 200,
             message: "Logout successful!",
-            data: []
+            data: [],
         };
         return res.status(200).json(result);
     } catch (error) {
@@ -170,31 +170,44 @@ module.exports.resetPassword = async (req, res) => {
 };
 
 module.exports.refreshToken = async (req, res) => {
-    const { refreshToken, user } = req.body;
+    const { refreshToken, userId } = req.body;
     // if refresh token exists
     if (
         refreshToken &&
-        refreshToken == _CONF.refreshTokens[user.id].refreshToken
+        refreshToken == _CONF.refreshTokens[userId].refreshToken
     ) {
-        const token = jwt.sign(
-            { id: user.id, username: user.username },
-            _CONF.SECRET,
-            {
-                expiresIn: _CONF.tokenLife,
+        // verifies secret and checks exp
+        jwt.verify(
+            refreshToken,
+            _CONF.SECRET_REFRESH,
+            async function (err, decoded) {
+                if (err) {
+                    delete _CONF.refreshTokens[decoded.id];
+                    console.error(err.toString());
+                    const result = await response("Unauthorized access.", 401);
+                    return res.status(401).json(result);
+                }
+                const token = jwt.sign(
+                    { id: decoded.id, username: decoded.username },
+                    _CONF.SECRET,
+                    {
+                        expiresIn: _CONF.tokenLife,
+                    }
+                );
+                const result = await response(
+                    "Reset token successfully!",
+                    200,
+                    null,
+                    (data = {
+                        token: token,
+                        // refreshToken: refreshToken,
+                    })
+                );
+                // update the token in the list
+                _CONF.refreshTokens[decoded.id].token = token;
+                res.status(200).json(result);
             }
         );
-        const result = await response(
-            "Reset token successfully!",
-            200,
-            (data = {
-                user: user,
-                token: token,
-                // refreshToken: refreshToken,
-            })
-        );
-        // update the token in the list
-        _CONF.refreshTokens[req.user.id].token = token;
-        res.status(200).json(result);
     } else {
         const result = await response("Invalid request", 404);
         res.status(404).send(result);
