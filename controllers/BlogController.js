@@ -4,14 +4,13 @@ const mstPostCommonModel = require("../models/mst_post_common_model");
 const _CONF = require("../config");
 
 module.exports.getBlog = async (req, res) => {
-    const { id, perPage, currentPage } = req.params;
+    const { id } = req.params;
     try {
         if (!id) {
             const result = await response("Blog not found!", 404);
             return res.status(404).json(result);
         }
         const blog = await blogModel.findById(id);
-        const totalPage = Math.ceil( await blogModel.count() / (perPage ? perPage : _CONF.PER_PAGE_DEFAULT) );
         if (!blog) {
             const result = await response("Blog not found!", 404);
             return res.status(404).json(result);
@@ -23,9 +22,7 @@ module.exports.getBlog = async (req, res) => {
             image: blog.image,
             content: blog.content
         }
-        let result = await response("Get detail blog successfully!", 200, 'blog_detail', blogData);
-        result.currentPage = currentPage ?? 1;
-        result.totalPage = totalPage;
+        const result = await response("Get detail blog successfully!", 200, 'blog_detail', blogData);
         return res.status(200).json(result);
 
     } catch (error) {
@@ -40,7 +37,7 @@ module.exports.getBlogs = async (req, res) => {
     const perPage = req.query.perPage || _CONF.PER_PAGE_DEFAULT;
     try {
         const totalPage = Math.ceil( await blogModel.count() / (perPage) );
-        if (currentPage > totalPage) {
+        if (currentPage > totalPage || currentPage < 1) {
             const result = await response("CurentPage not found!", 404);
             return res.status(404).json(result);
         }
