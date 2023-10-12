@@ -29,9 +29,11 @@ const AdminSchema = new Schema({
         type: String,
         required: true,
     },
-    saltRounds: {
+    token: {
         type: String,
-        // required: true,
+    },
+    refreshToken: {
+        type: String,
     },
 });
 

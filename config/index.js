@@ -6,7 +6,7 @@ const config = Object.freeze({
     // expiresIn token
     tokenLife: 600, // 10 minutes
     refreshTokenLife: 86400, // 1 day
-    refreshTokens: {},
+    // refreshTokens: {},
 
     // gmail
     HOST: "smtp.gmail.com",

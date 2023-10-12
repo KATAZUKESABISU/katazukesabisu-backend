@@ -48,11 +48,11 @@ module.exports.login = async (req, res) => {
                 token: token,
                 refreshToken: refreshToken,
             };
+            await adminModel.findByIdAndUpdate(user._id, {
+                token: token,
+                refreshToken: refreshToken,
+            });
             const result = await response("Logged in", 200, null, data);
-            _CONF.refreshTokens[userInfo.id] = {
-                token,
-                refreshToken,
-            };
             return res.status(200).json(result);
         } else {
             const result = await response("User not found", 404);
@@ -71,11 +71,16 @@ module.exports.logout = async (req, res) => {
         if (!userId) {
             const result = await response("userId is required!", 400);
             return res.status(400).json(result);
-        } else if (!_CONF.refreshTokens.hasOwnProperty(userId)) {
+        }
+        const user = await adminModel.findById(userId);
+        if (!user) {
             const result = await response("userId not exist!", 400);
             return res.status(400).json(result);
         }
-        delete _CONF.refreshTokens[userId];
+        await adminModel.findByIdAndUpdate(userId, {
+            token: null,
+            refreshToken: null,
+        });
         const result = {
             statusCode: 200,
             message: "Logout successful!",
@@ -140,7 +145,7 @@ module.exports.resetPassword = async (req, res) => {
                         }
                         const user = await adminModel.findOneAndUpdate(
                             { email },
-                            { password: hash, saltRounds: saltRounds }
+                            { password: hash }
                         );
                         if (!user) {
                             const result = await response(
@@ -171,18 +176,19 @@ module.exports.resetPassword = async (req, res) => {
 
 module.exports.refreshToken = async (req, res) => {
     const { refreshToken, userId } = req.body;
+    const user = await adminModel.findById(userId);
     // if refresh token exists
-    if (
-        refreshToken &&
-        refreshToken == _CONF.refreshTokens[userId]?.refreshToken
-    ) {
+    if (refreshToken && user?.refreshToken === refreshToken) {
         // verifies secret and checks exp
         jwt.verify(
             refreshToken,
             _CONF.SECRET_REFRESH,
             async function (err, decoded) {
                 if (err) {
-                    delete _CONF.refreshTokens[decoded.id];
+                    await adminModel.findByIdAndUpdate(userId, {
+                        token: null,
+                        refreshToken: null,
+                    });
                     console.error(err.toString());
                     const result = await response("Unauthorized access.", 401);
                     return res.status(401).json(result);
@@ -194,6 +200,7 @@ module.exports.refreshToken = async (req, res) => {
                         expiresIn: _CONF.tokenLife,
                     }
                 );
+                await adminModel.findByIdAndUpdate(userId, { token: token });
                 const result = await response(
                     "Reset token successfully!",
                     200,
@@ -204,7 +211,6 @@ module.exports.refreshToken = async (req, res) => {
                     })
                 );
                 // update the token in the list
-                _CONF.refreshTokens[decoded.id].token = token;
                 res.status(200).json(result);
             }
         );
