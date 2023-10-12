@@ -174,7 +174,7 @@ module.exports.refreshToken = async (req, res) => {
     // if refresh token exists
     if (
         refreshToken &&
-        refreshToken == _CONF.refreshTokens[userId].refreshToken
+        refreshToken == _CONF.refreshTokens[userId]?.refreshToken
     ) {
         // verifies secret and checks exp
         jwt.verify(
