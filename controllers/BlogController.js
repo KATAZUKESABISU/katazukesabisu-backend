@@ -46,10 +46,8 @@ module.exports.getBlogs = async (req, res) => {
         if (published) {
             condition.published = published;
         }
-        console.log(condition);
-        let totalPage = Math.ceil(
-            (await blogModel.count(condition)) / perPage
-        );
+        const totalRecord = await blogModel.count(condition);
+        let totalPage = Math.ceil((totalRecord) / perPage);
         totalPage = totalPage == 0 ? 1 : totalPage;
         if (currentPage > totalPage || currentPage < 1) {
             const result = await response("CurentPage not found!", 404);
@@ -73,7 +71,7 @@ module.exports.getBlogs = async (req, res) => {
                 createDate: item.createDate,
                 image: item.image,
                 content: item.content,
-                publish: item.publish,
+                published: item.published,
             })),
         };
         let result = await response(
@@ -82,6 +80,7 @@ module.exports.getBlogs = async (req, res) => {
             "blogs",
             blogData
         );
+        result.totalRecord = totalRecord;
         result.currentPage = currentPage;
         result.totalPage = totalPage;
         return res.status(200).json(result);
@@ -94,4 +93,6 @@ module.exports.getBlogs = async (req, res) => {
 
 module.exports.createBlog = async (req, res) => {};
 
-module.exports.updateBlog = async (req, res) => {};
+module.exports.updateBlog = async (req, res) => {
+    const {id, title, image, content, published} = req.body
+};

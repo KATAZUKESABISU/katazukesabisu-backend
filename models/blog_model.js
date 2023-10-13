@@ -7,8 +7,8 @@ const BlogSchema = new Schema({
         required: true,
     },
     createDate: {
-        type: String,
-        required: false,
+        type: Date,
+        required: true,
     },
     content: {
         type: String,

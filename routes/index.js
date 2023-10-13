@@ -1,4 +1,7 @@
-const { isAuthentication } = require("../middleware");
+const { isAuthentication, getUrlImageUpload } = require("../middleware");
+const multer      = require('multer');
+const { storage } = require('../cloudinary');
+const upload      = multer({ storage });
 const adminRoute = require("./admin");
 const inquiryRoute = require("./inquiry");
 const blogRoute = require("./blog");
@@ -39,6 +42,7 @@ function route(app) {
     app.get("/api/mst_info", getMstInfo);
     app.get("/api/home_page", getDataHomePage);
     app.use("/api/blog", blogRoute);
+    app.post('/api/upload', upload.single('image'), getUrlImageUpload);
 }
 
 module.exports = route;

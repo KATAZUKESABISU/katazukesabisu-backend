@@ -745,5 +745,5 @@ module.exports.blog = Array(15).fill({
   - [CommonMark](https://commonmark.org/) - "A strongly defined, highly compatible specification of Markdown"
 
   `,
-    publish: 1,
+  published: 1,
 });

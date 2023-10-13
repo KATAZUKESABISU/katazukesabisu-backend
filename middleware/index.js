@@ -32,3 +32,13 @@ module.exports.isAuthentication = async (req, res, next) => {
         return res.status(403).json(result);
     }
 };
+
+module.exports.getUrlImageUpload = async (req, res) => {
+    const result = await response(
+        "Upload image to cloudinary successfully!",
+        200,
+        null,
+        req.file.path
+    );
+    return res.status(200).json(result);
+}
