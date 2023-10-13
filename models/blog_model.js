@@ -16,7 +16,10 @@ const BlogSchema = new Schema({
     },
     image: {
         type: String,
-    }
+    },
+    publish: {
+        type: Number,
+    },
 });
 
 module.exports = mongoose.model("Blog", BlogSchema);

@@ -1,10 +1,8 @@
 module.exports.blog = Array(15).fill({
-  id: "blog-abcd",
-  title: "Markdown cheatsheet",
-  createDate: "2023-10-05 22:53",
-  image:
-    "https://res.cloudinary.com/seekda/image/upload/w_1200,h_800,c_fill,f_auto,fl_lossy,q_auto/production/AT_UAB6-12-38-03/_66347854-3649-46D6-B415-CA3E66BDC92C.jpg",
-  content: `# Standard features
+    title: "Markdown cheatsheet",
+    createDate: "2023-10-05 22:53",
+    image: "https://res.cloudinary.com/seekda/image/upload/w_1200,h_800,c_fill,f_auto,fl_lossy,q_auto/production/AT_UAB6-12-38-03/_66347854-3649-46D6-B415-CA3E66BDC92C.jpg",
+    content: `# Standard features
 
   The following <u>markdown features</u> are defined by the [CommonMark][] standard, and are generally supported by all markdown parsers and editors.
 
@@ -747,5 +745,5 @@ module.exports.blog = Array(15).fill({
   - [CommonMark](https://commonmark.org/) - "A strongly defined, highly compatible specification of Markdown"
 
   `,
+    publish: 1,
 });
-

@@ -1,6 +1,7 @@
 const { isAuthentication } = require("../middleware");
 const adminRoute = require("./admin");
 const inquiryRoute = require("./inquiry");
+const blogRoute = require("./blog");
 const inquiryController = require("../controllers/InquiryController");
 const {
     getMstInfo,
@@ -37,6 +38,7 @@ function route(app) {
     app.use("/api/inquiry", inquiryRoute);
     app.get("/api/mst_info", getMstInfo);
     app.get("/api/home_page", getDataHomePage);
+    app.use("/api/blog", blogRoute);
 }
 
 module.exports = route;
