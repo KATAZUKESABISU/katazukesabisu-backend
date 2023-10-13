@@ -17,7 +17,7 @@ const BlogSchema = new Schema({
     image: {
         type: String,
     },
-    publish: {
+    published: {
         type: Number,
     },
 });

@@ -39,36 +39,28 @@ module.exports.getBlog = async (req, res) => {
 module.exports.getBlogs = async (req, res) => {
     const currentPage = req.query.currentPage || 1;
     const perPage = req.query.limit || _CONF.PER_PAGE_DEFAULT;
-    const sortItem = req.query.sortItem || _CONF.SORT_ITEM_DEFAULT_DATE;
-    const sortOrder = req.query.sortOrder || _CONF.SORT_ORDER_DEFAULT_DESC;
+    const published = req.query.published;
     const title = req.query.title;
     try {
-        const condition = title ? { title: title } : {};
-        const totalPage = Math.ceil(
+        let condition = title ? { title: title } : {};
+        if (published) {
+            condition.published = published;
+        }
+        console.log(condition);
+        let totalPage = Math.ceil(
             (await blogModel.count(condition)) / perPage
         );
+        totalPage = totalPage == 0 ? 1 : totalPage;
         if (currentPage > totalPage || currentPage < 1) {
             const result = await response("CurentPage not found!", 404);
             return res.status(404).json(result);
         }
-
         const blogCommon = await mstPostCommonModel.findOne({
             contentType: _CONF.BLOG_COMMON,
         });
-        let sortBlog = {};
-        if (sortItem == _CONF.SORT_ITEM_DEFAULT_DATE) {
-            sortBlog = {
-                createDate: sortOrder,
-            };
-        } else if (sortItem == _CONF.SORT_ITEM_PUBLISH) {
-            sortBlog = {
-                publish: sortOrder,
-                createDate: _CONF.SORT_ORDER_DESC,
-            };
-        }
         const blog = await blogModel
             .find(condition)
-            .sort(sortBlog)
+            .sort({ createDate: _CONF.SORT_ORDER_DESC })
             .skip(perPage * currentPage - perPage)
             .limit(perPage);
 
@@ -87,7 +79,7 @@ module.exports.getBlogs = async (req, res) => {
         let result = await response(
             "Get list blog successfully!",
             200,
-            "Blog",
+            "blogs",
             blogData
         );
         result.currentPage = currentPage;
