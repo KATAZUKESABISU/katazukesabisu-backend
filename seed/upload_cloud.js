@@ -19,6 +19,13 @@ module.exports.upload = async () => {
     const ImgContact = getPathImg("167418631395102.png");
     const imageSEO = getPathImg("161067216639801.png");
     const avatar = getPathImg("avatar.png");
+    const imageHomepage1 = getPathImg("homepage_1.jpg");
+    const imageHomepage2 = getPathImg("homepage_2.jpg");
+    const imageHomepage3 = getPathImg("homepage_3.jpg");
+    const imageHomepage4 = getPathImg("homepage_4.jpg");
+    const imageHomepage5 = getPathImg("homepage_5.jpg");
+    const imageHomepage6 = getPathImg("homepage_6.jpg");
+    const imageHomepage7 = getPathImg("homepage_7.jpg");
 
     const imgQRCodeUrl = await uploadImage(ImgQRCode);
     const image1Url = await uploadImage(image1);
@@ -37,6 +44,13 @@ module.exports.upload = async () => {
     const ImgContactUrl = await uploadImage(ImgContact);
     const imageSEOUrl = await uploadImage(imageSEO);
     const avatarUrl = await uploadImage(avatar);
+    const imageHomepage1Url = await uploadImage(imageHomepage1);
+    const imageHomepage2Url = await uploadImage(imageHomepage2);
+    const imageHomepage3Url = await uploadImage(imageHomepage3);
+    const imageHomepage4Url = await uploadImage(imageHomepage4);
+    const imageHomepage5Url = await uploadImage(imageHomepage5);
+    const imageHomepage6Url = await uploadImage(imageHomepage6);
+    const imageHomepage7Url = await uploadImage(imageHomepage7);
 
     return {
         imgQRCodeUrl,
@@ -55,6 +69,13 @@ module.exports.upload = async () => {
         ImgContactUsUrl,
         ImgContactUrl,
         imageSEOUrl,
-        avatarUrl
+        avatarUrl,
+        imageHomepage1Url,
+        imageHomepage2Url,
+        imageHomepage3Url,
+        imageHomepage4Url,
+        imageHomepage5Url,
+        imageHomepage6Url,
+        imageHomepage7Url,
     };
 };

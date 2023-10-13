@@ -92,7 +92,7 @@ module.exports.communicationMethod = {
 };
 
 module.exports.introduction = {
-    title: "その不用品の回収、お任せください！",
+    title: "不用品の回収は、全てお任せください！",
     createDate: "",
     content: [
         {
@@ -107,13 +107,13 @@ module.exports.introduction = {
         {
             type: "paragraph",
             data: {
-                text: 'お客様は立ち合いのみ、事前の分別も不要です！全てお任せください！<br />他社では別途請求となる<strong className="bg-[#f76600] text-[110%]">搬出作業費（大型家電含む）・お掃除作業費・車両費・出張費・梱包作業費などが全て込みの料金</strong>です。',
+                text: "かたづけサービスは不用品・粗大ゴミ・引っ越しでのゴミなどの回収に困っているお客様は、ご軽気にご連絡ください",
             },
         },
         {
             type: "paragraph",
             data: {
-                text: '<strong className="bg-[#0000ff] text-[110%]">大阪．兵庫．奈良</strong>で不用品回収・買取・粗大ゴミの回収、遺品整理などでお困りの方はご相談ください。<br /><strong className="bg-[#f76600] text-[110%]">お見積りは無料</strong>ですので安心してご連絡ください！',
+                text: "<strong>お見積りは無料です！</strong>",
             },
         },
     ],
@@ -122,7 +122,7 @@ module.exports.introduction = {
 };
 
 module.exports.serviceIntro = {
-    title: "追加料金一切なし！",
+    title: "追加料金は一切なし！",
     createDate: "",
     style: "with-background",
     isDisplay: true,
@@ -140,7 +140,7 @@ module.exports.serviceIntro = {
         {
             type: "header",
             data: {
-                text: "出張費・お見積り・基本料金無料！",
+                text: "出張費・お見積り・基本料金は全て無料！",
                 withBackground: true,
                 level: 4,
             },
@@ -148,13 +148,13 @@ module.exports.serviceIntro = {
         {
             type: "paragraph",
             data: {
-                text: "お客様は立ち合いのみ、事前の分別も不要です！全てお任せください！",
+                text: "全てお任せください！お客様はお立ち合いだけです。",
             },
         },
         {
             type: "paragraph",
             data: {
-                text: '他社では別途請求となる<strong className="bg-[#f76600] text-[110%]">搬出作業費（大型家電含む）・お掃除作業費・車両費・出張費・梱包作業費などが全て込みの料金</strong>です。',
+                text: "お見積りでご提示した金額は搬出作業費や掃除作業費なども全て含まれておりますので、追加料金は一切ありません。",
             },
         },
     ],
@@ -194,46 +194,27 @@ module.exports.serviceGuide = {
     content: [
         {
             src: "",
-            subTitle: "最短30分以内に到着！",
+            subTitle: "粗大ゴミの回収",
             alt: "クレジットカード支払_VISA",
-            caption:
-                "We have been working on this project more than three years.",
+            caption: "山積みのゴミにお困りしませんか？",
         },
         {
             src: "",
-            subTitle: "最短30分以内に到着！",
+            subTitle: "不用品の撤去",
             alt: "クレジットカード支払_VISA",
-            caption:
-                "We have been working on this project more than three years.",
-        },
-
-        {
-            src: "",
-            subTitle: "最短30分以内に到着！",
-            alt: "クレジットカード支払_VISA",
-            caption:
-                "We have been working on this project more than three years.",
+            caption: "山積みのゴミにお困りしませんか？",
         },
         {
             src: "",
-            subTitle: "最短30分以内に到着！",
+            subTitle: "引っ越しのお掃除",
             alt: "クレジットカード支払_VISA",
-            caption:
-                "We have been working on this project more than three years. We have been working on this project more than three years.",
+            caption: "お引越しのお客様はご安心いただけます！",
         },
         {
             src: "",
-            subTitle: "最短30分以内に到着！",
+            subTitle: "モノの買取",
             alt: "クレジットカード支払_VISA",
-            caption:
-                "We have been working on this project more than three years.",
-        },
-        {
-            src: "",
-            subTitle: "最短30分以内に到着！",
-            alt: "クレジットカード支払_VISA",
-            caption:
-                "最短30分以内に到着！最短30分以内に到着！最短30分以内に到着！最短30分以内に到着！最短30分以内に到着！",
+            caption: "捨てそうな家電製品は高額で販売できるかもしれません！",
         },
     ],
     contentType: 4,
@@ -242,17 +223,12 @@ module.exports.serviceGuide = {
 
 module.exports.availableArea = {
     title: "対応エリア",
-    style: "grid-cols-2",
+    style: "flex justify-center [&>figure>img.img-map]:h-[500px]",
     content: [
         {
             src: "",
             alt: "大阪．兵庫．奈良エリア",
-            caption: "大阪．兵庫．奈良",
-        },
-        {
-            src: "",
-            alt: "大阪府エリア",
-            caption: "大阪府",
+            caption: "",
         },
     ],
     contentType: 4,
@@ -261,7 +237,7 @@ module.exports.availableArea = {
 
 module.exports.coupons = {
     title: "キャンペーン実施中！",
-    isDisplay: true,
+    isDisplay: false,
     content: {
         heading: {
             text: "出張費・お見積り・基本料金無料！",
@@ -577,4 +553,4 @@ module.exports.blogCommon = {
     createDate: "",
     content: "",
     contentType: 14,
-}
+};

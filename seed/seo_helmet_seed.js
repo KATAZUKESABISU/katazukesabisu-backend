@@ -31,7 +31,7 @@ module.exports.seoHelmet = [
         ],
     },
     {
-        nameSeo: "Blog",
+        nameSeo: "blog",
         content: "",
     },
 ];

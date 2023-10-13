@@ -10,7 +10,7 @@ const MstContactModel = require("../models/mst_contact_model");
 const MstPostCommonModel = require("../models/mst_post_common_model");
 const MstButtonModel = require("../models/mst_button_model");
 const SeoHelmetModel = require("../models/seo_helmet_model");
-const ServicePageModel = require("../models/mst_service_page_model"); 
+const ServicePageModel = require("../models/mst_service_page_model");
 const BlogModel = require("../models/blog_model");
 
 const adminSeed = require("./admin_seed");
@@ -36,7 +36,7 @@ const {
     lineTemplate,
     listQA,
     contactUs,
-    blogCommon
+    blogCommon,
 } = require("./mst_post_common_seed");
 const { buttonQA } = require("./mst_button_seed");
 const { seoHelmet } = require("./seo_helmet_seed");
@@ -90,7 +90,7 @@ const seedDB = async (result) => {
     );
     await mstCommunicationMethod.save();
 
-    introduction.content[0].data.file.url = result.image1Url;
+    introduction.content[0].data.file.url = result.imageHomepage1Url;
     const introductionData = {
         title: introduction.title,
         createDate: introduction.createDate,
@@ -101,7 +101,7 @@ const seedDB = async (result) => {
     const mstIntroduction = new MstPostCommonModel(introductionData);
     await mstIntroduction.save();
 
-    serviceIntro.content[0].data.file.url = result.image2Url;
+    serviceIntro.content[0].data.file.url = result.imageHomepage2Url;
     const serviceIntroData = {
         title: serviceIntro.title,
         createDate: serviceIntro.createDate,
@@ -127,12 +127,10 @@ const seedDB = async (result) => {
     const mstServiceList = new MstPostCommonModel(serviceListData);
     await mstServiceList.save();
 
-    serviceGuide.content[0].src = result.image2Url;
-    serviceGuide.content[1].src = result.image2Url;
-    serviceGuide.content[2].src = result.image2Url;
-    serviceGuide.content[3].src = result.image2Url;
-    serviceGuide.content[4].src = result.image2Url;
-    serviceGuide.content[5].src = result.image2Url;
+    serviceGuide.content[0].src = result.imageHomepage3Url;
+    serviceGuide.content[1].src = result.imageHomepage4Url;
+    serviceGuide.content[2].src = result.imageHomepage5Url;
+    serviceGuide.content[3].src = result.imageHomepage6Url;
     const serviceGuideData = {
         title: serviceGuide.title,
         style: serviceGuide.style,
@@ -144,8 +142,7 @@ const seedDB = async (result) => {
     const mstServiceGuide = new MstPostCommonModel(serviceGuideData);
     await mstServiceGuide.save();
 
-    availableArea.content[0].src = result.image6Url;
-    availableArea.content[1].src = result.image7Url;
+    availableArea.content[0].src = result.imageHomepage7Url;
     const availableAreaData = {
         title: availableArea.title,
         style: availableArea.style,
@@ -242,10 +239,10 @@ const seedDB = async (result) => {
 
     // Create data seoHelmet
     seoHelmet[0].content[0].content = result.imageSEOUrl;
-    const seoHelmetData = seoHelmet.map(item => ({
+    const seoHelmetData = seoHelmet.map((item) => ({
         nameSeo: item.nameSeo,
-        content: JSON.stringify(item.content)
-    }))
+        content: JSON.stringify(item.content),
+    }));
     await SeoHelmetModel.deleteMany({});
     await SeoHelmetModel.insertMany(seoHelmetData);
 
@@ -261,7 +258,7 @@ const seedDB = async (result) => {
         heading: servicePriceInfor.heading,
         section: JSON.stringify(servicePriceInfor.section),
         contentType: servicePriceInfor.contentType,
-    }
+    };
     const servicePriceInforModel = new ServicePageModel(servicePriceInforData);
     await servicePriceInforModel.save();
 
@@ -275,7 +272,7 @@ const seedDB = async (result) => {
         heading: ratePlan.heading,
         section: JSON.stringify(ratePlan.section),
         contentType: ratePlan.contentType,
-    }
+    };
     const ratePlanModel = new ServicePageModel(ratePlanData);
     await ratePlanModel.save();
 
