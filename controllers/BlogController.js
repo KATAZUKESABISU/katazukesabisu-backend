@@ -47,7 +47,7 @@ module.exports.getBlogs = async (req, res) => {
             condition.published = published;
         }
         const totalRecord = await blogModel.count(condition);
-        let totalPage = Math.ceil((totalRecord) / perPage);
+        let totalPage = Math.ceil(totalRecord / perPage);
         totalPage = totalPage == 0 ? 1 : totalPage;
         if (currentPage > totalPage || currentPage < 1) {
             const result = await response("CurentPage not found!", 404);
@@ -91,8 +91,40 @@ module.exports.getBlogs = async (req, res) => {
     }
 };
 
-module.exports.createBlog = async (req, res) => {};
+module.exports.createBlog = async (req, res) => {
+    const { title, image, content, published } = req.body;
+    try {
+        const doc = await new blogModel({
+            title: title,
+            createDate: new Date(),
+            image: image,
+            content: content,
+            published: published,
+        }).save();
+        const result = await response("Create successfully!", 200, null, {id: doc._id});
+        return res.status(200).json(result);
+    } catch (error) {
+        console.log(error);
+        const result = await response("Something went wrong!", 500);
+        return res.status(500).json(result);
+    }
+};
 
 module.exports.updateBlog = async (req, res) => {
-    const {id, title, image, content, published} = req.body
+    const { id, title, image, content, published } = req.body;
+    try {
+        await blogModel.findByIdAndUpdate(id, {
+            title: title,
+            createDate: new Date(),
+            image: image,
+            content: content,
+            published: published,
+        });
+        const result = await response("Update successfully!", 200, null, { id: id });
+        return res.status(200).json(result);
+    } catch (error) {
+        console.log(error);
+        const result = await response("Something went wrong!", 500);
+        return res.status(500).json(result);
+    }
 };
