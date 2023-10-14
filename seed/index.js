@@ -64,6 +64,7 @@ const seedDB = async (result) => {
         createDate: contactInfo.createDate,
         list: JSON.stringify(contactInfo.list),
         block: JSON.stringify(contactInfo.block),
+        isDisplay: contactInfo.isDisplay,
     };
     const mstContact = new MstContactModel(mstContactData);
     await mstContact.save();
