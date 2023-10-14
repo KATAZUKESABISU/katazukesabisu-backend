@@ -4,6 +4,7 @@ const mstInquiryModel = require("../models/mst_inquiry_model");
 const inquiryModel = require("../models/inquiry_model");
 const mstButtonModel = require("../models/mst_button_model");
 const mstServicePageModel = require("../models/mst_service_page_model");
+const mstHeadingModel = require("../models/mst_heading_model");
 const _CONF = require("../config");
 const { response } = require("../utils/commonUtil");
 
@@ -149,6 +150,9 @@ module.exports.getMstInfoClient = async (req, res) => {
 
 module.exports.getDataHomePage = async (req, res) => {
     try {
+        const heading = await mstHeadingModel.findOne({
+            contentType: _CONF.HOME_PAGE,
+        });
         const homePageData = await mstPostCommonModel.find({
             contentType: _CONF.HOME_PAGE,
         });
@@ -169,7 +173,10 @@ module.exports.getDataHomePage = async (req, res) => {
             "Get data home page successfully!",
             200,
             "home_page",
-            homePage
+            {
+                heading,
+                homePage,
+            }
         );
         return res.status(200).json(result);
     } catch (error) {
@@ -181,6 +188,10 @@ module.exports.getDataHomePage = async (req, res) => {
 
 module.exports.getDataHomePageClient = async (req, res) => {
     try {
+        const heading = await mstHeadingModel.findOne({
+            contentType: _CONF.HOME_PAGE,
+            isDisplay: true,
+        });
         const homePageData = await mstPostCommonModel.find({
             contentType: _CONF.HOME_PAGE,
             isDisplay: true,
@@ -202,7 +213,10 @@ module.exports.getDataHomePageClient = async (req, res) => {
             "Get data home page successfully!",
             200,
             "home_page",
-            homePage
+            {
+                heading,
+                homePage,
+            }
         );
         return res.status(200).json(result);
     } catch (error) {
@@ -214,6 +228,9 @@ module.exports.getDataHomePageClient = async (req, res) => {
 
 module.exports.getAboutUs = async (req, res) => {
     try {
+        const heading = await mstHeadingModel.findOne({
+            contentType: _CONF.ABOUT_US,
+        });
         const aboutUsData = await mstPostCommonModel.findOne({
             contentType: _CONF.ABOUT_US,
         });
@@ -226,7 +243,10 @@ module.exports.getAboutUs = async (req, res) => {
             "Get data about us successfully!",
             200,
             "about_us",
-            aboutUs
+            {
+                heading,
+                aboutUs,
+            }
         );
         return res.status(200).json(result);
     } catch (error) {
@@ -238,6 +258,10 @@ module.exports.getAboutUs = async (req, res) => {
 
 module.exports.getAboutUsClient = async (req, res) => {
     try {
+        const heading = await mstHeadingModel.findOne({
+            contentType: _CONF.ABOUT_US,
+            isDisplay: true,
+        });
         const aboutUsData = await mstPostCommonModel.findOne({
             contentType: _CONF.ABOUT_US,
             isDisplay: true,
@@ -251,7 +275,10 @@ module.exports.getAboutUsClient = async (req, res) => {
             "Get data about us successfully!",
             200,
             "about_us",
-            aboutUs
+            {
+                heading,
+                aboutUs,
+            }
         );
         return res.status(200).json(result);
     } catch (error) {

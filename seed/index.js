@@ -12,6 +12,7 @@ const MstButtonModel = require("../models/mst_button_model");
 const SeoHelmetModel = require("../models/seo_helmet_model");
 const ServicePageModel = require("../models/mst_service_page_model");
 const BlogModel = require("../models/blog_model");
+const MstHeadingModel = require("../models/mst_heading_model");
 
 const adminSeed = require("./admin_seed");
 const mstInquirySeed = require("./mst_inquiry_seed");
@@ -42,6 +43,7 @@ const { buttonQA } = require("./mst_button_seed");
 const { seoHelmet } = require("./seo_helmet_seed");
 const { servicePriceInfor, ratePlan } = require("./mst_service_page_seed");
 const { blog } = require("./blog_seed");
+const { heading } = require("./mst_heading_seed");
 
 const seedDB = async (result) => {
     console.log("Start Insert");
@@ -292,6 +294,8 @@ const seedDB = async (result) => {
     // const blogModel = new BlogModel(blog);
     // await blogModel.save();
 
+    await MstHeadingModel.deleteMany();
+    await MstHeadingModel.insertMany(heading);
     console.log("End Insert");
 };
 
