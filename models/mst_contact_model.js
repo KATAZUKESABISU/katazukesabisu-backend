@@ -14,6 +14,9 @@ const MstContactSchema = new Schema({
     block: {
         type: String,
     },
+    isDisplay: {
+        type: Boolean,
+    }
 });
 
 module.exports = mongoose.model("MstContact", MstContactSchema);

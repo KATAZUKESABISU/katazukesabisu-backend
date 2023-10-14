@@ -41,7 +41,7 @@ module.exports.getInquiry = async (req, res) => {
         const result = await response(
             "Get detail inquiry successfully!",
             200,
-            'inquiry_details',
+            "inquiry_details",
             inquiry
         );
         return res.status(200).json(result);
@@ -54,11 +54,28 @@ module.exports.getInquiry = async (req, res) => {
 
 module.exports.getInquiries = async (req, res) => {
     try {
-        const inquiries = await inquiryModel.find({});
+        const inquiries = await inquiryModel.find();
         const result = await response(
             "Get list inquiry successfully!",
             200,
-            'inquiries',
+            "inquiries",
+            inquiries
+        );
+        return res.status(200).json(result);
+    } catch (error) {
+        console.log(error);
+        const result = await response("Something went wrong!", 500);
+        return res.status(500).json(result);
+    }
+};
+
+module.exports.getInquiriesClient = async (req, res) => {
+    try {
+        const inquiries = await inquiryModel.find({ isDisplay: true });
+        const result = await response(
+            "Get list inquiry successfully!",
+            200,
+            "inquiries",
             inquiries
         );
         return res.status(200).json(result);

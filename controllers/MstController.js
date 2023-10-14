@@ -11,9 +11,74 @@ module.exports.getMstInfo = async (req, res) => {
     try {
         const contact = await mstContactModel.findOne();
 
-        const inquiryForm = await mstInquiryModel.findOne({});
+        const inquiryForm = await mstInquiryModel.findOne();
 
         const postCommon = await mstPostCommonModel.find();
+        const formNote = postCommon.find(
+            (element) => element.contentType === _CONF.FORM_NOTE
+        );
+        const privacyPolicy = postCommon.find(
+            (element) => element.contentType === _CONF.PRIVACY_POLICY
+        );
+        const communicationMethod = postCommon.find(
+            (element) => element.contentType === _CONF.COMMUNICATION_METHOD
+        );
+
+        const masterInfo = {
+            contactInfo: {
+                title: contact?.title,
+                createDate: contact?.createDate,
+                list: JSON.parse(contact?.list),
+                block: JSON.parse(contact?.block),
+            },
+            form: {
+                inquiryItem: JSON.parse(inquiryForm?.inquiryItem),
+                requestContent: JSON.parse(inquiryForm?.requestContent),
+                name: JSON.parse(inquiryForm?.name),
+                furigana: JSON.parse(inquiryForm?.furigana),
+                emailAddress: JSON.parse(inquiryForm?.emailAddress),
+                address: JSON.parse(inquiryForm?.address),
+                telephoneNumber: JSON.parse(inquiryForm?.telephoneNumber),
+                preferredContact: JSON.parse(inquiryForm?.preferredContact),
+                contentOfInquiry: JSON.parse(inquiryForm?.contentOfInquiry),
+            },
+            formNoteInfo: {
+                title: formNote?.title,
+                createDate: formNote?.createDate,
+                content: JSON.parse(formNote?.content),
+            },
+            privacyPolicy: {
+                title: privacyPolicy?.title,
+                createDate: privacyPolicy?.createDate,
+                content: JSON.parse(privacyPolicy?.content),
+            },
+            communicationMethod: {
+                title: communicationMethod?.title,
+                createDate: communicationMethod?.createDate,
+                content: JSON.parse(communicationMethod?.content),
+            },
+        };
+        const result = await response(
+            "Get data masters successfully!",
+            200,
+            null,
+            masterInfo
+        );
+        return res.status(200).json(result);
+    } catch (error) {
+        console.log(error);
+        const result = await response("Something went wrong!", 500);
+        return res.status(500).json(result);
+    }
+};
+
+module.exports.getMstInfoClient = async (req, res) => {
+    try {
+        const contact = await mstContactModel.findOne({ isDisplay: true });
+
+        const inquiryForm = await mstInquiryModel.findOne({ isDisplay: true });
+
+        const postCommon = await mstPostCommonModel.find({ isDisplay: true });
         const formNote = postCommon.find(
             (element) => element.contentType === _CONF.FORM_NOTE
         );
@@ -93,7 +158,40 @@ module.exports.getDataHomePage = async (req, res) => {
         const result = await response(
             "Get data home page successfully!",
             200,
-            'home_page',
+            "home_page",
+            homePage
+        );
+        return res.status(200).json(result);
+    } catch (error) {
+        console.log(error);
+        const result = await response("Something went wrong!", 500);
+        return res.status(500).json(result);
+    }
+};
+
+module.exports.getDataHomePageClient = async (req, res) => {
+    try {
+        const homePageData = await mstPostCommonModel.find({
+            contentType: _CONF.HOME_PAGE,
+            isDisplay: true,
+        });
+        let homePage = {};
+        homePageData?.forEach((element) => {
+            homePage[element?._name] = {
+                title: element?.title,
+                createDate: element?.createDate,
+                style: element?.style,
+                button: element?.button
+                    ? JSON.parse(element?.button)
+                    : undefined,
+                isDisplay: element?.isDisplay,
+                content: JSON.parse(element?.content),
+            };
+        });
+        const result = await response(
+            "Get data home page successfully!",
+            200,
+            "home_page",
             homePage
         );
         return res.status(200).json(result);
@@ -117,7 +215,7 @@ module.exports.getAboutUs = async (req, res) => {
         const result = await response(
             "Get data about us successfully!",
             200,
-            'about_us',
+            "about_us",
             aboutUs
         );
         return res.status(200).json(result);
@@ -239,11 +337,13 @@ module.exports.getCommonBlock = async (req, res) => {
 
 module.exports.getServicePriceInfor = async (req, res) => {
     try {
-        const servicePriceData = await mstServicePageModel.findOne({ contentType: _CONF.SERVICE_PRICE_INFO});
+        const servicePriceData = await mstServicePageModel.findOne({
+            contentType: _CONF.SERVICE_PRICE_INFO,
+        });
         const servicePriceInfo = {
             heading: servicePriceData.heading,
             section: JSON.parse(servicePriceData.section),
-        }
+        };
         const result = await response(
             "Get service price info successfully!",
             200,
@@ -260,11 +360,13 @@ module.exports.getServicePriceInfor = async (req, res) => {
 
 module.exports.getRatePlan = async (req, res) => {
     try {
-        const ratePlaneData = await mstServicePageModel.findOne({ contentType: _CONF.RATE_PLAN})
+        const ratePlaneData = await mstServicePageModel.findOne({
+            contentType: _CONF.RATE_PLAN,
+        });
         const ratePlan = {
             heading: ratePlaneData.heading,
             section: JSON.parse(ratePlaneData.section),
-        }
+        };
         const result = await response(
             "Get rate plan successfully!",
             200,

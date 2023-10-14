@@ -8,7 +8,9 @@ const blogRoute = require("./blog");
 const inquiryController = require("../controllers/InquiryController");
 const {
     getMstInfo,
+    getMstInfoClient,
     getDataHomePage,
+    getDataHomePageClient,
     getAboutUs,
     getFooterContact,
     getFlowPage,
@@ -16,16 +18,15 @@ const {
     getServicePriceInfor,
     getRatePlan,
 } = require("../controllers/MstController");
-const { getNotFound } = require("../utils/commonUtil");
+const { getNotFound, getNotFoundClient } = require("../utils/commonUtil");
 const { getBlog, getBlogs } = require("../controllers/BlogController");
 
 function route(app) {
     // client
-    app.get("/public/404_not_found", getNotFound);
-    app.get("/public/inquiry/:id/detail", inquiryController.getInquiry);
-    app.get("/public/inquiries", inquiryController.getInquiries);
-    app.get("/public/mst_info", getMstInfo);
-    app.get("/public/home_page", getDataHomePage);
+    app.get("/public/404_not_found", getNotFoundClient);
+    app.get("/public/inquiries", inquiryController.getInquiriesClient);
+    app.get("/public/mst_info", getMstInfoClient);
+    app.get("/public/home_page", getDataHomePageClient);
     app.get("/public/about_us", getAboutUs);
     app.get("/public/footer_contact", getFooterContact);
     app.get("/public/flow_page", getFlowPage);

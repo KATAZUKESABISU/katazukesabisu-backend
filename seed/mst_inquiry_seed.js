@@ -66,4 +66,5 @@ module.exports = {
         required: false,
         type: "text-area",
     }),
+    isDisplay: true,
 };

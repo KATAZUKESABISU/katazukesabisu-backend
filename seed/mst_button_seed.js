@@ -3,4 +3,5 @@ module.exports.buttonQA = {
         { innerText: "お問い合わせフォーム", location: "/contact" },
     ]),
     category: 0,
+    isDisplay: true,
 };

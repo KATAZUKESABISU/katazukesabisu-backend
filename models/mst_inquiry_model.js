@@ -38,6 +38,9 @@ const MstInquirySchema = new Schema({
         type: String,
         required: true,
     },
+    isDisplay: {
+        type: Boolean,
+    }
 });
 
 module.exports = mongoose.model("MstInquiry", MstInquirySchema);

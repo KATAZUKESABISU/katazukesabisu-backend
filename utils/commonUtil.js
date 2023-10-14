@@ -57,6 +57,31 @@ module.exports.getNotFound = async (req, res) => {
     }
 };
 
+module.exports.getNotFoundClient = async (req, res) => {
+    try {
+        const errorNotFound = await mstPostCommonModel.findOne({
+            contentType: _CONF.NOT_FOUND,
+            isDisplay: true,
+        });
+        if (errorNotFound) {
+            const result = await this.response(
+                "Get not found successfully!",
+                200,
+                {
+                    title: errorNotFound.title,
+                    createDate: errorNotFound.createDate,
+                    content: JSON.parse(errorNotFound.content),
+                }
+            );
+            return res.status(200).json(result);
+        }
+    } catch (error) {
+        console.log(error);
+        const result = await this.response("Something went wrong!", 500);
+        return res.status(500).json(result);
+    }
+};
+
 module.exports.uploadImage = async (imagePath) => {
     const options = {
         use_filename: true,
