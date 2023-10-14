@@ -174,7 +174,7 @@ module.exports.getDataHomePage = async (req, res) => {
             200,
             "home_page",
             {
-                heading,
+                heading: heading.heading,
                 homePage,
             }
         );
@@ -214,7 +214,7 @@ module.exports.getDataHomePageClient = async (req, res) => {
             200,
             "home_page",
             {
-                heading,
+                heading: heading.heading,
                 homePage,
             }
         );
@@ -244,7 +244,7 @@ module.exports.getAboutUs = async (req, res) => {
             200,
             "about_us",
             {
-                heading,
+                heading: heading.heading,
                 aboutUs,
             }
         );
@@ -276,7 +276,7 @@ module.exports.getAboutUsClient = async (req, res) => {
             200,
             "about_us",
             {
-                heading,
+                heading: heading.heading,
                 aboutUs,
             }
         );
