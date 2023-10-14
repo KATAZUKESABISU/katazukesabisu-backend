@@ -56,7 +56,7 @@ const seedDB = async (result) => {
 
     await MstContactModel.deleteMany({});
     contactInfo.block[0].data.file.url = result.imgContactUrl;
-    contactInfo.block[2].data.file.url = result.imgQRCodeUrl;
+    contactInfo.block[1].data.file.url = result.imgQRCodeUrl;
 
     // create data mstContactSeed
     const mstContactData = {
