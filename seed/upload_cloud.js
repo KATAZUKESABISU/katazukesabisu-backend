@@ -2,7 +2,7 @@ const { getPathImg } = require("../uploads/images");
 const { uploadImage } = require("../utils/commonUtil");
 
 module.exports.upload = async () => {
-    const ImgQRCode = getPathImg("167375512749501.png");
+    const imgQRCode = getPathImg("167375512749501.png");
     const image1 = getPathImg("161037146399401.jpg");
     const image2 = getPathImg("161037164366101.jpg");
     const image3 = getPathImg("161060655013303.png");
@@ -15,8 +15,8 @@ module.exports.upload = async () => {
     const masterCardImg = getPathImg("master_card_logo.svg");
     const jcbImg = getPathImg("JCB_logo.svg");
     const lineGuide = getPathImg("line_guide.png");
-    const ImgContactUs = getPathImg("167418631395101.png");
-    const ImgContact = getPathImg("167418631395102.png");
+    const imgContactUs = getPathImg("banner3.png");
+    const imgContact = getPathImg("banner2.png");
     const imageSEO = getPathImg("161067216639801.png");
     const avatar = getPathImg("avatar.png");
     const imageHomepage1 = getPathImg("homepage_1.jpg");
@@ -27,7 +27,7 @@ module.exports.upload = async () => {
     const imageHomepage6 = getPathImg("homepage_6.jpg");
     const imageHomepage7 = getPathImg("homepage_7.jpg");
 
-    const imgQRCodeUrl = await uploadImage(ImgQRCode);
+    const imgQRCodeUrl = await uploadImage(imgQRCode);
     const image1Url = await uploadImage(image1);
     const image2Url = await uploadImage(image2);
     const image3Url = await uploadImage(image3);
@@ -40,8 +40,8 @@ module.exports.upload = async () => {
     const masterCardImgUrl = await uploadImage(masterCardImg);
     const jcbImgUrl = await uploadImage(jcbImg);
     const lineGuideUrl = await uploadImage(lineGuide);
-    const ImgContactUsUrl = await uploadImage(ImgContactUs);
-    const ImgContactUrl = await uploadImage(ImgContact);
+    const imgContactUsUrl = await uploadImage(imgContactUs);
+    const imgContactUrl = await uploadImage(imgContact);
     const imageSEOUrl = await uploadImage(imageSEO);
     const avatarUrl = await uploadImage(avatar);
     const imageHomepage1Url = await uploadImage(imageHomepage1);
@@ -66,8 +66,8 @@ module.exports.upload = async () => {
         masterCardImgUrl,
         jcbImgUrl,
         lineGuideUrl,
-        ImgContactUsUrl,
-        ImgContactUrl,
+        imgContactUsUrl,
+        imgContactUrl,
         imageSEOUrl,
         avatarUrl,
         imageHomepage1Url,

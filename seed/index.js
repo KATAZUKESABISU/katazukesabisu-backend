@@ -15,7 +15,7 @@ const BlogModel = require("../models/blog_model");
 
 const adminSeed = require("./admin_seed");
 const mstInquirySeed = require("./mst_inquiry_seed");
-const mstContactSeed = require("./mst_contact_seed");
+const { contactInfo } = require("./mst_contact_seed");
 const {
     notFound,
     formNote,
@@ -55,13 +55,15 @@ const seedDB = async (result) => {
     await mstInquiry.save();
 
     await MstContactModel.deleteMany({});
-    mstContactSeed.block[1].data.file.url = result.ImgContactUrl;
+    contactInfo.block[0].data.file.url = result.imgContactUrl;
+    contactInfo.block[2].data.file.url = result.imgQRCodeUrl;
+
     // create data mstContactSeed
     const mstContactData = {
-        title: mstContactSeed.title,
-        createDate: mstContactSeed.createDate,
-        list: JSON.stringify(mstContactSeed.list),
-        block: JSON.stringify(mstContactSeed.block),
+        title: contactInfo.title,
+        createDate: contactInfo.createDate,
+        list: JSON.stringify(contactInfo.list),
+        block: JSON.stringify(contactInfo.block),
     };
     const mstContact = new MstContactModel(mstContactData);
     await mstContact.save();
@@ -83,6 +85,7 @@ const seedDB = async (result) => {
         title: communicationMethod.title,
         createDate: communicationMethod.createDate,
         content: JSON.stringify(communicationMethod.content),
+        isDisplay: communicationMethod.isDisplay,
         contentType: communicationMethod.contentType,
     };
     const mstCommunicationMethod = new MstPostCommonModel(
@@ -95,6 +98,7 @@ const seedDB = async (result) => {
         title: introduction.title,
         createDate: introduction.createDate,
         content: JSON.stringify(introduction.content),
+        isDisplay: introduction.isDisplay,
         contentType: introduction.contentType,
         _name: introduction._name,
     };
@@ -121,6 +125,7 @@ const seedDB = async (result) => {
     const serviceListData = {
         title: serviceList.title,
         content: JSON.stringify(serviceList.content),
+        isDisplay: serviceList.isDisplay,
         contentType: serviceList.contentType,
         _name: serviceList._name,
     };
@@ -136,6 +141,7 @@ const seedDB = async (result) => {
         style: serviceGuide.style,
         button: JSON.stringify(serviceGuide.button),
         content: JSON.stringify(serviceGuide.content),
+        isDisplay: serviceGuide.isDisplay,
         contentType: serviceGuide.contentType,
         _name: serviceGuide._name,
     };
@@ -147,6 +153,7 @@ const seedDB = async (result) => {
         title: availableArea.title,
         style: availableArea.style,
         content: JSON.stringify(availableArea.content),
+        isDisplay: availableArea.isDisplay,
         contentType: availableArea.contentType,
         _name: availableArea._name,
     };
@@ -157,6 +164,7 @@ const seedDB = async (result) => {
         title: coupons.title,
         isDisplay: coupons.isDisplay,
         content: JSON.stringify(coupons.content),
+        isDisplay: coupons.isDisplay,
         contentType: coupons.contentType,
         _name: coupons._name,
     };
@@ -184,32 +192,35 @@ const seedDB = async (result) => {
         title: paymentMethod.title,
         id: paymentMethod.id,
         content: JSON.stringify(paymentMethod.content),
+        isDisplay: paymentMethod.isDisplay,
         contentType: paymentMethod.contentType,
         _name: paymentMethod._name,
     };
     const mstPaymentMethod = new MstPostCommonModel(paymentMethodData);
     await mstPaymentMethod.save();
 
-    guide.content[2].data.file.url = result.lineGuideUrl;
+    guide.content[1].data.file.url = result.imgQRCodeUrl;
     // Create data guide
     const guideData = {
         title: guide.title,
         id: guide.id,
         createDate: guide.createDate,
         content: JSON.stringify(guide.content),
+        isDisplay: guide.isDisplay,
         contentType: guide.contentType,
         _name: guide._name,
     };
     const mstGuide = new MstPostCommonModel(guideData);
     await mstGuide.save();
 
-    lineTemplate.content[3].data.file.url = result.ImgQRCode;
+    lineTemplate.content[3].data.file.url = result.imgQRCode;
     // Create data lineTemplate
     const lineTemplateData = {
         title: lineTemplate.title,
         id: lineTemplate.id,
         createDate: lineTemplate.createDate,
         content: JSON.stringify(lineTemplate.content),
+        isDisplay: lineTemplate.isDisplay,
         contentType: lineTemplate.contentType,
         _name: lineTemplate._name,
     };
@@ -219,12 +230,13 @@ const seedDB = async (result) => {
     const mstListQA = new MstPostCommonModel(listQA);
     await mstListQA.save();
 
-    contactUs.content[0].data.file.url = result.ImgContactUsUrl;
+    contactUs.content[0].data.file.url = result.imgContactUsUrl;
     // Create data lineTemplate
     const contactUsData = {
         title: contactUs.title,
         createDate: contactUs.createDate,
         content: JSON.stringify(contactUs.content),
+        isDisplay: contactUs.isDisplay,
         contentType: contactUs.contentType,
     };
     const mstContactUs = new MstPostCommonModel(contactUsData);
@@ -266,8 +278,6 @@ const seedDB = async (result) => {
     ratePlan.section[0].content[1].data.imageURL = result.image1Url;
     ratePlan.section[0].content[2].data.imageURL = result.image1Url;
     ratePlan.section[0].content[3].data.imageURL = result.image1Url;
-    ratePlan.section[1].content[0].data.file.url = result.image2Url;
-    ratePlan.section[2].content[0].data.imageURL = result.image2Url;
     const ratePlanData = {
         heading: ratePlan.heading,
         section: JSON.stringify(ratePlan.section),

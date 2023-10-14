@@ -21,6 +21,7 @@ module.exports.getBlog = async (req, res) => {
             createDate: blog.createDate,
             image: blog.image,
             content: blog.content,
+            published: blog.published
         };
         const result = await response(
             "Get detail blog successfully!",

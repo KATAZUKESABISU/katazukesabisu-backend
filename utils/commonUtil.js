@@ -58,7 +58,6 @@ module.exports.getNotFound = async (req, res) => {
 };
 
 module.exports.uploadImage = async (imagePath) => {
-    console.log(imagePath);
     const options = {
         use_filename: true,
         unique_filename: false,
