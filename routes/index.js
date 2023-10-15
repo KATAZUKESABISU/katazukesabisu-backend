@@ -45,7 +45,7 @@ function route(app) {
     app.get("/public/rate_plan", getRatePlanClient);
     app.get("/public/list_blog", getBlogsClient);
     app.get("/public/blog/:id", getBlogClient);
-    app.post("/api/inquiry/create", inquiryController.createInquiry);
+    app.post("/public/inquiry/create", inquiryController.createInquiry);
     // admin
     app.use("/api", adminRoute);
     app.use(isAuthentication);

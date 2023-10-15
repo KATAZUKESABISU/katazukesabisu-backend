@@ -123,13 +123,6 @@ module.exports.ratePlan = {
                         description: "ゴミ屋敷の場合はこちらをご利用ください。",
                     },
                 },
-                {
-                    type: "button",
-                    data: {
-                        style: "red",
-                        name: "カード払いOK!",
-                    },
-                },
             ],
         },
     ],
