@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const _CONF = require("../config");
 const { response } = require("../utils/commonUtil");
 const adminModel = require("../models/admin_model");
+const authModel = require("../models/auth_model");
 
 module.exports.isAuthentication = async (req, res, next) => {
     const { authorization } = req.headers;
@@ -11,16 +12,15 @@ module.exports.isAuthentication = async (req, res, next) => {
         // verifies secret and checks exp
         jwt.verify(token, _CONF.SECRET, async function (err, decoded) {
             if (err) {
-                await adminModel.findByIdAndUpdate(decoded?.id, {
+                await authModel.findOneAndUpdate({ userId: decoded?.id, token }, {
                     token: null,
                 });
                 console.error(err.toString());
                 const result = await response("Unauthorized access.", 401);
                 return res.status(401).json(result);
             }
-            const user = await adminModel.findById(decoded?.id);
-            if (user?.token === token) {
-                req.user = decoded;
+            const auth = await authModel.findOne({ userId: decoded?.id, token });
+            if (auth) {
                 next();
             } else {
                 const result = await response("Unauthorized access.", 401);

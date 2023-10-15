@@ -29,12 +29,6 @@ const AdminSchema = new Schema({
         type: String,
         required: true,
     },
-    token: {
-        type: String,
-    },
-    refreshToken: {
-        type: String,
-    },
 });
 
 AdminSchema.plugin(passportLocalMongoose);

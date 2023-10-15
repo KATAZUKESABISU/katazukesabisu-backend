@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const _CONF = require("../config");
 const adminModel = require("../models/admin_model");
+const authModel = require("../models/auth_model");
 const randomString = require("randomstring");
 const { sendMail, response } = require("../utils/commonUtil");
 const {
@@ -28,30 +29,28 @@ module.exports.login = async (req, res) => {
                 role: user.role,
             };
 
-            const token = jwt.sign(
-                { id: user._id, username: user.username },
-                _CONF.SECRET,
-                {
-                    expiresIn: _CONF.tokenLife,
-                }
-            );
-            const refreshToken = jwt.sign(
-                { id: user._id, username: user.username },
-                _CONF.SECRET_REFRESH,
-                {
-                    expiresIn: _CONF.refreshTokenLife,
-                }
-            );
+            const hashInfo = {
+                id: user._id,
+                username: user.username,
+                date: new Date().getTime(),
+            };
+            const token = jwt.sign(hashInfo, _CONF.SECRET, {
+                expiresIn: _CONF.tokenLife,
+            });
+            const refreshToken = jwt.sign(hashInfo, _CONF.SECRET_REFRESH, {
+                expiresIn: _CONF.refreshTokenLife,
+            });
 
             const data = {
                 user: userInfo,
                 token: token,
                 refreshToken: refreshToken,
             };
-            await adminModel.findByIdAndUpdate(user._id, {
+            await new authModel({
+                userId: user._id,
                 token: token,
                 refreshToken: refreshToken,
-            });
+            }).save();
             const result = await response("Logged in", 200, null, data);
             return res.status(200).json(result);
         } else {
@@ -67,20 +66,21 @@ module.exports.login = async (req, res) => {
 
 module.exports.logout = async (req, res) => {
     const { userId } = req.body;
+    const { authorization } = req.headers;
+    const token = authorization?.replace("Bearer ", "");
     try {
         if (!userId) {
             const result = await response("userId is required!", 400);
             return res.status(400).json(result);
         }
-        const user = await adminModel.findById(userId);
-        if (!user) {
+        const auth = await authModel.findOneAndDelete({
+            userId: userId,
+            token: token,
+        });
+        if (!auth) {
             const result = await response("userId not exist!", 400);
             return res.status(400).json(result);
         }
-        await adminModel.findByIdAndUpdate(userId, {
-            token: null,
-            refreshToken: null,
-        });
         const result = {
             statusCode: 200,
             message: "Logout successful!",
@@ -100,7 +100,7 @@ module.exports.forgetPassword = async (req, res) => {
         const code = randomString.generate({
             length: 8,
         });
-        _CONF.GENERATE.code = code;
+        _CONF.GENERATE[email].code = code;
         const user = await adminModel.findOne({ email });
 
         if (user) {
@@ -121,9 +121,9 @@ module.exports.forgetPassword = async (req, res) => {
 };
 
 module.exports.resetPassword = async (req, res) => {
-    const { passwordNew, code } = req.body;
+    const { email, passwordNew, code } = req.body;
     try {
-        if (code === _CONF.GENERATE.code) {
+        if (code === _CONF.GENERATE[email].code) {
             bcrypt.genSalt(10, async function (err, saltRounds) {
                 if (err) {
                     console.error(err);
@@ -176,31 +176,29 @@ module.exports.resetPassword = async (req, res) => {
 
 module.exports.refreshToken = async (req, res) => {
     const { refreshToken, userId } = req.body;
-    const user = await adminModel.findById(userId);
+    const auth = await authModel.findOne({ userId, refreshToken });
+    console.log(auth);
     // if refresh token exists
-    if (refreshToken && user?.refreshToken === refreshToken) {
+    if (refreshToken && auth) {
         // verifies secret and checks exp
         jwt.verify(
             refreshToken,
             _CONF.SECRET_REFRESH,
             async function (err, decoded) {
                 if (err) {
-                    await adminModel.findByIdAndUpdate(userId, {
-                        token: null,
-                        refreshToken: null,
-                    });
+                    await authModel.findByIdAndDelete(auth._id);
                     console.error(err.toString());
                     const result = await response("Unauthorized access.", 401);
                     return res.status(401).json(result);
                 }
                 const token = jwt.sign(
-                    { id: decoded.id, username: decoded.username },
+                    { id: decoded.id, username: decoded.username, date: new Date().getTime() },
                     _CONF.SECRET,
                     {
                         expiresIn: _CONF.tokenLife,
                     }
                 );
-                await adminModel.findByIdAndUpdate(userId, { token: token });
+                await authModel.findByIdAndUpdate(auth._id, { token: token });
                 const result = await response(
                     "Reset token successfully!",
                     200,

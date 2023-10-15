@@ -76,6 +76,8 @@ module.exports.getBlogs = async (req, res) => {
     const perPage = req.query.limit || _CONF.PER_PAGE_DEFAULT;
     const published = req.query.published;
     const title = req.query.title;
+    const sortItem = req.query.sortItem;
+    const sortOrder = req.query.sortOrder || _CONF.SORT_ORDER_DEFAULT;
     try {
         let condition = title ? { title: title } : {};
         if (published) {
@@ -91,9 +93,14 @@ module.exports.getBlogs = async (req, res) => {
         const blogCommon = await mstPostCommonModel.findOne({
             contentType: _CONF.BLOG_COMMON,
         });
+        let sort = {};
+        if (sortItem) {
+            sort[sortItem] = sortOrder;
+        }
+        sort['createDate'] = _CONF.SORT_ORDER_DESC;
         const blog = await blogModel
             .find(condition)
-            .sort({ createDate: _CONF.SORT_ORDER_DESC })
+            .sort(sort)
             .skip(perPage * currentPage - perPage)
             .limit(perPage);
 

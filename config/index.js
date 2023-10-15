@@ -13,9 +13,7 @@ const config = Object.freeze({
     PORT: "587",
     GMAIL_EMAIL: "katazukesabisu@gmail.com",
     GMAIL_PASSWORD: "douw jgjc pkbh vmny",
-    GENERATE: {
-        code: "",
-    },
+    GENERATE: {},
 
     /***CONST***/
     NOT_FOUND: 0,
@@ -39,9 +37,9 @@ const config = Object.freeze({
     RATE_PLAN: 1,
 
     PER_PAGE_DEFAULT: 5,
-    SORT_ITEM_DEFAULT_DATE: "createDate",
+    SORT_ITEM_DEFAULT: "createDate",
     SORT_ITEM_PUBLISH: "publish",
-    SORT_ORDER_DEFAULT_DESC: "DESC",
+    SORT_ORDER_DEFAULT: "DESC",
     SORT_ORDER_ASC: "ASC",
     SORT_ORDER_DESC: "DESC",
 
