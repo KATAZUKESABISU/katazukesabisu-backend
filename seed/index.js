@@ -58,7 +58,7 @@ const seedDB = async (result) => {
 
     await MstContactModel.deleteMany({});
     contactInfo.block[0].data.file.url = result.imgContactUrl;
-    contactInfo.block[1].data.file.url = result.imgQRCodeUrl;
+    contactInfo.block[2].data.file.url = result.imgQRCodeUrl;
 
     // create data mstContactSeed
     const mstContactData = {
@@ -254,6 +254,12 @@ const seedDB = async (result) => {
 
     // Create data seoHelmet
     seoHelmet[0].content[0].content = result.imageSEOUrl;
+    seoHelmet[1].content[0].content = result.imageSEOUrl;
+    seoHelmet[2].content[0].content = result.imageSEOUrl;
+    seoHelmet[3].content[0].content = result.imageSEOUrl;
+    seoHelmet[4].content[0].content = result.imageSEOUrl;
+    seoHelmet[5].content[0].content = result.imageSEOUrl;
+
     const seoHelmetData = seoHelmet.map((item) => ({
         nameSeo: item.nameSeo,
         content: JSON.stringify(item.content),
@@ -283,6 +289,8 @@ const seedDB = async (result) => {
     ratePlan.section[0].content[3].data.imageURL = result.image1Url;
     const ratePlanData = {
         heading: ratePlan.heading,
+        id: ratePlan.id,
+        button: JSON.stringify(ratePlan.button),
         section: JSON.stringify(ratePlan.section),
         contentType: ratePlan.contentType,
     };

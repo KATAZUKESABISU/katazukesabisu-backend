@@ -9,4 +9,9 @@ module.exports.heading = [
         contentType: 5,
         isDisplay: true,
     },
+    {
+        heading: "ご利用の流れ",
+        contentType: 7,
+        isDisplay: true,
+    },
 ];

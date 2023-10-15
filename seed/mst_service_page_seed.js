@@ -68,6 +68,8 @@ module.exports.servicePriceInfor = {
 
 module.exports.ratePlan = {
     heading: "料金プラン",
+    id: "#price",
+    button: [{ innerText: "カード払いOK!", location: "/flow#f02" }],
     section: [
         {
             style: "list-service-special",

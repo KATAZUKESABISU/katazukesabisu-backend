@@ -231,7 +231,7 @@ module.exports.serviceGuide = {
 
 module.exports.availableArea = {
     title: "対応エリア",
-    style: "flex justify-center [&>figure>img.img-map]:h-[500px]",
+    style: "img-map",
     content: [
         {
             src: "",
@@ -367,7 +367,6 @@ module.exports.footerContact = {
 };
 
 module.exports.summary = {
-    title: "ご利用の流れ",
     content: JSON.stringify([
         { innerText: "回収までの流れ", location: "#f01" },
         { innerText: "取り扱いクレジットカード", location: "#f02" },

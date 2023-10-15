@@ -1,4 +1,4 @@
-module.exports.blog = Array(15).fill({
+module.exports.blog = Array(1).fill({
     title: "Markdown cheatsheet",
     createDate: "2023-10-05 22:53",
     image: "https://res.cloudinary.com/seekda/image/upload/w_1200,h_800,c_fill,f_auto,fl_lossy,q_auto/production/AT_UAB6-12-38-03/_66347854-3649-46D6-B415-CA3E66BDC92C.jpg",

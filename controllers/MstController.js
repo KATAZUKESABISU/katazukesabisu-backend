@@ -62,7 +62,7 @@ module.exports.getMstInfo = async (req, res) => {
         const result = await response(
             "Get data masters successfully!",
             200,
-            null,
+            "contact_page",
             masterInfo
         );
         return res.status(200).json(result);
@@ -137,7 +137,7 @@ module.exports.getMstInfoClient = async (req, res) => {
         const result = await response(
             "Get data masters successfully!",
             200,
-            null,
+            "contact_page",
             masterInfo
         );
         return res.status(200).json(result);
@@ -276,7 +276,7 @@ module.exports.getAboutUs = async (req, res) => {
         const result = await response(
             "Get data about us successfully!",
             200,
-            "about_us",
+            "about",
             {
                 heading: heading.heading,
                 aboutUs,
@@ -308,7 +308,7 @@ module.exports.getAboutUsClient = async (req, res) => {
         const result = await response(
             "Get data about us successfully!",
             200,
-            "about_us",
+            "about",
             {
                 heading: heading?.heading || "",
                 aboutUs,
@@ -373,6 +373,9 @@ module.exports.getFooterContactClient = async (req, res) => {
 
 module.exports.getFlowPage = async (req, res) => {
     try {
+        const heading = await mstHeadingModel.findOne({
+            contentType: _CONF.FLOW_PAGE,
+        });
         const flowPageData = await mstPostCommonModel.find({
             contentType: _CONF.FLOW_PAGE,
         });
@@ -396,7 +399,9 @@ module.exports.getFlowPage = async (req, res) => {
             }
         });
 
-        let flowPage = {};
+        let flowPage = {
+            heading: heading?.heading || "",
+        };
         flowPageData?.forEach((element) => {
             if (element?._name === _CONF.LIST_QA) {
                 flowPage[element?._name] = {
@@ -430,6 +435,10 @@ module.exports.getFlowPage = async (req, res) => {
 
 module.exports.getFlowPageClient = async (req, res) => {
     try {
+        const heading = await mstHeadingModel.findOne({
+            contentType: _CONF.FLOW_PAGE,
+            isDisplay: true,
+        });
         const flowPageData = await mstPostCommonModel.find({
             contentType: _CONF.FLOW_PAGE,
             isDisplay: true,
@@ -458,7 +467,9 @@ module.exports.getFlowPageClient = async (req, res) => {
             }
         });
 
-        let flowPage = {};
+        let flowPage = {
+            heading: heading?.heading || "",
+        };
         flowPageData?.forEach((element) => {
             if (element?._name === _CONF.LIST_QA) {
                 flowPage[element?._name] = {
@@ -550,7 +561,7 @@ module.exports.getServicePriceInfor = async (req, res) => {
         const result = await response(
             "Get service price info successfully!",
             200,
-            "service_price_info",
+            "service_page",
             servicePriceInfo
         );
         return res.status(200).json(result);
@@ -574,39 +585,12 @@ module.exports.getServicePriceInforClient = async (req, res) => {
             const result = await response(
                 "Get service price info successfully!",
                 200,
-                "service_price_info",
+                "service_page",
                 servicePriceInfo
             );
             return res.status(200).json(result);
         }
         const result = await response("Service price info not found!", 404);
-        return res.status(404).json(result);
-    } catch (error) {
-        console.log(error);
-        const result = await response("Something went wrong!", 500);
-        return res.status(500).json(result);
-    }
-};
-
-module.exports.getRatePlan = async (req, res) => {
-    try {
-        const ratePlaneData = await mstServicePageModel.findOne({
-            contentType: _CONF.RATE_PLAN,
-        });
-        const ratePlan = {
-            heading: ratePlaneData.heading,
-            section: JSON.parse(ratePlaneData.section),
-        };
-        if (ratePlan.section[0].isDisplay === true) {
-            const result = await response(
-                "Get rate plan successfully!",
-                200,
-                "rate_plan",
-                ratePlan
-            );
-            return res.status(200).json(result);
-        }
-        const result = await response("Rate plan not found!", 404);
         return res.status(404).json(result);
     } catch (error) {
         console.log(error);
@@ -622,12 +606,43 @@ module.exports.getRatePlanClient = async (req, res) => {
         });
         const ratePlan = {
             heading: ratePlaneData.heading,
+            id: ratePlaneData.id,
+            button: JSON.parse(ratePlaneData.button),
+            section: JSON.parse(ratePlaneData.section),
+        };
+        if (ratePlan.section[0].isDisplay === true) {
+            const result = await response(
+                "Get rate plan successfully!",
+                200,
+                "service_page",
+                ratePlan
+            );
+            return res.status(200).json(result);
+        }
+        const result = await response("Rate plan not found!", 404);
+        return res.status(404).json(result);
+    } catch (error) {
+        console.log(error);
+        const result = await response("Something went wrong!", 500);
+        return res.status(500).json(result);
+    }
+};
+
+module.exports.getRatePlan = async (req, res) => {
+    try {
+        const ratePlaneData = await mstServicePageModel.findOne({
+            contentType: _CONF.RATE_PLAN,
+        });
+        const ratePlan = {
+            heading: ratePlaneData.heading,
+            id: ratePlaneData.id,
+            button: JSON.parse(ratePlaneData.button),
             section: JSON.parse(ratePlaneData.section),
         };
         const result = await response(
             "Get rate plan successfully!",
             200,
-            "rate_plan",
+            "service_page",
             ratePlan
         );
         return res.status(200).json(result);

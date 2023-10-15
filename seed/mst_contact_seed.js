@@ -13,7 +13,13 @@ module.exports.contactInfo = {
                     url: "",
                 },
                 caption: "",
-                style: "!max-w-full block",
+                style: "full-width",
+            },
+        },
+        {
+            type: "paragraph",
+            data: {
+                text: "お急ぎの方は、この番号までお電話・LINE・メッセージにてご連絡いただけます！",
             },
         },
         {
@@ -23,13 +29,7 @@ module.exports.contactInfo = {
                     url: "",
                 },
                 caption: "",
-                style: "block grid-item-2",
-            },
-        },
-        {
-            type: "paragraph",
-            data: {
-                text: "お急ぎの方は、この番号までお電話・LINE・メッセージにてご連絡いただけます！",
+                style: "QR-code",
             },
         },
     ],

@@ -5,6 +5,12 @@ const MstServicePageSchema = new Schema({
     heading: {
         type: String,
     },
+    id: {
+        type: String,
+    },
+    button: {
+        type: String,
+    },
     section: {
         type: String,
     },
