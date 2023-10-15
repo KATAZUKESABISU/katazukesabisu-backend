@@ -177,7 +177,6 @@ module.exports.resetPassword = async (req, res) => {
 module.exports.refreshToken = async (req, res) => {
     const { refreshToken, userId } = req.body;
     const auth = await authModel.findOne({ userId, refreshToken });
-    console.log(auth);
     // if refresh token exists
     if (refreshToken && auth) {
         // verifies secret and checks exp

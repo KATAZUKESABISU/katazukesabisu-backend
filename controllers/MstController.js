@@ -186,6 +186,40 @@ module.exports.getDataHomePage = async (req, res) => {
     }
 };
 
+module.exports.updateHomePage = async (req, res) => {
+    const { heading, homePage } = req.body;
+    try {
+        await mstHeadingModel.findOneAndUpdate(
+            {
+                contentType: _CONF.HOME_PAGE,
+            },
+            { heading: heading }
+        );
+        for (const [key, obj] of Object.entries(homePage)) {
+            const data = {
+                title: obj?.title,
+                createDate: obj?.createDate,
+                style: obj?.style,
+                button: obj?.button ? JSON.stringify(obj?.button) : undefined,
+                isDisplay: obj?.isDisplay,
+                content: JSON.stringify(obj?.content),
+            };
+            await mstPostCommonModel.updateOne({ _name: key }, data);
+        }
+        const result = await response(
+            "Update data home page successfully!",
+            200,
+            "home_page",
+            {}
+        );
+        return res.status(200).json(result);
+    } catch (error) {
+        console.log(error);
+        const result = await response("Something went wrong!", 500);
+        return res.status(500).json(result);
+    }
+};
+
 module.exports.getDataHomePageClient = async (req, res) => {
     try {
         const heading = await mstHeadingModel.findOne({
@@ -214,7 +248,7 @@ module.exports.getDataHomePageClient = async (req, res) => {
             200,
             "home_page",
             {
-                heading: heading.heading,
+                heading: heading?.heading || "",
                 homePage,
             }
         );
@@ -276,7 +310,7 @@ module.exports.getAboutUsClient = async (req, res) => {
             200,
             "about_us",
             {
-                heading: heading.heading,
+                heading: heading?.heading || "",
                 aboutUs,
             }
         );

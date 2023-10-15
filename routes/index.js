@@ -11,6 +11,7 @@ const {
     getMstInfoClient,
     getDataHomePage,
     getDataHomePageClient,
+    updateHomePage,
     getAboutUs,
     getAboutUsClient,
     getFooterContact,
@@ -51,6 +52,7 @@ function route(app) {
     app.use("/api/inquiry", inquiryRoute);
     app.get("/api/mst_info", getMstInfo);
     app.get("/api/home_page", getDataHomePage);
+    app.put("/api/home_page/update", updateHomePage);
     app.get("/api/about_us", getAboutUs);
     app.get("/api/footer_contact", getFooterContact);
     app.get("/api/flow_page", getFlowPage);
