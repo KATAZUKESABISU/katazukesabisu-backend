@@ -100,7 +100,7 @@ module.exports.forgetPassword = async (req, res) => {
         const user = await adminModel.findOne({ email });
         if (user) {
             const code = randomString.generate({
-                length: 8,
+                length: 6,
             });
             _CONF.GENERATE[email] = code;
             const subject = `${_CONF.PROJECT_NAME} - confirmation code`;
