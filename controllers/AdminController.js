@@ -97,13 +97,12 @@ module.exports.logout = async (req, res) => {
 module.exports.forgetPassword = async (req, res) => {
     const { email } = req.body;
     try {
-        const code = randomString.generate({
-            length: 8,
-        });
-        _CONF.GENERATE[email].code = code;
         const user = await adminModel.findOne({ email });
-
         if (user) {
+            const code = randomString.generate({
+                length: 8,
+            });
+            _CONF.GENERATE[email] = code;
             const subject = `${_CONF.PROJECT_NAME} - confirmation code`;
             const content = templateForgetPassword(user.username, code);
             await sendMail(subject, content, email);
@@ -191,7 +190,11 @@ module.exports.refreshToken = async (req, res) => {
                     return res.status(401).json(result);
                 }
                 const token = jwt.sign(
-                    { id: decoded.id, username: decoded.username, date: new Date().getTime() },
+                    {
+                        id: decoded.id,
+                        username: decoded.username,
+                        date: new Date().getTime(),
+                    },
                     _CONF.SECRET,
                     {
                         expiresIn: _CONF.tokenLife,
