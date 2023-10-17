@@ -10,5 +10,7 @@ route.post("/token", adminController.refreshToken);
 
 route.use(isAuthentication);
 route.post("/logout", adminController.logout);
+route.post("/get_devices", adminController.getDevices);
+route.post("/logout_device", adminController.logoutDevice);
 
 module.exports = route;

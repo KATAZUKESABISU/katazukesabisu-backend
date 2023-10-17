@@ -12,6 +12,9 @@ const AuthSchema = new Schema({
     refreshToken: {
         type: String,
     },
+    device: {
+        type: String,
+    }
 });
 
 module.exports = mongoose.model("Auth", AuthSchema);

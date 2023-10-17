@@ -10,13 +10,16 @@ const {
 } = require("../templateMail/templateForgetPassword");
 
 module.exports.login = async (req, res) => {
-    const { username, password } = req.body;
+    const { username, password, device } = req.body;
     try {
         const user = await adminModel.findOne({ username });
         if (user) {
             const matchPassword = await bcrypt.compare(password, user.password);
             if (!matchPassword) {
-                const result = await response("Invalid Credentials", 400);
+                const result = await response(
+                    "The username and password you entered did not match our records. Please double-check and try again.",
+                    400
+                );
                 return res.status(400).json(result);
             }
             const userInfo = {
@@ -50,12 +53,16 @@ module.exports.login = async (req, res) => {
                 userId: user._id,
                 token: token,
                 refreshToken: refreshToken,
+                device: device || "Unknown",
             }).save();
             const result = await response("Logged in", 200, null, data);
             return res.status(200).json(result);
         } else {
-            const result = await response("User not found", 404);
-            return res.status(404).json(result);
+            const result = await response(
+                "The username and password you entered did not match our records. Please double-check and try again.",
+                400
+            );
+            return res.status(400).json(result);
         }
     } catch (error) {
         console.log(error);
@@ -97,15 +104,18 @@ module.exports.logout = async (req, res) => {
 module.exports.forgetPassword = async (req, res) => {
     const { email } = req.body;
     try {
-        const code = randomString.generate({
-            length: 8,
-        });
-        _CONF.GENERATE[email].code = code;
         const user = await adminModel.findOne({ email });
-
         if (user) {
+            const code = randomString.generate({
+                length: 6,
+            });
+            _CONF.GENERATE[email] = {
+                code: code,
+                createAt: new Date().getTime(),
+            };
+            console.log(_CONF.GENERATE[email]);
             const subject = `${_CONF.PROJECT_NAME} - confirmation code`;
-            const content = templateForgetPassword(user.username, code);
+            const content = templateForgetPassword(user.displayName, code);
             await sendMail(subject, content, email);
             const result = await response("Check mail!", 200);
             return res.status(200).json(result);
@@ -123,7 +133,7 @@ module.exports.forgetPassword = async (req, res) => {
 module.exports.resetPassword = async (req, res) => {
     const { email, passwordNew, code } = req.body;
     try {
-        if (code === _CONF.GENERATE[email].code) {
+        if (code === _CONF.GENERATE[email]?.code && checkExpired(email)) {
             bcrypt.genSalt(10, async function (err, saltRounds) {
                 if (err) {
                     console.error(err);
@@ -154,9 +164,11 @@ module.exports.resetPassword = async (req, res) => {
                             );
                             return res.status(404).json(result);
                         }
+                        await authModel.findByIdAndDelete(user._id);
                         const result = await response(
                             "Reset password successful",
                             200,
+                            null,
                             (data = { email })
                         );
                         return res.status(200).json(result);
@@ -164,8 +176,11 @@ module.exports.resetPassword = async (req, res) => {
                 );
             });
         } else {
-            const result = await response("Code not found", 404);
-            return res.status(404).json(result);
+            const result = await response(
+                "Invalid code. Please send new code!",
+                400
+            );
+            return res.status(400).json(result);
         }
     } catch (error) {
         console.log(error);
@@ -191,7 +206,11 @@ module.exports.refreshToken = async (req, res) => {
                     return res.status(401).json(result);
                 }
                 const token = jwt.sign(
-                    { id: decoded.id, username: decoded.username, date: new Date().getTime() },
+                    {
+                        id: decoded.id,
+                        username: decoded.username,
+                        date: new Date().getTime(),
+                    },
                     _CONF.SECRET,
                     {
                         expiresIn: _CONF.tokenLife,
@@ -215,4 +234,62 @@ module.exports.refreshToken = async (req, res) => {
         const result = await response("Invalid request", 404);
         res.status(404).send(result);
     }
+};
+
+module.exports.getDevices = async (req, res) => {
+    const { userId } = req.body;
+    try {
+        if (!userId) {
+            const result = await response("Invalid request!", 400);
+            return res.status(400).json(result);
+        }
+        const doc = await authModel.find({ userId });
+        if (doc.length == 0) {
+            const result = await response("Invalid request!", 400);
+            return res.status(400).json(result);
+        }
+        const devices = doc.map((item) => ({
+            deviceId: item._id,
+            device: item.device,
+        }));
+        const result = await response(
+            "Get devices successfully!",
+            200,
+            null,
+            devices
+        );
+        return res.status(200).json(result);
+    } catch (error) {
+        console.log(error);
+        const result = await response("Something went wrong!", 500);
+        return res.status(500).json(result);
+    }
+};
+
+module.exports.logoutDevice = async (req, res) => {
+    const { deviceId } = req.body;
+    try {
+        const doc = await authModel.findByIdAndDelete(deviceId);
+        const result = {
+            statusCode: 200,
+            message: "Logout device successful!",
+            data: [],
+        };
+        return res.status(200).json(result);
+    } catch (error) {
+        console.log(error);
+        const result = await response("Something went wrong!", 500);
+        return res.status(500).json(result);
+    }
+};
+
+const checkExpired = (email) => {
+    const endTime = new Date().getTime();
+    const startTime = _CONF.GENERATE[email]?.createAt;
+    const time = endTime - startTime;
+    if (time > 300000) {
+        delete _CONF.GENERATE[email];
+        return false;
+    }
+    return true;
 };
