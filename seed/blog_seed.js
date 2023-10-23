@@ -1,8 +1,9 @@
 module.exports.blog = Array(1).fill({
-    title: "Markdown cheatsheet",
-    createDate: "2023-10-05 22:53",
-    image: "https://res.cloudinary.com/seekda/image/upload/w_1200,h_800,c_fill,f_auto,fl_lossy,q_auto/production/AT_UAB6-12-38-03/_66347854-3649-46D6-B415-CA3E66BDC92C.jpg",
-    content: `# Standard features
+  title: "Markdown cheatsheet",
+  createDate: "2023-10-05 22:53",
+  image:
+    "https://res.cloudinary.com/seekda/image/upload/w_1200,h_800,c_fill,f_auto,fl_lossy,q_auto/production/AT_UAB6-12-38-03/_66347854-3649-46D6-B415-CA3E66BDC92C.jpg",
+  content: `# Standard features
 
   The following <u>markdown features</u> are defined by the [CommonMark][] standard, and are generally supported by all markdown parsers and editors.
 
@@ -17,17 +18,6 @@ module.exports.blog = Array(1).fill({
   #### h4 Heading
   ##### h5 Heading
   ###### h6 Heading
-  \`\`\`
-
-  Renders to this HTML:
-
-  \`\`\`html
-  <h1>h1 Heading</h1>
-  <h2>h2 Heading</h2>
-  <h3>h3 Heading</h3>
-  <h4>h4 Heading</h4>
-  <h5>h5 Heading</h5>
-  <h6>h6 Heading</h6>
   \`\`\`
 
   Which looks like this in the browser:
@@ -57,17 +47,6 @@ module.exports.blog = Array(1).fill({
   \`\`\`
   Lorem ipsum dolor sit amet, graecis denique ei vel, at duo primis mandamus. Et legere ocurreret pri, animal tacimates complectitur ad cum. Cu eum inermis inimicus efficiendi. Labore officiis his ex, soluta officiis concludaturque ei qui, vide sensibus vim ad.
   \`\`\`
-
-  Renders to this HTML:
-
-  \`\`\`html
-  <p>
-    Lorem ipsum dolor sit amet, graecis denique ei vel, at duo primis mandamus. Et legere ocurreret pri, animal tacimates
-    complectitur ad cum. Cu eum inermis inimicus efficiendi. Labore officiis his ex, soluta officiis concludaturque ei
-    qui, vide sensibus vim ad.
-  </p>
-  \`\`\`
-
 
   ## Breaks
 
@@ -146,14 +125,6 @@ module.exports.blog = Array(1).fill({
 
   > Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
 
-  And the generated HTML from a markdown parser might look something like this:
-
-  \`\`\`html
-  <blockquote>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-  </blockquote>
-  \`\`\`
-
   Blockquotes can also be nested:
 
   \`\`\`
@@ -223,29 +194,6 @@ module.exports.blog = Array(1).fill({
   - Aenean sit amet erat nunc
   - Eget porttitor lorem
 
-  And this HTML
-
-  \`\`\`html
-  <ul>
-    <li>Lorem ipsum dolor sit amet</li>
-    <li>Consectetur adipiscing elit</li>
-    <li>Integer molestie lorem at massa</li>
-    <li>Facilisis in pretium nisl aliquet</li>
-    <li>
-      Nulla volutpat aliquam velit
-      <ul>
-        <li>Phasellus iaculis neque</li>
-        <li>Purus sodales ultricies</li>
-        <li>Vestibulum laoreet porttitor sem</li>
-        <li>Ac tristique libero volutpat at</li>
-      </ul>
-    </li>
-    <li>Faucibus porta lacus fringilla vel</li>
-    <li>Aenean sit amet erat nunc</li>
-    <li>Eget porttitor lorem</li>
-  </ul>
-  \`\`\`
-
   ### Ordered Lists
 
   A list of items in which the order of items does explicitly matter.
@@ -271,21 +219,6 @@ module.exports.blog = Array(1).fill({
   6. Faucibus porta lacus fringilla vel
   7. Aenean sit amet erat nunc
   8. Eget porttitor lorem
-
-  And this HTML:
-
-  \`\`\`html
-  <ol>
-    <li>Lorem ipsum dolor sit amet</li>
-    <li>Consectetur adipiscing elit</li>
-    <li>Integer molestie lorem at massa</li>
-    <li>Facilisis in pretium nisl aliquet</li>
-    <li>Nulla volutpat aliquam velit</li>
-    <li>Faucibus porta lacus fringilla vel</li>
-    <li>Aenean sit amet erat nunc</li>
-    <li>Eget porttitor lorem</li>
-  </ol>
-  \`\`\`
 
   ### Time-saving Tip!
 
@@ -339,14 +272,6 @@ module.exports.blog = Array(1).fill({
   Example text here...
   \`\`\`
   </pre>
-
-  Renders to something like this in HTML:
-
-  \`\`\`html
-  <pre>
-    <p>Example text here...</p>
-  </pre>
-  \`\`\`
 
   And appears like this when viewed in a browser:
 
@@ -644,29 +569,6 @@ module.exports.blog = Array(1).fill({
   | engine | engine to be used for processing templates. Handlebars is the default.    |
   | ext    | extension to be used for dest files.                                      |
 
-  And this HTML:
-
-  \`\`\`html
-  <table>
-    <tr>
-      <th>Option</th>
-      <th>Description</th>
-    </tr>
-    <tr>
-      <td>data</td>
-      <td>path to data files to supply the data that will be passed into templates.</td>
-    </tr>
-    <tr>
-      <td>engine</td>
-      <td>engine to be used for processing templates. Handlebars is the default.</td>
-    </tr>
-    <tr>
-      <td>ext</td>
-      <td>extension to be used for dest files.</td>
-    </tr>
-  </table>
-  \`\`\`
-
   ### Aligning cells
 
   **Center text in a column**
@@ -745,5 +647,5 @@ module.exports.blog = Array(1).fill({
   - [CommonMark](https://commonmark.org/) - "A strongly defined, highly compatible specification of Markdown"
 
   `,
-  published: 1,
+  published: 0,
 });

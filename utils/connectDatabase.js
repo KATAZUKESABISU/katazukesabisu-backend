@@ -21,4 +21,11 @@ db.once("open", () => {
     console.log("Database Connected");
 });
 
+const cleanup = (event) => {
+    mongoose.disconnect()
+}
+
+process.on("SIGINT", cleanup);
+process.on("SIGTERM", cleanup);
+
 module.exports = { db };
