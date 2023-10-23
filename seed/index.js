@@ -2,7 +2,7 @@ if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
 }
 const upload_cloud = require("./upload_cloud");
-const db = require("../utils/connectDatabase");
+const { db } = require("../utils/connectDatabase");
 
 const AdminModel = require("../models/admin_model");
 const MstInquiryModel = require("../models/mst_inquiry_model");
@@ -310,6 +310,7 @@ const seedDB = async (result) => {
 const start = async () => {
     const result = await upload_cloud.upload();
     await seedDB(result);
+    await db.close();
 };
 
 start();

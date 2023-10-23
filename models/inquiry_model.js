@@ -31,7 +31,7 @@ const InquirySchema = new Schema({
         required: true,
     },
     preferredContact: {
-        type: Number,
+        type: String,
         required: false,
     },
     contentOfInquiry: {

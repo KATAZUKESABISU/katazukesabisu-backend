@@ -34,7 +34,6 @@ const {
 function route(app) {
     // client
     app.get("/public/404_not_found", getNotFoundClient);
-    app.get("/public/inquiries", inquiryController.getInquiriesClient);
     app.get("/public/mst_info", getMstInfoClient);
     app.get("/public/home_page", getDataHomePageClient);
     app.get("/public/about_us", getAboutUsClient);
@@ -45,23 +44,26 @@ function route(app) {
     app.get("/public/rate_plan", getRatePlanClient);
     app.get("/public/list_blog", getBlogsClient);
     app.get("/public/blog/:id", getBlogClient);
+    // app.get("/public/inquiries", inquiryController.getInquiriesClient);
     app.post("/public/inquiry/create", inquiryController.createInquiry);
+    app.put("/public/inquiry/:id", inquiryController.updateInquiry);
+    app.get("/public/inquiry/:id", inquiryController.getInquiry);
     // admin
     app.use("/api", adminRoute);
-    app.use(isAuthentication);
-    app.get("/api/404_not_found", getNotFound);
-    app.use("/api/inquiry", inquiryRoute);
-    app.get("/api/mst_info", getMstInfo);
-    app.get("/api/home_page", getDataHomePage);
-    app.put("/api/home_page/update", updateHomePage);
-    app.get("/api/about_us", getAboutUs);
-    app.get("/api/footer_contact", getFooterContact);
-    app.get("/api/flow_page", getFlowPage);
-    app.get("/api/common_block", getCommonBlock);
-    app.get("/api/service_price_infor", getServicePriceInfor);
-    app.get("/api/rate_plan", getRatePlan);
-    app.use("/api/blog", blogRoute);
-    app.post("/api/upload", upload.single("image"), getUrlImageUpload);
+    app.get("/api/404_not_found", isAuthentication, getNotFound);
+    app.use("/api/inquiry", isAuthentication, inquiryRoute);
+    app.get("/api/inquiries", isAuthentication, inquiryController.getInquiries)
+    app.get("/api/mst_info", isAuthentication, getMstInfo);
+    app.get("/api/home_page", isAuthentication, getDataHomePage);
+    app.put("/api/home_page/update", isAuthentication, updateHomePage);
+    app.get("/api/about_us", isAuthentication, getAboutUs);
+    app.get("/api/footer_contact", isAuthentication, getFooterContact);
+    app.get("/api/flow_page", isAuthentication, getFlowPage);
+    app.get("/api/common_block", isAuthentication, getCommonBlock);
+    app.get("/api/service_price_infor", isAuthentication, getServicePriceInfor);
+    app.get("/api/rate_plan", isAuthentication, getRatePlan);
+    app.use("/api/blog", isAuthentication, blogRoute);
+    app.post("/api/upload", isAuthentication, upload.single("image"), getUrlImageUpload);
 }
 
 module.exports = route;

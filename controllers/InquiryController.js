@@ -4,11 +4,20 @@ const { response } = require("../utils/commonUtil");
 module.exports.createInquiry = async (req, res) => {
     const inquiry = req.body;
     try {
-        const id = (await inquiryModel.create({ ...inquiry }))._id;
         const data = {
-            id,
-        };
-        const result = await response("Create successfully!", 200, null, data);
+            inquiryItem: inquiry.inquiryItem,
+            requestContent: JSON.stringify(inquiry.requestContent),
+            name: inquiry.name,
+            furigana: inquiry.furigana || "",
+            emailAddress: inquiry.emailAddress,
+            address: inquiry.address || "",
+            telephoneNumber: inquiry.telephoneNumber,
+            preferredContact: JSON.stringify(inquiry.preferredContact),
+            contentOfInquiry: inquiry.contentOfInquiry || "",
+            createAt: new Date().getTime()
+        }
+        const id = (await inquiryModel.create(data))._id;
+        const result = await response("Create successfully!", 200, null, { id });
         return res.status(200).json(result);
     } catch (error) {
         console.log(error);
@@ -21,7 +30,11 @@ module.exports.updateInquiry = async (req, res) => {
     const id = req.body._id;
     const inquiry = req.body;
     try {
-        await inquiryModel.findByIdAndUpdate(id, { ...inquiry });
+        const doc = await inquiryModel.findByIdAndUpdate(id, { ...inquiry });
+        if (!doc) {
+            const result = await response("Inquiry not found!", 404);
+            return res.status(404).json(result);
+        }
         const data = {
             id,
         };
@@ -37,7 +50,27 @@ module.exports.updateInquiry = async (req, res) => {
 module.exports.getInquiry = async (req, res) => {
     const { id } = req.params;
     try {
-        const inquiry = await inquiryModel.findById(id);
+        if (!id) {
+            const result = await response("Id inquiry is required!", 400);
+            return res.status(400).json(result);
+        }
+        const doc = await inquiryModel.findById(id);
+        if (!doc) {
+            const result = await response("Inquiry not found!", 404);
+            return res.status(404).json(result);
+        }
+        const inquiry = {
+            id: doc._id,
+            inquiryItem: doc.inquiryItem,
+            requestContent: JSON.parse(doc.requestContent),
+            name: doc.name,
+            furigana: doc.furigana,
+            emailAddress: doc.emailAddress,
+            address: doc.address,
+            telephoneNumber: doc.telephoneNumber,
+            preferredContact: JSON.parse(doc.preferredContact),
+            contentOfInquiry: doc.contentOfInquiry,
+        }
         const result = await response(
             "Get detail inquiry successfully!",
             200,
@@ -71,7 +104,7 @@ module.exports.getInquiries = async (req, res) => {
 
 module.exports.getInquiriesClient = async (req, res) => {
     try {
-        const inquiries = await inquiryModel.find({ isDisplay: true });
+        const inquiries = await inquiryModel.find();
         const result = await response(
             "Get list inquiry successfully!",
             200,
