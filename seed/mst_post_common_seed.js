@@ -129,7 +129,7 @@ module.exports.introduction = {
 module.exports.serviceIntro = {
     title: "追加料金は一切なし！",
     createDate: "",
-    style: "with-background",
+    // style: "with-background",
     isDisplay: true,
     button: [{ innerText: "料金プランはこちら", location: "/service#price" }],
     content: [
@@ -351,14 +351,14 @@ module.exports.footerContact = {
             type: "contact-list",
             data: {
                 label: "対応エリア",
-                value: "",
+                value: "愛知・岐阜・三重の周辺",
             },
         },
         {
             type: "contact-list",
             data: {
                 label: "所在地",
-                value: "",
+                value: "愛知県春日井市中央通2-78",
             },
         },
     ]),
