@@ -5,17 +5,23 @@ if (process.env.NODE_ENV !== "production") {
 require("./utils/connectDatabase");
 const express = require("express");
 const bodyParser = require("body-parser");
-const cors = require('cors');
+const cors = require("cors");
 
 const route = require("./routes");
 
 const app = express();
 
 // Access-Control-Allow-Origin header
-// app.use(
-//     cors({origin: ['http://localhost:3000', 'https://katazukesabisu.com', 'https://admin.katazukesabisu.com']})
-//   );
-app.use(cors({ origin: ["http://localhost:3000", "katazukesabisu.com"] }));
+app.use(
+    cors({
+        origin: [
+            "http://localhost:3000",
+            "https://katazukesabisu.com",
+            "https://admin.katazukesabisu.com",
+            "https://www.google.com/",
+        ],
+    })
+);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
