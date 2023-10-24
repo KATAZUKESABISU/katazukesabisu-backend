@@ -12,10 +12,10 @@ const route = require("./routes");
 const app = express();
 
 // Access-Control-Allow-Origin header
-app.use(
-    cors({origin: ['http://localhost:3000', 'https://katazukesabisu.com', 'https://admin.katazukesabisu.com']})
-  );
-
+// app.use(
+//     cors({origin: ['http://localhost:3000', 'https://katazukesabisu.com', 'https://admin.katazukesabisu.com']})
+//   );
+app.use(cors({ origin: ["http://localhost:3000", "katazukesabisu.com"] }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
