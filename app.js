@@ -18,7 +18,7 @@ app.use(
       "http://localhost:3000",
       "https://katazukesabisu.com",
       "https://admin.katazukesabisu.com",
-      "https://ads.katazukesabisu.com/",
+      "https://ads.katazukesabisu.com",
     ],
   })
 );
