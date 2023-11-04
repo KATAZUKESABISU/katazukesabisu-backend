@@ -88,7 +88,7 @@ module.exports.communicationMethod = {
                 file: {
                     url: "",
                 },
-            },
+            },                                                                              
         },
     ],
     isDisplay: true,
